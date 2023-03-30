@@ -5,9 +5,9 @@
 
 #include "libreriaAutonoleggio.h"
 
+using namespace std;
 
 int main(int argc, char* argv[]) {
-
-	prova();
+	generazioneFinestra();
 	return 0;
 }

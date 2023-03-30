@@ -1,4 +1,7 @@
 #ifndef libreriaAutonoleggio
 #define libreriaAutonoleggio
-void prova();
+int generazioneFinestra();
+
+
+int endDateCalculator(int inizio[], int fine[]);
 #endif
