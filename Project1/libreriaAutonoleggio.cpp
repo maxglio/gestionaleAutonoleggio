@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <SDL_ttf.h>
 
 #include "libreriaAutonoleggio.h"
 
@@ -41,39 +42,27 @@ int endDateCalculator(int inizio[], int fine[]){
 
 
 int generazioneFinestra(){
-	SDL_Window* window = nullptr;
-	SDL_Surface* windowSurface = nullptr;
-	SDL_Surface* imageSurface = nullptr;
+	bool quit = false;
+	SDL_Event event;
 
+	SDL_Init(SDL_INIT_VIDEO);
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "video initializzation Error: " << SDL_GetError() << std::endl;
-	}
-	else {
-		window = SDL_CreateWindow("gestionale autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1800, 1000, SDL_WINDOW_SHOWN);
-		SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-		if (window == NULL) {
-			std::cout << "Window creatiuon error: " << SDL_GetError() << std::endl;
-		}
-		else {
+	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+	SDL_ShowSimpleMessageBox(0, "buondì", SDL_GetError(),screen);
 
-			windowSurface = SDL_GetWindowSurface(window);
-			imageSurface = SDL_LoadBMP("coolHue-FD6585-0D25B9.bmp");
+	while (!quit)
+	{
+		SDL_WaitEvent(&event);
 
-			if (imageSurface == NULL) {
-				std::cout << "image loading error: " << SDL_GetError() << std::endl;
-			}
-			else {
-				SDL_BlitSurface(imageSurface, NULL, windowSurface, NULL);
-				SDL_UpdateWindowSurface(window);
-				SDL_Delay(10000);
-			}
-
-
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			quit = true;
+			break;
 		}
 	}
 
-	SDL_DestroyWindow(window);
 	SDL_Quit();
+
 	return 0;
 }
