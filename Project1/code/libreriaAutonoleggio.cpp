@@ -73,8 +73,7 @@ int generazioneFinestra(){
 	SDL_Init(SDL_INIT_VIDEO);
 
 	SDL_DisplayMode dm;
-	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-	SDL_ShowSimpleMessageBox(0, "porocdio", SDL_GetError(),screen);
+
 
 	if (SDL_GetDesktopDisplayMode(0, &dm) != 0){
 		SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
