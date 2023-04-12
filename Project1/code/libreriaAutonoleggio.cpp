@@ -44,12 +44,36 @@ int endDateCalculator(int inizio[], int fine[]){
 int generazioneFinestra(){
 	bool quit = false;
 	SDL_Event event;
-
+	SDL_Renderer* renderer;
 	SDL_Init(SDL_INIT_VIDEO);
 
-	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-	SDL_ShowSimpleMessageBox(0, "buondì", SDL_GetError(),screen);
+	SDL_DisplayMode dm;
 
+	if (SDL_GetDesktopDisplayMode(0, &dm) != 0){
+		SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
+		return 1;
+	}
+
+	int w, h;
+	w = dm.w;
+	h = dm.h;
+
+	printf("w=%d h=%d", w, h);
+
+	SDL_Window *screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
+
+	SDL_ShowSimpleMessageBox(0, "aaaaaaaaaa", SDL_GetError(),screen);
+
+	renderer = SDL_CreateRenderer(screen, -1, 0);
+	// Select the color for drawing. It is set to red here.
+	SDL_SetRenderDrawColor(renderer, 30, 30, 30 ,255);
+
+	// Clear the entire screen to our selected color.
+	SDL_RenderClear(renderer);
+
+	// Up until now everything was drawn behind the scenes.
+	// This will show the new, red contents of the window.
+	SDL_RenderPresent(renderer);
 	while (!quit)
 	{
 		SDL_WaitEvent(&event);
