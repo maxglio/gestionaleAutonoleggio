@@ -125,5 +125,9 @@ void refreshID() {
 	wf.write((char*)&wstu[0], sizeof(id));
 	wf.close();
 	ifstream rf("/binaryFiles/id.dat", ios::out | ios::binary);
+	id rstu[1];
+	rf.read((char*)&rstu[0], sizeof(id));
+	rf.close();
+	cout << "id: " << wstu[0].id;
 }
 //FINE FILE BINARI
