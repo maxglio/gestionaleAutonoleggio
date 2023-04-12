@@ -88,8 +88,6 @@ int generazioneFinestra(){
 
 	SDL_Window *screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
 
-	SDL_ShowSimpleMessageBox(0, "aaaaaaaaaa", SDL_GetError(),screen);
-
 	renderer = SDL_CreateRenderer(screen, -1, 0);
 	// Select the color for drawing. It is set to red here.
 	SDL_SetRenderDrawColor(renderer, 30, 30, 30 ,255);
