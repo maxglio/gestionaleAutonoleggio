@@ -74,6 +74,7 @@ int generazioneFinestra(){
 
 	SDL_DisplayMode dm;
 
+
 	if (SDL_GetDesktopDisplayMode(0, &dm) != 0){
 		SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
 		return 1;
@@ -93,8 +94,8 @@ int generazioneFinestra(){
 	// Select the color for drawing. It is set to red here.
 	SDL_SetRenderDrawColor(renderer, 30, 30, 30 ,255);
 
-	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-	SDL_ShowSimpleMessageBox(0, "buondì", SDL_GetError(),screen);
+	// Clear the entire screen to our selected color.
+	SDL_RenderClear(renderer);
 
 	// Up until now everything was drawn behind the scenes.
 	// This will show the new, red contents of the window.
