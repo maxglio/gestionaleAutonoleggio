@@ -3,11 +3,35 @@
 #include <SDL_image.h>
 #include <iostream>
 #include <SDL_ttf.h>
+#include <fstream>
 
 #include "libreriaAutonoleggio.h"
 
 using namespace std;
 
+struct macchina {
+	string marca;
+	string modello;
+	string carburante;
+	int id;
+	int km;
+	int annoMatricolazione;
+	int dataInizioNoleggio[3];
+	int durataNoleggio;
+	int potenza;
+	int cambio;
+	int fumatori;
+	int usato;
+	int posti;
+	int porte;
+};
+
+struct id {
+	int id;
+};
+
+
+//DATE
 int endDateCalculator(int inizio[], int fine[]){
 	int durataMesi;
 	//prendo in input il numero di mesi del noleggio;
@@ -36,11 +60,12 @@ int endDateCalculator(int inizio[], int fine[]){
 
 	return 	durataMesi;
 }
+//FINE DATE
 
 
 
 
-
+//INTERFACCIA GRAFICA
 int generazioneFinestra(){
 	bool quit = false;
 	SDL_Event event;
@@ -66,3 +91,15 @@ int generazioneFinestra(){
 
 	return 0;
 }
+//FINE INTERFACCIA GRAFICA
+
+//FILE BINARI
+void refreshID() {
+	ofstream wf("/binaryFiles/id.dat", ios::out | ios::binary);
+	id wstu[1];
+	wstu[0].id = 0;
+	wf.write((char*)&wstu[0], sizeof(id));
+	wf.close();
+	ifstream rf("/binaryFiles/id.dat", ios::out | ios::binary);
+}
+//FINE FILE BINARI
