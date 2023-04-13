@@ -15,16 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="code\libreriaAutonoleggio.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="libreriaAutonoleggio.cpp">
+    <ClCompile Include="code\main.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="libreriaAutonoleggio.h">
+    <ClInclude Include="code\libreriaAutonoleggio.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="code\images\Group 107.png">
+      <Filter>File di risorse</Filter>
+    </Image>
+    <Image Include="code\images\IMG_0014 1.JPG">
+      <Filter>File di risorse</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="code\binaryFiles\id.dat" />
+    <None Include="code\binaryFiles\macchine.dat" />
   </ItemGroup>
 </Project>

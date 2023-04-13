@@ -11,7 +11,9 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-	refreshID();
-	generazioneFinestra();
+	int data[3];
+	int ora[2];
+	getCurrentDate(data);
+	getCurrentTime(ora);
 	return 0;
 }

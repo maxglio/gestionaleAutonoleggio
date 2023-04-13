@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
@@ -9,34 +9,11 @@
 
 #include "libreriaAutonoleggio.h"
 
+#define NMACCHINE 100
+
 using namespace std;
 
-const Uint8 Button = SDL_BUTTON_LEFT; /*We know that we are going to use this button only*/
-
-/*A boolean to check if the object intersects with the mouse*/
-bool intersects(int objectX, int objectY, int objectW, int objectH, int mouseX, int mouseY)
-{
-	if (mouseX < objectX || mouseY < objectY)
-	{
-		return false;
-	}
-	else if (mouseX > objectX + objectW || mouseY > objectY + objectH)
-	{
-		return false;
-	}
-	/*Returns true only if the mouse is hovering the object*/
-	return true;
-}
-
-/*enum of gamestates*/
-enum gamestate
-{
-	Intro,
-	Main,
-	Exit,
-};
-
-struct macchina {
+struct Automobile {
 	string marca;
 	string modello;
 	string carburante;
@@ -53,13 +30,10 @@ struct macchina {
 	int porte;
 };
 
-struct id {
-	int id;
-};
-
+struct Automobile garage[NMACCHINE];
 
 //DATE
-int endDateCalculator(int inizio[], int fine[]){
+void endDateCalculator(int inizio[], int fine[]){
 	int durataMesi;
 	//prendo in input il numero di mesi del noleggio;
 	do{
@@ -85,7 +59,21 @@ int endDateCalculator(int inizio[], int fine[]){
 
 	fine[1] %= 12;
 
-	return 	durataMesi;
+}
+
+void getCurrentDate(int data[]) {
+	time_t current_time = time(nullptr);
+	tm* local_time = localtime(&current_time);
+	data[0] = (local_time->tm_mday);
+	data[1] = (local_time->tm_mon + 1);
+	data[2] = (local_time->tm_year + 1900);
+}
+
+void getCurrentTime(int ora[]) {
+	time_t current_time = time(nullptr);
+	tm* local_time = localtime(&current_time);
+	ora[0] = (local_time->tm_hour);
+	ora[1] = (local_time->tm_min);
 }
 //FINE DATE
 
@@ -119,7 +107,7 @@ int generazioneFinestra() {
 	w = dm.w;
 	h = dm.h;
 
-	printf("w=%d h=%d", w, h);
+	printf("\n\nw=%d h=%d", w, h);
 
 	SDL_Window *screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
 	SDL_Surface* button = SDL_LoadBMP("newgame.bmp");
@@ -174,15 +162,38 @@ int generazioneFinestra() {
 
 //FILE BINARI
 void refreshID() {
-	ofstream wf("/binaryFiles/id.dat", ios::out | ios::binary);
-	id wstu[1];
-	wstu[0].id = 0;
-	wf.write((char*)&wstu[0], sizeof(id));
-	wf.close();
-	ifstream rf("/binaryFiles/id.dat", ios::out | ios::binary);
-	id rstu[1];
-	rf.read((char*)&rstu[0], sizeof(id));
-	rf.close();
-	cout << "id: " << wstu[0].id;
+	int prova = 0;
+	int a;
+	errno_t error_code;
+	FILE* pf;
+	error_code = fopen_s(&pf, "id.dat", "w+");
+	if (error_code == 0) {
+		fwrite(&prova, sizeof(int), 1, pf);
+		fclose(pf);
+	}
+	
+	cout << endl << "error code id: " << error_code << endl;
+	error_code = fopen_s(&pf, "id.dat", "r");
+	fread(&a, sizeof(int), 1, pf);
+	fclose(pf);
+	cout << "risultato id:" << a;
+}
+
+void addCar(){
+	int prova = 0;
+	int a;
+	errno_t error_code;
+	FILE* pf;
+	error_code = fopen_s(&pf, "cars.dat", "a");
+	if (error_code == 0) {
+		fwrite(&prova, sizeof(int), 1, pf);
+		fclose(pf);
+	}
+
+	cout << endl << "error code cars: " << error_code << endl;
+	error_code = fopen_s(&pf, "cars.dat", "r");
+	fread(&a, sizeof(int), 1, pf);
+	fclose(pf);
+	cout << "risultato cars:" << a;
 }
 //FINE FILE BINARI

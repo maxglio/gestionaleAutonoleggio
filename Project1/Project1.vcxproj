@@ -105,13 +105,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\massi\OneDrive\Documenti\libraries\SDL2_image-2.6.3\include;C:\Users\massi\OneDrive\Documenti\libraries\SDL2-2.26.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_mixer-2.6.3\include;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_image-2.6.3\include;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_ttf-2.20.2\include;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2-2.26.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\massi\OneDrive\Documenti\libraries\SDL2_image-2.6.3\lib\x64;C:\Users\massi\OneDrive\Documenti\libraries\SDL2-2.26.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_mixer-2.6.3\lib\x64;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2-2.26.4\lib\x64;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_image-2.6.3\lib\x64;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_ttf-2.20.2\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,20 +122,31 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_mixer-2.6.3\include;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_image-2.6.3\include;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_ttf-2.20.2\include;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2-2.26.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_mixer-2.6.3\lib\x64;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2-2.26.4\lib\x64;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_image-2.6.3\lib\x64;C:\Users\enrmo\OneDrive\Documents\libreries\SDL2_ttf-2.20.2\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="libreriaAutonoleggio.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="code\libreriaAutonoleggio.cpp" />
+    <ClCompile Include="code\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="libreriaAutonoleggio.h" />
+    <ClInclude Include="code\libreriaAutonoleggio.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="code\images\Group 107.png" />
+    <Image Include="code\images\IMG_0014 1.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="code\binaryFiles\id.dat" />
+    <None Include="code\binaryFiles\macchine.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
