@@ -7,9 +7,11 @@
 
 #include "libreriaAutonoleggio.h"
 
+#define NMACCHINE 100
+
 using namespace std;
 
-struct macchina {
+struct Automobile {
 	string marca;
 	string modello;
 	string carburante;
@@ -26,13 +28,10 @@ struct macchina {
 	int porte;
 };
 
-struct id {
-	int id;
-};
-
+struct Automobile garage[NMACCHINE];
 
 //DATE
-int endDateCalculator(int inizio[], int fine[]){
+void endDateCalculator(int inizio[], int fine[]){
 	int durataMesi;
 	//prendo in input il numero di mesi del noleggio;
 	do{
@@ -58,7 +57,21 @@ int endDateCalculator(int inizio[], int fine[]){
 
 	fine[1] %= 12;
 
-	return 	durataMesi;
+}
+
+void getCurrentDate(int data[]) {
+	time_t current_time = time(nullptr);
+	tm* local_time = localtime(&current_time);
+	data[0] = (local_time->tm_mday);
+	data[1] = (local_time->tm_mon + 1);
+	data[2] = (local_time->tm_year + 1900);
+}
+
+void getCurrentTime(int ora[]) {
+	time_t current_time = time(nullptr);
+	tm* local_time = localtime(&current_time);
+	ora[0] = (local_time->tm_hour);
+	ora[1] = (local_time->tm_min);
 }
 //FINE DATE
 
@@ -84,7 +97,7 @@ int generazioneFinestra(){
 	w = dm.w;
 	h = dm.h;
 
-	printf("w=%d h=%d", w, h);
+	printf("\n\nw=%d h=%d", w, h);
 
 	SDL_Window *screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
 
@@ -118,10 +131,38 @@ int generazioneFinestra(){
 
 //FILE BINARI
 void refreshID() {
+	int prova = 0;
+	int a;
 	errno_t error_code;
 	FILE* pf;
-	error_code = fopen_s(&pf, "id.dat", "w");
-	cout << error_code;
+	error_code = fopen_s(&pf, "id.dat", "w+");
+	if (error_code == 0) {
+		fwrite(&prova, sizeof(int), 1, pf);
+		fclose(pf);
+	}
+	
+	cout << endl << "error code id: " << error_code << endl;
+	error_code = fopen_s(&pf, "id.dat", "r");
+	fread(&a, sizeof(int), 1, pf);
+	fclose(pf);
+	cout << "risultato id:" << a;
+}
 
+void addCar(){
+	int prova = 0;
+	int a;
+	errno_t error_code;
+	FILE* pf;
+	error_code = fopen_s(&pf, "cars.dat", "a");
+	if (error_code == 0) {
+		fwrite(&prova, sizeof(int), 1, pf);
+		fclose(pf);
+	}
+
+	cout << endl << "error code cars: " << error_code << endl;
+	error_code = fopen_s(&pf, "cars.dat", "r");
+	fread(&a, sizeof(int), 1, pf);
+	fclose(pf);
+	cout << "risultato cars:" << a;
 }
 //FINE FILE BINARI

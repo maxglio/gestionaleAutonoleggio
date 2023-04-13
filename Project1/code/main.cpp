@@ -10,7 +10,8 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-	refreshID();
-	generazioneFinestra();
+	int data[3];
+	getCurrentDate(data);
+	getCurrentTime();
 	return 0;
 }
