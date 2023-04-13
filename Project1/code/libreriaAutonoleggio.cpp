@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
@@ -118,15 +118,10 @@ int generazioneFinestra(){
 
 //FILE BINARI
 void refreshID() {
-	ofstream wf("/binaryFiles/id.dat", ios::out | ios::binary);
-	id wstu[1];
-	wstu[0].id = 0;
-	wf.write((char*)&wstu[0], sizeof(id));
-	wf.close();
-	ifstream rf("/binaryFiles/id.dat", ios::out | ios::binary);
-	id rstu[1];
-	rf.read((char*)&rstu[0], sizeof(id));
-	rf.close();
-	cout << "id: " << wstu[0].id;
+	errno_t error_code;
+	FILE* pf;
+	error_code = fopen_s(&pf, "id.dat", "w");
+	cout << error_code;
+
 }
 //FINE FILE BINARI
