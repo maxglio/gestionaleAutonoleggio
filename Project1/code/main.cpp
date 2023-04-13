@@ -10,9 +10,6 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-	int data[3];
-	int ora[2];
-	getCurrentDate(data);
-	getCurrentTime(ora);
+	addCar();
 	return 0;
 }

@@ -7,7 +7,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 100
+#define NMACCHINE 1
 
 using namespace std;
 
@@ -26,6 +26,7 @@ struct Automobile {
 	int usato;
 	int posti;
 	int porte;
+	int neopatentato;
 };
 
 struct Automobile garage[NMACCHINE];
@@ -149,20 +150,61 @@ void refreshID() {
 }
 
 void addCar(){
-	int prova = 0;
 	int a;
+
 	errno_t error_code;
 	FILE* pf;
-	error_code = fopen_s(&pf, "cars.dat", "a");
-	if (error_code == 0) {
-		fwrite(&prova, sizeof(int), 1, pf);
-		fclose(pf);
+	FILE* aa;
+	//apro il file
+	error_code = fopen_s(&pf, "cars.dat", "w");
+
+	//prendo in input tutto
+	for (int i = 0; i < NMACCHINE; i++) {
+		cout << "inserire la marca: ";
+		cin >> garage[i].marca;
+		cout << "inserire il modello: ";
+		cin >> garage[i].modello;
+		cout << "inserire il carburante1: ";
+		cin >> garage[i].carburante;
+		cout << "inserire il km1: ";
+		cin >> garage[i].km;
+		cout << "inserire il annoMatricolazione1: ";
+		cin >> garage[i].annoMatricolazione;
+		cout << "inserire il potenza1: ";
+		cin >> garage[i].potenza;
+		cout << "inserire il cambio1: ";
+		cin >> garage[i].cambio;
+		cout << "inserire il fumatori1: ";
+		cin >> garage[i].fumatori;
+		cout << "inserire il usato1: ";
+		cin >> garage[i].usato;
+		cout << "inserire il posti1: ";
+		cin >> garage[i].posti;
+		cout << "inserire il porte1: ";
+		cin >> garage[i].porte;
+		if (garage[i].potenza > 95){
+			garage[i].neopatentato = 0;
+		}
+		else if(garage[i].potenza <= 95){
+			garage[i].neopatentato = 1;
+		}
 	}
 
+	//se è andato tutto bene
+	if (error_code == 0) {
+		//scrivo
+		fwrite(&garage, sizeof(garage), 1, pf);
+		//chiudo il file
+		fclose(pf);
+	}
+	
 	cout << endl << "error code cars: " << error_code << endl;
-	error_code = fopen_s(&pf, "cars.dat", "r");
-	fread(&a, sizeof(int), 1, pf);
-	fclose(pf);
-	cout << "risultato cars:" << a;
+
+	error_code = fopen_s(&aa, "cars.dat", "r");
+	if (error_code == 0) {
+		size_t success = fread(&garage, sizeof(garage), 1, aa);
+		fclose(aa);
+		cout << "success: " << success;
+	}
 }
 //FINE FILE BINARI
