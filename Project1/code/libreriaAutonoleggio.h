@@ -11,7 +11,7 @@ void endDateCalculator(int inizio[], int fine[]);
 
 void getCurrentDate(int data[]);
 
-void getCurrentTime();
+void getCurrentTime(int ora[]);
 
 //FINE DATE
 
