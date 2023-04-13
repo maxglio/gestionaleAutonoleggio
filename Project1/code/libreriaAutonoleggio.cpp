@@ -4,10 +4,37 @@
 #include <iostream>
 #include <SDL_ttf.h>
 #include <fstream>
+#include <ctime>
+#include <cstdlib>
 
 #include "libreriaAutonoleggio.h"
 
 using namespace std;
+
+const Uint8 Button = SDL_BUTTON_LEFT; /*We know that we are going to use this button only*/
+
+/*A boolean to check if the object intersects with the mouse*/
+bool intersects(int objectX, int objectY, int objectW, int objectH, int mouseX, int mouseY)
+{
+	if (mouseX < objectX || mouseY < objectY)
+	{
+		return false;
+	}
+	else if (mouseX > objectX + objectW || mouseY > objectY + objectH)
+	{
+		return false;
+	}
+	/*Returns true only if the mouse is hovering the object*/
+	return true;
+}
+
+/*enum of gamestates*/
+enum gamestate
+{
+	Intro,
+	Main,
+	Exit,
+};
 
 struct macchina {
 	string marca;
@@ -66,7 +93,15 @@ int endDateCalculator(int inizio[], int fine[]){
 
 
 //INTERFACCIA GRAFICA
-int generazioneFinestra(){
+int generazioneFinestra() {
+	srand(time(NULL));
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		cout << "Failed to initialize" << SDL_GetError() << std::endl;
+		return 1;
+	}
+	std::atexit(&SDL_Quit);
 	bool quit = false;
 	SDL_Event event;
 	SDL_Renderer* renderer;
@@ -87,31 +122,52 @@ int generazioneFinestra(){
 	printf("w=%d h=%d", w, h);
 
 	SDL_Window *screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
-
-	renderer = SDL_CreateRenderer(screen, -1, 0);
-	// Select the color for drawing. It is set to red here.
-	SDL_SetRenderDrawColor(renderer, 30, 30, 30 ,255);
-
-	// Clear the entire screen to our selected color.
-	SDL_RenderClear(renderer);
-
-	// Up until now everything was drawn behind the scenes.
-	// This will show the new, red contents of the window.
-	SDL_RenderPresent(renderer);
-	while (!quit)
+	SDL_Surface* button = SDL_LoadBMP("newgame.bmp");
+	SDL_Rect cButton;
+	cButton.x = 220;
+	cButton.y = screen->h / 2;
+	cButton.w = button->w;
+	cButton.h = button->h;
+	/*Set the current gamestate, in this case its Intro*/
+	gamestate current = Intro;
+	while (current != Exit) /*Game Loop*/
 	{
-		SDL_WaitEvent(&event);
-
-		switch (event.type)
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
 		{
-		case SDL_QUIT:
-			quit = true;
+			switch (current) /*Switch the current state*/
+			{
+			case Intro:
+				if (event.type == SDL_QUIT)
+				{
+					current = Exit;
+				}
+				/*Here we check if the mouse is being clicked on the button*/
+				if ((event.button.button & Button) == Button && intersects(cButton.x, cButton.y, cButton.w, cButton.h, event.button.x, event.button.y))
+				{
+					current = Main; /*If it is true we change the current state*/
+				}
+				break;
+			case Main:
+				if (event.type == SDL_QUIT)
+				{
+					current = Exit;
+				}
+				break;
+			}
+		}
+		switch (current)
+		{
+		case Intro:
+			SDL_FillRect(screen, &screen->clip_rect, 000000);
+			SDL_BlitSurface(button, NULL, screen, &cButton); /*We draw the icon*/
+			break;
+		case Main:
+			SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
 			break;
 		}
+		SDL_Flip(screen);
 	}
-
-	SDL_Quit();
-
 	return 0;
 }
 //FINE INTERFACCIA GRAFICA
