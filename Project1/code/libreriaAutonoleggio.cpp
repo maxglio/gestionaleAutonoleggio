@@ -83,23 +83,30 @@ void getCurrentTime(int ora[]) {
 
 //INTERFACCIA GRAFICA
 int generazioneFinestra() {
-	srand(time(NULL));
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		cout << "Failed to initialize" << SDL_GetError() << std::endl;
-		return 1;
-	}
-	std::atexit(&SDL_Quit);
 	bool quit = false;
 	SDL_Event event;
 	SDL_Renderer* renderer;
+
+	SDL_Rect srcrect;
+	SDL_Rect dstrect;
+
+	srcrect.x = 0;
+	srcrect.y = 0;
+	srcrect.w = 83;
+	srcrect.h = 32;
+	dstrect.x = 10;
+	dstrect.y = 10;
+	dstrect.w = 83;
+	dstrect.h = 32;
+
+
 	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(IMG_INIT_PNG);
 
 	SDL_DisplayMode dm;
 
 
-	if (SDL_GetDesktopDisplayMode(0, &dm) != 0){
+	if (SDL_GetDesktopDisplayMode(0, &dm) != 0) {
 		SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
 		return 1;
 	}
@@ -110,53 +117,69 @@ int generazioneFinestra() {
 
 	printf("\n\nw=%d h=%d", w, h);
 
-	SDL_Window *screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
-	SDL_Surface* button = SDL_LoadBMP("newgame.bmp");
-	SDL_Rect cButton;
-	cButton.x = 220;
-	cButton.y = screen->h / 2;
-	cButton.w = button->w;
-	cButton.h = button->h;
-	/*Set the current gamestate, in this case its Intro*/
-	gamestate current = Intro;
-	while (current != Exit) /*Game Loop*/
-	{
-		SDL_Event event;
-		while (SDL_PollEvent(&event))
-		{
-			switch (current) /*Switch the current state*/
-			{
-			case Intro:
-				if (event.type == SDL_QUIT)
-				{
-					current = Exit;
-				}
-				/*Here we check if the mouse is being clicked on the button*/
-				if ((event.button.button & Button) == Button && intersects(cButton.x, cButton.y, cButton.w, cButton.h, event.button.x, event.button.y))
-				{
-					current = Main; /*If it is true we change the current state*/
-				}
-				break;
-			case Main:
-				if (event.type == SDL_QUIT)
-				{
-					current = Exit;
-				}
-				break;
-			}
-		}
-		switch (current)
-		{
-		case Intro:
-			SDL_FillRect(screen, &screen->clip_rect, 000000);
-			SDL_BlitSurface(button, NULL, screen, &cButton); /*We draw the icon*/
-			break;
-		case Main:
-			SDL_FillRect(screen, &screen->clip_rect, SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
-			break;
-		}
-		SDL_Flip(screen);
+	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
+
+	
+
+	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
+	// Select the color for drawing. It is set to red here.
+	SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
+
+	// Clear the entire screen to our selected color.
+	SDL_RenderClear(renderer);
+
+	// Up until now everything was drawn behind the scenes.
+	// This will show the new, red contents of the window.
+	SDL_RenderPresent(renderer);
+
+	SDL_Surface* lettuce_sur = IMG_Load("exit.png");
+
+	if (lettuce_sur == NULL) {
+		std::cout << "Error loading image: " << IMG_GetError();
+		return 5;
 	}
+
+	SDL_Texture* lettuce_tex = SDL_CreateTextureFromSurface(renderer, lettuce_sur);
+
+	if (lettuce_tex == NULL) {
+		std::cout << "Error creating texture";
+		return 6;
+	}
+
+	SDL_FreeSurface(lettuce_sur);
+
+	
+
+	while (!quit)
+	{
+		SDL_WaitEvent(&event);
+
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			quit = true;
+			break;
+		}
+
+		SDL_RenderClear(renderer);
+
+		SDL_RenderCopy(renderer, lettuce_tex, &srcrect, &dstrect);
+
+		SDL_RenderPresent(renderer);
+
+	}
+
+	SDL_DestroyTexture(lettuce_tex);
+
+	SDL_DestroyRenderer(renderer);
+
+	SDL_DestroyWindow(screen);
+
+	IMG_Quit();
+
+	SDL_Quit();
+
+
 	return 0;
 }
 //FINE INTERFACCIA GRAFICA
@@ -221,7 +244,7 @@ void addCar(){
 		}
 	}
 
-	//se è andato tutto bene
+	//se ï¿½ andato tutto bene
 	if (error_code == 0) {
 		//scrivo
 		fwrite(&garage, sizeof(garage), 1, pf);
