@@ -66,6 +66,7 @@ void getCurrentDate(int data[]) {
 	time_t current_time = time(nullptr);
 	tm* local_time = localtime(&current_time);
 	data[0] = (local_time->tm_mday);
+	//HAHAHAHAHA
 	data[1] = (local_time->tm_mon + 1);
 	data[2] = (local_time->tm_year + 1900);
 }
@@ -100,6 +101,7 @@ int generazioneFinestra() {
 	dstrect.h = 32;
 
 
+	//HAHAHAHAHAH
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Init(IMG_INIT_PNG);
 
@@ -205,7 +207,7 @@ void refreshID() {
 
 void addCar(){
 	int a;
-
+	
 	errno_t error_code;
 	FILE* pf;
 	FILE* aa;
