@@ -34,6 +34,9 @@
     <Image Include="code\images\IMG_0014 1.JPG">
       <Filter>File di risorse</Filter>
     </Image>
+    <Image Include="exit.png">
+      <Filter>File di risorse</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="code\binaryFiles\id.dat" />

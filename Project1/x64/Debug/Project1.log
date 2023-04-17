@@ -1,4 +1,4 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (x64\Debug\) contiene file condivisi da un altro progetto (Project1.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
-  main.cpp
-Button.obj : error LNK2001: simbolo esterno "struct SDL_Renderer * renderer" (?renderer@@3PEAUSDL_Renderer@@EA) non risolto
-C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\x64\Debug\gestionaleAutonoleggio.exe : fatal error LNK1120: 1 esterni non risolti
+  libreriaAutonoleggio.cpp
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(207,6): warning C4101: 'a': variabile locale senza riferimenti
+  Project1.vcxproj -> C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\x64\Debug\gestionaleAutonoleggio.exe
