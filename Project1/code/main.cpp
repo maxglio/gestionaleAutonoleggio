@@ -12,6 +12,6 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	generazioneFinestra();
-	addCar();
+	//addCar();
 	return 0;
 }

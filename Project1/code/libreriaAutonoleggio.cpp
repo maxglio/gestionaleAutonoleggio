@@ -83,18 +83,33 @@ void getCurrentTime(int ora[]) {
 
 
 //INTERFACCIA GRAFICA
+
+int check_click_in_rect(int x, int y, struct SDL_Rect* rect){
+	/* Check X coordinate is within rectangle range */
+	if (x >= rect->x && x < (rect->x + rect->w))
+	{
+		/* Check Y coordinate is within rectangle range */
+		if (y >= rect->y && y < (rect->y + rect->h))
+		{
+			/* X and Y is inside the rectangle */
+			return 1;
+		}
+	}
+
+	/* X or Y is outside the rectangle */
+	return 0;
+}
+
 int generazioneFinestra() {
+	int xMouse, yMouse;
 	bool quit = false;
 	SDL_Event event;
 	SDL_Renderer* renderer;
+	SDL_Point* p;
 
-	SDL_Rect srcrect;
+
 	SDL_Rect dstrect;
 
-	srcrect.x = 0;
-	srcrect.y = 0;
-	srcrect.w = 83;
-	srcrect.h = 32;
 	dstrect.x = 10;
 	dstrect.y = 10;
 	dstrect.w = 83;
@@ -134,27 +149,40 @@ int generazioneFinestra() {
 	// This will show the new, red contents of the window.
 	SDL_RenderPresent(renderer);
 
-	SDL_Surface* lettuce_sur = IMG_Load("exit.png");
+	SDL_RenderDrawRect(renderer, &dstrect);
 
-	if (lettuce_sur == NULL) {
-		std::cout << "Error loading image: " << IMG_GetError();
+	SDL_Surface* ExitSurface = IMG_Load("exit.png");
+
+	if (ExitSurface == NULL) {
+		cout << "Error loading image: " << IMG_GetError();
 		return 5;
 	}
 
-	SDL_Texture* lettuce_tex = SDL_CreateTextureFromSurface(renderer, lettuce_sur);
+	SDL_Texture* ExitTexture = SDL_CreateTextureFromSurface(renderer, ExitSurface);
 
-	if (lettuce_tex == NULL) {
-		std::cout << "Error creating texture";
+	if (ExitSurface == NULL) {
+		cout << "Error creating texture";
 		return 6;
 	}
 
-	SDL_FreeSurface(lettuce_sur);
+	SDL_FreeSurface(ExitSurface);
 
 	
 
-	while (!quit)
-	{
+	while (!quit){
+
+		SDL_GetGlobalMouseState(&xMouse, &yMouse);
+		printf("\ny = %d - x = %d", xMouse, yMouse);
 		SDL_WaitEvent(&event);
+
+		if (check_click_in_rect(xMouse, yMouse, &dstrect) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					break;
+				}
+			}
+			
+		}
 
 		switch (event.type)
 		{
@@ -165,13 +193,13 @@ int generazioneFinestra() {
 
 		SDL_RenderClear(renderer);
 
-		SDL_RenderCopy(renderer, lettuce_tex, &srcrect, &dstrect);
+		SDL_RenderCopy(renderer, ExitTexture, NULL, &dstrect);
 
 		SDL_RenderPresent(renderer);
 
 	}
 
-	SDL_DestroyTexture(lettuce_tex);
+	SDL_DestroyTexture(ExitTexture);
 
 	SDL_DestroyRenderer(renderer);
 
