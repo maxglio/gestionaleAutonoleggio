@@ -108,15 +108,10 @@ int generazioneFinestra() {
 	SDL_Point* p;
 
 
-	SDL_Rect dstrect;
-
-	dstrect.x = 10;
-	dstrect.y = 10;
-	dstrect.w = 83;
-	dstrect.h = 32;
 
 
-	//HAHAHAHAHAH
+
+
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Init(IMG_INIT_PNG);
 
@@ -132,9 +127,55 @@ int generazioneFinestra() {
 	w = dm.w;
 	h = dm.h;
 
+	int hDIv2 = h / 2;
+
 	printf("\n\nw=%d h=%d", w, h);
 
-	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
+	cout << endl << "w / 2 = " << hDIv2;
+
+
+#define HRECTSX 70
+#define WRECTSX 100
+
+
+	SDL_Rect lowRect;
+	lowRect.x = WRECTSX;
+	lowRect.y = 0;
+	lowRect.w = WRECTSX;
+	lowRect.h = HRECTSX;
+
+	SDL_Rect exitRect;
+	exitRect.x = 0;
+	exitRect.y = 0;
+	exitRect.w = WRECTSX;
+	exitRect.h = HRECTSX;
+
+	SDL_Rect sqrRect;
+	sqrRect.x = (WRECTSX + WRECTSX);
+	sqrRect.y = 0;
+	sqrRect.w = WRECTSX;
+	sqrRect.h = HRECTSX;
+
+	SDL_Rect titleRect;
+	titleRect.x = ((w / 2)-(700/2));
+	titleRect.y = 0;
+	titleRect.w = 700;
+	titleRect.h = 130;
+	
+	SDL_Rect searchRect;
+	searchRect.x = ((w / 2) - (800 / 2)) - 200;
+	searchRect.y = 200;
+	searchRect.w = 800;
+	searchRect.h = 130;
+
+	SDL_Rect filterRect;
+	filterRect.x = (((w / 2) - (800 / 2)) - 200) + searchRect.w + 60;
+	filterRect.y = 200;
+	filterRect.w = 130;
+	filterRect.h = 130;
+
+
+	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_OPENGL);
 
 	
 
@@ -146,12 +187,53 @@ int generazioneFinestra() {
 	SDL_RenderClear(renderer);
 
 	// Up until now everything was drawn behind the scenes.
-	// This will show the new, red contents of the window.
+	// This will show the new contents of the window.
 	SDL_RenderPresent(renderer);
 
-	SDL_RenderDrawRect(renderer, &dstrect);
+	//start rectangle rendering
+		
+	//SQUARE BUTTON
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_RenderDrawRect(renderer, &sqrRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
 
-	SDL_Surface* ExitSurface = IMG_Load("exit.png");
+	//LOW BUTTON
+		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+		SDL_RenderDrawRect(renderer, &lowRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//EXIT BUTTON
+		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+		SDL_RenderDrawRect(renderer, &exitRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//TITLE
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_RenderDrawRect(renderer, &titleRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//SEARCH BOX
+		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+		SDL_RenderDrawRect(renderer, &searchRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//FILTER
+		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+		SDL_RenderDrawRect(renderer, &filterRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+
+	//end rectangle rendering
+
+	/*SDL_RenderDrawRect(renderer, &exitRect);
+
+	SDL_Surface* ExitSurface = IMG_Load("code/images/exit.png");
 
 	if (ExitSurface == NULL) {
 		cout << "Error loading image: " << IMG_GetError();
@@ -165,7 +247,7 @@ int generazioneFinestra() {
 		return 6;
 	}
 
-	SDL_FreeSurface(ExitSurface);
+	SDL_FreeSurface(ExitSurface);*/
 
 	
 
@@ -175,31 +257,31 @@ int generazioneFinestra() {
 		printf("\ny = %d - x = %d", xMouse, yMouse);
 		SDL_WaitEvent(&event);
 
-		if (check_click_in_rect(xMouse, yMouse, &dstrect) == 1) {
+		if (check_click_in_rect(xMouse, yMouse, &exitRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
-					break;
+					system("taskkill /IM gestionaleAutonoleggio.exe");
 				}
 			}
 			
 		}
 
 		switch (event.type)
-		{
+		{ 
 		case SDL_QUIT:
 			quit = true;
-			break;
+			system("taskkill /IM gestionaleAutonoleggio.exe");
 		}
 
 		SDL_RenderClear(renderer);
 
-		SDL_RenderCopy(renderer, ExitTexture, NULL, &dstrect);
+		//SDL_RenderCopy(renderer, ExitTexture, NULL, &exitRect);
 
-		SDL_RenderPresent(renderer);
+		//SDL_RenderPresent(renderer);
 
 	}
 
-	SDL_DestroyTexture(ExitTexture);
+	//SDL_DestroyTexture(ExitTexture);
 
 	SDL_DestroyRenderer(renderer);
 
