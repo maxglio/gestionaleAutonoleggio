@@ -134,8 +134,10 @@ int generazioneFinestra() {
 	cout << endl << "w / 2 = " << hDIv2;
 
 
-#define HRECTSX 70
-#define WRECTSX 100
+#define HRECTSX (6/100.0)*h
+	cout << endl << "HRECTSX = " << HRECTSX;
+#define WRECTSX (5/100.0)*w
+	cout << endl << "WRECTSX = " << WRECTSX;
 
 
 	SDL_Rect lowRect;
@@ -157,22 +159,28 @@ int generazioneFinestra() {
 	sqrRect.h = HRECTSX;
 
 	SDL_Rect titleRect;
-	titleRect.x = ((w / 2)-(700/2));
+	titleRect.w = ((36 / 100.0) * w);
+	titleRect.x = ((w / 2)-(titleRect.w/2));
 	titleRect.y = 0;
-	titleRect.w = 700;
-	titleRect.h = 130;
+	titleRect.h = (12/100.0)*h;
 	
 	SDL_Rect searchRect;
-	searchRect.x = ((w / 2) - (800 / 2)) - 200;
-	searchRect.y = 200;
-	searchRect.w = 800;
-	searchRect.h = 130;
+	searchRect.w = (41/100.0)*w;
+	searchRect.x = ((w / 2) - (searchRect.w / 2)) - ((10 / 100.0)*w);
+	searchRect.y = (18/100.0)*h;
+	searchRect.h = (12/100.0)*h;
 
 	SDL_Rect filterRect;
-	filterRect.x = (((w / 2) - (800 / 2)) - 200) + searchRect.w + 60;
-	filterRect.y = 200;
-	filterRect.w = 130;
-	filterRect.h = 130;
+	filterRect.x = searchRect.x + searchRect.w + ((3 / 100.0)*w);
+	filterRect.y = searchRect.y;
+	filterRect.w = searchRect.h;
+	filterRect.h = searchRect.h;
+
+	SDL_Rect bigRect;
+	bigRect.x = (1.5/100.0)*w;
+	bigRect.y = (36/100.0)*h;
+	bigRect.w = (w - bigRect.x)- bigRect.x;
+	bigRect.h = (h - bigRect.y)- bigRect.x;
 
 
 	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_OPENGL);
@@ -225,6 +233,12 @@ int generazioneFinestra() {
 	//FILTER
 		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 		SDL_RenderDrawRect(renderer, &filterRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//BIG RECTANGLE
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_RenderDrawRect(renderer, &bigRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
