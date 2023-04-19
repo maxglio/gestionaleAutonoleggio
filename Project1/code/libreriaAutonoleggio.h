@@ -19,5 +19,7 @@ void getCurrentTime(int ora[]);
 void refreshID();
 
 void addCar();
+
+void readCar();
 //FINE FILE BINARI
 #endif
