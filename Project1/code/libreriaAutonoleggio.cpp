@@ -9,7 +9,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 1
+#define NMACCHINE 100
 
 using namespace std;
 
@@ -17,7 +17,6 @@ struct Automobile {
 	string marca;
 	string modello;
 	string carburante;
-	int id;
 	int km;
 	int annoMatricolazione;
 	int dataInizioNoleggio[3];
@@ -32,7 +31,7 @@ struct Automobile {
 };
 
 struct Automobile garage[NMACCHINE];
-struct Automobile garage2[NMACCHINE];
+struct Automobile garageLettura[NMACCHINE];
 
 //DATE
 void endDateCalculator(int inizio[], int fine[]){
@@ -429,25 +428,6 @@ int generazioneFinestra() {
 //FINE INTERFACCIA GRAFICA
 
 //FILE BINARI
-void refreshID() {
-	int prova = 0;
-	int a;
-
-
-	errno_t error_code;
-	FILE* pf;
-	error_code = fopen_s(&pf, "id.dat", "w+");
-	if (error_code == 0) {
-		fwrite(&prova, sizeof(int), 1, pf);
-		fclose(pf);
-	}
-	
-	cout << endl << "error code id: " << error_code << endl;
-	error_code = fopen_s(&pf, "id.dat", "r");
-	fread(&a, sizeof(int), 1, pf);
-	fclose(pf);
-	cout << "risultato id:" << a;
-}
 
 void addCar(){
 	int a;
@@ -472,6 +452,7 @@ void addCar(){
 		cin >> garage[i].annoMatricolazione;
 		cout << "inserire il potenza1: ";
 		cin >> garage[i].potenza;
+		cout << "0 manuale - 1 semiautomatica - 2 automatico" << endl;
 		cout << "inserire il cambio1: ";
 		cin >> garage[i].cambio;
 		cout << "inserire il fumatori1: ";
@@ -505,10 +486,48 @@ void addCar(){
 
 	error_code = fopen_s(&aa, "cars.dat", "r");
 	if (error_code == 0) {
-		fread(&garage2, sizeof(struct Automobile), NMACCHINE, aa);
+		fread(&garageLettura, sizeof(struct Automobile), NMACCHINE, aa);
 		fclose(aa);
-		cout << garage2[0].marca;
+		cout << garageLettura[0].marca;
 	}else if (error_code != 0) {
+		cout << "errore nell'apertura del file";
+		exit(0);
+	}
+}
+
+void readCar() {
+	errno_t error_code;
+
+	FILE* readCar;
+
+	error_code = fopen_s(&readCar, "cars.dat", "r");
+	if (error_code == 0) {
+		fread(&garageLettura, sizeof(struct Automobile), NMACCHINE, readCar);
+		fclose(readCar);
+
+		for (int i = 0; i < NMACCHINE; i++) {
+			cout << "-----------------------------------";
+			cout << "Macchina numero: " << i;
+			cout << endl;
+			cout << "marca: "                                    << garageLettura[i].marca              << endl;
+			cout << "modello: "                                  << garageLettura[i].modello            << endl;
+			cout << "carburante: "                               << garageLettura[i].carburante         << endl;
+			cout << "chilometraggio: "                           << garageLettura[i].km                 << endl;
+			cout << "anno di immatricolazione: "                 << garageLettura[i].annoMatricolazione << endl;
+			cout << "potenza: "                                  << garageLettura[i].potenza            << endl;
+			cout << "tipo di cambio: "                           << garageLettura[i].cambio             << endl;
+			cout << "0 manuale - 1 semiautomatica - 2 automatico"                                       << endl;
+			cout << "fumatori: "                                 << garageLettura[i].fumatori           << endl;
+			cout << "[0 = no][1 = si]"                                                                  << endl;
+			cout << "usato: "                                    << garageLettura[i].usato              << endl;
+			cout << "[0 = no][1 = si]"                                                                  << endl;
+			cout << "posti: "                                    << garageLettura[i].posti              << endl;
+			cout << "porte: "                                    << garageLettura[i].porte              << endl;
+			cout << "neopatentato: "                             << garageLettura[i].neopatentato       << endl;
+			cout << "[0 = no][1 = si]"                                                                  << endl;
+		}
+	}
+	else if (error_code != 0) {
 		cout << "errore nell'apertura del file";
 		exit(0);
 	}
