@@ -107,6 +107,7 @@ int generazioneFinestra() {
 	SDL_Event event;
 	SDL_Renderer* renderer;
 	SDL_Point* p;
+	bool filterControl = false;
 
 
 
@@ -283,9 +284,9 @@ int generazioneFinestra() {
 	SDL_FreeSurface(SearchIconSurface);
 	
 	//FILTER ICON RENDERING
-	SDL_Surface* FilterIconONSurface = IMG_Load("code/images/filterIconON.png");
-	SDL_Texture* FilterIconONTexture = SDL_CreateTextureFromSurface(renderer, FilterIconONSurface);
-	SDL_FreeSurface(FilterIconONSurface);
+	SDL_Surface* FilterIconSurface = IMG_Load("code/images/filterIconON.png");
+	SDL_Texture* FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
+	SDL_FreeSurface(FilterIconSurface);
 
 	
 
@@ -305,13 +306,77 @@ int generazioneFinestra() {
 					system("taskkill /IM gestionaleAutonoleggio.exe");
 				}
 			}
-			
 		}
 
 	//HIDE
 	//square
 
 	//SEARCH ICON
+		if (check_click_in_rect(xMouse, yMouse, &filterRect) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+
+					switch (filterControl){
+					case false:
+						cout << "bbbbbbbbbbbbbbbbbbb";
+						//COVER
+						FilterIconSurface = IMG_Load("code/images/cover.png");
+
+						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
+
+						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
+
+						SDL_RenderPresent(renderer);
+
+						SDL_UpdateWindowSurface(screen);
+						//COVER
+
+						FilterIconSurface = IMG_Load("code/images/filterIconOFF.png");
+
+						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
+
+						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
+
+						SDL_RenderPresent(renderer);
+
+						SDL_UpdateWindowSurface(screen);
+
+						
+						filterControl = true;
+						break;
+					case true:
+						cout << "aaaaaaaaaaaaaaaaaa";
+						
+						//COVER
+						FilterIconSurface = IMG_Load("code/images/cover.png");
+
+						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
+
+						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
+
+						SDL_RenderPresent(renderer);
+
+						SDL_UpdateWindowSurface(screen);
+						//COVER
+
+						FilterIconSurface = IMG_Load("code/images/filterIconON.png");
+
+						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
+
+						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
+
+						SDL_RenderPresent(renderer);
+
+						SDL_UpdateWindowSurface(screen);
+						filterControl = false;
+						break;
+
+					default:
+						break;
+					}
+				}
+			}
+		}
 
 	
 
@@ -331,7 +396,7 @@ int generazioneFinestra() {
 
 		SDL_RenderPresent(renderer);
 
-		SDL_RenderCopy(renderer, FilterIconONTexture, NULL, &filterRect);
+		SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
 
 		SDL_RenderPresent(renderer);
 
@@ -341,7 +406,7 @@ int generazioneFinestra() {
 
 	}
 
-	SDL_DestroyTexture(FilterIconONTexture);
+	SDL_DestroyTexture(FilterIconTexture);
 
 	SDL_DestroyTexture(ExitTexture);
 
