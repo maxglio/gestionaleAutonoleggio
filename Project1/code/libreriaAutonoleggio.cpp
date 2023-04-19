@@ -32,6 +32,7 @@ struct Automobile {
 };
 
 struct Automobile garage[NMACCHINE];
+struct Automobile garage2[NMACCHINE];
 
 //DATE
 void endDateCalculator(int inizio[], int fine[]){
@@ -314,6 +315,8 @@ int generazioneFinestra() {
 void refreshID() {
 	int prova = 0;
 	int a;
+
+
 	errno_t error_code;
 	FILE* pf;
 	error_code = fopen_s(&pf, "id.dat", "w+");
@@ -373,18 +376,24 @@ void addCar(){
 	//se � andato tutto bene
 	if (error_code == 0) {
 		//scrivo
-		fwrite(&garage, sizeof(garage), 1, pf);
+		fwrite(&garage, sizeof(struct Automobile), NMACCHINE, pf);
 		//chiudo il file
 		fclose(pf);
+	}else if (error_code != 0) {
+		cout << "errore nell'apertura del file";
+		exit(0);
 	}
 	
 	cout << endl << "error code cars: " << error_code << endl;
 
 	error_code = fopen_s(&aa, "cars.dat", "r");
 	if (error_code == 0) {
-		size_t success = fread(&garage, sizeof(garage), 1, aa);
+		fread(&garage2, sizeof(struct Automobile), NMACCHINE, aa);
 		fclose(aa);
-		cout << "success: " << success;
+		cout << garage2[0].marca;
+	}else if (error_code != 0) {
+		cout << "errore nell'apertura del file";
+		exit(0);
 	}
 }
 //FINE FILE BINARI
