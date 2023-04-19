@@ -115,8 +115,10 @@ int generazioneFinestra() {
 
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Init(IMG_INIT_PNG);
+	TTF_Init();
 
 	SDL_DisplayMode dm;
+
 
 
 	if (SDL_GetDesktopDisplayMode(0, &dm) != 0) {
@@ -141,11 +143,11 @@ int generazioneFinestra() {
 	cout << endl << "WRECTSX = " << WRECTSX;
 
 
-	SDL_Rect lowRect;
-	lowRect.x = WRECTSX;
-	lowRect.y = 0;
-	lowRect.w = WRECTSX;
-	lowRect.h = HRECTSX;
+	SDL_Rect hideRect;
+	hideRect.x = WRECTSX;
+	hideRect.y = 0;
+	hideRect.w = WRECTSX;
+	hideRect.h = HRECTSX;
 
 	SDL_Rect exitRect;
 	exitRect.x = 0;
@@ -164,12 +166,18 @@ int generazioneFinestra() {
 	titleRect.x = ((w / 2)-(titleRect.w/2));
 	titleRect.y = 0;
 	titleRect.h = (12/100.0)*h;
-	
+
 	SDL_Rect searchRect;
 	searchRect.w = (41/100.0)*w;
-	searchRect.x = ((w / 2) - (searchRect.w / 2)) - ((10 / 100.0)*w);
+	searchRect.x = ((w / 2) - (searchRect.w / 2));
 	searchRect.y = (18/100.0)*h;
 	searchRect.h = (12/100.0)*h;
+
+	SDL_Rect searchIconRect;
+	searchIconRect.w = (6.75 / 100.0) * w;
+	searchIconRect.x = ((w / 2) - (searchRect.w / 2) - searchIconRect.w);
+	searchIconRect.y = (18 / 100.0) * h;
+	searchIconRect.h = (12 / 100.0) * h;
 
 	SDL_Rect filterRect;
 	filterRect.x = searchRect.x + searchRect.w + ((3 / 100.0)*w);
@@ -184,7 +192,7 @@ int generazioneFinestra() {
 	bigRect.h = (h - bigRect.y)- bigRect.x;
 
 
-	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_OPENGL);
+	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_POPUP_MENU);
 
 	
 
@@ -209,7 +217,7 @@ int generazioneFinestra() {
 
 	//LOW BUTTON
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		SDL_RenderDrawRect(renderer, &lowRect);
+		SDL_RenderDrawRect(renderer, &hideRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
@@ -222,6 +230,12 @@ int generazioneFinestra() {
 	//TITLE
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &titleRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//SEARCH BOX ICON
+		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+		SDL_RenderDrawRect(renderer, &searchIconRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
@@ -246,32 +260,45 @@ int generazioneFinestra() {
 
 	//end rectangle rendering
 
-	/*SDL_RenderDrawRect(renderer, &exitRect);
+	// WINDOW ICON
+	SDL_Surface* IconSurface = IMG_Load("code/images/icon.png");
+	SDL_SetWindowIcon(screen, IconSurface);
 
+	// EXIT BUTTON RENDERING
 	SDL_Surface* ExitSurface = IMG_Load("code/images/exit.png");
-
-	if (ExitSurface == NULL) {
-		cout << "Error loading image: " << IMG_GetError();
-		return 5;
-	}
-
 	SDL_Texture* ExitTexture = SDL_CreateTextureFromSurface(renderer, ExitSurface);
+	SDL_FreeSurface(ExitSurface);
 
-	if (ExitSurface == NULL) {
-		cout << "Error creating texture";
-		return 6;
-	}
+	//TITLE RENDERING
+	TTF_Font* TitleFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
+	SDL_Color TitleColor = { 255, 255, 255 };
+	SDL_Surface* TitleSurface = TTF_RenderText_Solid(TitleFont, "EM Autonoleggio", TitleColor);
+	SDL_Texture* TitleTexture = SDL_CreateTextureFromSurface(renderer, TitleSurface);
+	SDL_FreeSurface(TitleSurface);
 
-	SDL_FreeSurface(ExitSurface);*/
+
+	//SEARCH ICON RENDERING
+	SDL_Surface* SearchIconSurface = IMG_Load("code/images/searchIcon.png");
+	SDL_Texture* SearchIconTexture = SDL_CreateTextureFromSurface(renderer, SearchIconSurface);
+	SDL_FreeSurface(SearchIconSurface);
+	
+	//FILTER ICON RENDERING
+	SDL_Surface* FilterIconONSurface = IMG_Load("code/images/filterIconON.png");
+	SDL_Texture* FilterIconONTexture = SDL_CreateTextureFromSurface(renderer, FilterIconONSurface);
+	SDL_FreeSurface(FilterIconONSurface);
 
 	
 
 	while (!quit){
 
+	//Get Mouse POS
 		SDL_GetGlobalMouseState(&xMouse, &yMouse);
 		printf("\ny = %d - x = %d", xMouse, yMouse);
 		SDL_WaitEvent(&event);
+	//--------------------------------------------------
 
+
+	//EXIT
 		if (check_click_in_rect(xMouse, yMouse, &exitRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
@@ -281,6 +308,14 @@ int generazioneFinestra() {
 			
 		}
 
+	//HIDE
+	//square
+
+	//SEARCH ICON
+
+	
+
+
 		switch (event.type)
 		{ 
 		case SDL_QUIT:
@@ -288,19 +323,36 @@ int generazioneFinestra() {
 			system("taskkill /IM gestionaleAutonoleggio.exe");
 		}
 
-		SDL_RenderClear(renderer);
+		SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
 
-		//SDL_RenderCopy(renderer, ExitTexture, NULL, &exitRect);
+		SDL_RenderPresent(renderer);
 
-		//SDL_RenderPresent(renderer);
+		SDL_RenderCopy(renderer, ExitTexture, NULL, &exitRect);
+
+		SDL_RenderPresent(renderer);
+
+		SDL_RenderCopy(renderer, FilterIconONTexture, NULL, &filterRect);
+
+		SDL_RenderPresent(renderer);
+
+		SDL_RenderCopy(renderer, SearchIconTexture, NULL, &searchIconRect);
+
+		SDL_RenderPresent(renderer);
 
 	}
 
-	//SDL_DestroyTexture(ExitTexture);
+	SDL_DestroyTexture(FilterIconONTexture);
+
+	SDL_DestroyTexture(ExitTexture);
+
+	SDL_DestroyTexture(SearchIconTexture);
+
+	SDL_DestroyTexture(TitleTexture);
 
 	SDL_DestroyRenderer(renderer);
 
 	SDL_DestroyWindow(screen);
+
 
 	IMG_Quit();
 
