@@ -11,6 +11,7 @@
 
 #define NMACCHINE 100
 
+
 using namespace std;
 
 struct Automobile {
@@ -28,6 +29,7 @@ struct Automobile {
 	int posti;
 	int porte;
 	int neopatentato;
+	int prezzo;
 };
 
 struct Automobile garage[NMACCHINE];
@@ -429,17 +431,15 @@ int generazioneFinestra() {
 
 //FILE BINARI
 
-void addCar(){
-	int a;
-	
+void addCar(){	
 	errno_t error_code;
 	FILE* pf;
 	FILE* aa;
 	//apro il file
-	error_code = fopen_s(&pf, "cars.dat", "w");
+	error_code = fopen_s(&pf, "cars.dat", "a");
 
 	//prendo in input tutto
-	for (int i = 0; i < NMACCHINE; i++) {
+	for (int i = 0; i < 10; i++) {
 		cout << "inserire la marca: ";
 		cin >> garage[i].marca;
 		cout << "inserire il modello: ";
@@ -463,12 +463,15 @@ void addCar(){
 		cin >> garage[i].posti;
 		cout << "inserire il porte1: ";
 		cin >> garage[i].porte;
+		cout << "inserire il prezzo: ";
+		cin >> garage[i].prezzo;
 		if (garage[i].potenza > 95){
 			garage[i].neopatentato = 0;
 		}
 		else if(garage[i].potenza <= 95){
 			garage[i].neopatentato = 1;
 		}
+		cout << "----------------------------" << endl;
 	}
 
 	//se � andato tutto bene
@@ -483,16 +486,6 @@ void addCar(){
 	}
 	
 	cout << endl << "error code cars: " << error_code << endl;
-
-	error_code = fopen_s(&aa, "cars.dat", "r");
-	if (error_code == 0) {
-		fread(&garageLettura, sizeof(struct Automobile), NMACCHINE, aa);
-		fclose(aa);
-		cout << garageLettura[0].marca;
-	}else if (error_code != 0) {
-		cout << "errore nell'apertura del file";
-		exit(0);
-	}
 }
 
 void readCar() {
