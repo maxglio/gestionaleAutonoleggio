@@ -16,10 +16,10 @@ void getCurrentTime(int ora[]);
 //FINE DATE
 
 //FILE BINARI
-void refreshID();
-
 void addCar();
 
 void readCar();
+
+void printStruct();
 //FINE FILE BINARI
 #endif

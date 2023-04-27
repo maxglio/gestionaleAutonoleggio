@@ -11,6 +11,7 @@
 #include "libreriaAutonoleggio.h"
 
 #define NMACCHINE 2
+#define LUNGSTRUCT 13
 
 
 using namespace std;
@@ -33,8 +34,26 @@ struct Automobile {
 	int prezzo;
 };
 
+struct AutomobileString {
+	string marca;
+	string modello;
+	string carburante;
+	string km;
+	string annoMatricolazione;
+	string dataInizioNoleggio[3];
+	string durataNoleggio;
+	string potenza;
+	string cambio;
+	string fumatori;
+	string usato;
+	string posti;
+	string porte;
+	string neopatentato;
+	string prezzo;
+};
+
 struct Automobile garage[NMACCHINE];
-struct Automobile garageLettura[NMACCHINE];
+struct AutomobileString garageLettura[NMACCHINE];
 
 //DATE
 void endDateCalculator(int inizio[], int fine[]){
@@ -485,24 +504,45 @@ void addCar() {
 		fileWrite << garage[i].porte << "\n";
 		fileWrite << garage[i].neopatentato << "\n";
 		fileWrite << garage[i].prezzo << "\n";
-		fileWrite << "ÿ";
 	}
 	fileWrite.close();
 }
 
 void readCar() {
+	int i = 0;
+	int j = 0;
+
 	ifstream fileRead("cars.txt");
 
 	string line;
 
 	if (fileRead.is_open()) {
-		while (getline(fileRead, line))
-		{
-			cout << line << '\n';
+		while (getline(fileRead, line)){
+	
 		}
 	}
 	else {
 		cout << "Errore nell'apertura del file";
+	}
+}
+
+void printStruct() {
+	int i;
+	for (i = 0; i < NMACCHINE; i++) {
+		cout << "marca: "              << garageLettura[i].marca << "\n";
+		cout << "modello: "            << garageLettura[i].modello << "\n";
+		cout << "carburante: "         << garageLettura[i].carburante << "\n";
+		cout << "km: "                 << garageLettura[i].km << "\n";
+		cout << "annoMatricolazione: " << garageLettura[i].annoMatricolazione << "\n";
+		cout << "potenza: "            << garageLettura[i].potenza << "\n";
+		cout << "cambio: "             << garageLettura[i].cambio << "\n";
+		cout << "fumatori: "           << garageLettura[i].fumatori << "\n";
+		cout << "usato: "              << garageLettura[i].usato << "\n";
+		cout << "posti: "              << garageLettura[i].posti << "\n";
+		cout << "porte: "              << garageLettura[i].porte << "\n";
+		cout << "neopatentato: "       << garageLettura[i].neopatentato << "\n";
+		cout << "prezzo: "             << garageLettura[i].prezzo << "\n";
+		cout << "-------------------\n";
 	}
 }
 //FINE FILE BINARI
