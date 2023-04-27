@@ -9,7 +9,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 100
+#define NMACCHINE 2
 
 
 using namespace std;
@@ -431,15 +431,12 @@ int generazioneFinestra() {
 
 //FILE BINARI
 
-void addCar(){	
-	errno_t error_code;
-	FILE* pf;
-	FILE* aa;
-	//apro il file
-	error_code = fopen_s(&pf, "cars.dat", "a");
-
+void addCar() {
+	ofstream fileWrite;
+	//apro/creo il file
+	fileWrite.open("cars.txt", ios::app);
 	//prendo in input tutto
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < NMACCHINE; i++) {
 		cout << "inserire la marca: ";
 		cin >> garage[i].marca;
 		cout << "inserire il modello: ";
@@ -465,64 +462,33 @@ void addCar(){
 		cin >> garage[i].porte;
 		cout << "inserire il prezzo: ";
 		cin >> garage[i].prezzo;
-		if (garage[i].potenza > 95){
+		if (garage[i].potenza > 95) {
 			garage[i].neopatentato = 0;
 		}
-		else if(garage[i].potenza <= 95){
+		else if (garage[i].potenza <= 95) {
 			garage[i].neopatentato = 1;
 		}
 		cout << "----------------------------" << endl;
-	}
 
-	//se � andato tutto bene
-	if (error_code == 0) {
-		//scrivo
-		fwrite(&garage, sizeof(struct Automobile), NMACCHINE, pf);
-		//chiudo il file
-		fclose(pf);
-	}else if (error_code != 0) {
-		cout << "errore nell'apertura del file";
-		exit(0);
+		//scrivo tuttto sul file
+		fileWrite << garage[i].marca << "\t";
+		fileWrite << garage[i].modello << "\t";
+		fileWrite << garage[i].carburante << "\t";
+		fileWrite << garage[i].km << "\t";
+		fileWrite << garage[i].annoMatricolazione << "\t";
+		fileWrite << garage[i].potenza << "\t";
+		fileWrite << garage[i].cambio << "\t";
+		fileWrite << garage[i].fumatori << "\t";
+		fileWrite << garage[i].usato << "\t";
+		fileWrite << garage[i].posti << "\t";
+		fileWrite << garage[i].porte << "\t";
+		fileWrite << garage[i].neopatentato << "\t";
+		fileWrite << garage[i].prezzo << "\n";
 	}
-	
-	cout << endl << "error code cars: " << error_code << endl;
+	fileWrite.close();
 }
 
 void readCar() {
-	errno_t error_code;
-
-	FILE* readCar;
-
-	error_code = fopen_s(&readCar, "cars.dat", "r");
-	if (error_code == 0) {
-		fread(&garageLettura, sizeof(struct Automobile), NMACCHINE, readCar);
-		fclose(readCar);
-
-		for (int i = 0; i < NMACCHINE; i++) {
-			cout << "-----------------------------------";
-			cout << "Macchina numero: " << i;
-			cout << endl;
-			cout << "marca: "                                    << garageLettura[i].marca              << endl;
-			cout << "modello: "                                  << garageLettura[i].modello            << endl;
-			cout << "carburante: "                               << garageLettura[i].carburante         << endl;
-			cout << "chilometraggio: "                           << garageLettura[i].km                 << endl;
-			cout << "anno di immatricolazione: "                 << garageLettura[i].annoMatricolazione << endl;
-			cout << "potenza: "                                  << garageLettura[i].potenza            << endl;
-			cout << "tipo di cambio: "                           << garageLettura[i].cambio             << endl;
-			cout << "0 manuale - 1 semiautomatica - 2 automatico"                                       << endl;
-			cout << "fumatori: "                                 << garageLettura[i].fumatori           << endl;
-			cout << "[0 = no][1 = si]"                                                                  << endl;
-			cout << "usato: "                                    << garageLettura[i].usato              << endl;
-			cout << "[0 = no][1 = si]"                                                                  << endl;
-			cout << "posti: "                                    << garageLettura[i].posti              << endl;
-			cout << "porte: "                                    << garageLettura[i].porte              << endl;
-			cout << "neopatentato: "                             << garageLettura[i].neopatentato       << endl;
-			cout << "[0 = no][1 = si]"                                                                  << endl;
-		}
-	}
-	else if (error_code != 0) {
-		cout << "errore nell'apertura del file";
-		exit(0);
-	}
+	
 }
 //FINE FILE BINARI
