@@ -1,4 +1,3 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (x64\Debug\) contiene file condivisi da un altro progetto (Project1.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
-  libreriaAutonoleggio.cpp
-C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(207,6): warning C4101: 'a': variabile locale senza riferimenti
-  Project1.vcxproj -> C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\x64\Debug\gestionaleAutonoleggio.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (x64\Debug\) contiene file condivisi da un altro progetto (Project1.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
+  main.cpp
+  Project1.vcxproj -> C:\Users\massi\source\repos\gestionaleAutonoleggio\x64\Debug\gestionaleAutonoleggio.exe

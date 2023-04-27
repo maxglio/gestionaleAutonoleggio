@@ -6,6 +6,7 @@
 #include <fstream>
 #include <ctime>
 #include <cstdlib>
+#include <string>
 
 #include "libreriaAutonoleggio.h"
 
@@ -471,24 +472,37 @@ void addCar() {
 		cout << "----------------------------" << endl;
 
 		//scrivo tuttto sul file
-		fileWrite << garage[i].marca << "\t";
-		fileWrite << garage[i].modello << "\t";
-		fileWrite << garage[i].carburante << "\t";
-		fileWrite << garage[i].km << "\t";
-		fileWrite << garage[i].annoMatricolazione << "\t";
-		fileWrite << garage[i].potenza << "\t";
-		fileWrite << garage[i].cambio << "\t";
-		fileWrite << garage[i].fumatori << "\t";
-		fileWrite << garage[i].usato << "\t";
-		fileWrite << garage[i].posti << "\t";
-		fileWrite << garage[i].porte << "\t";
-		fileWrite << garage[i].neopatentato << "\t";
+		fileWrite << garage[i].marca << "\n";
+		fileWrite << garage[i].modello << "\n";
+		fileWrite << garage[i].carburante << "\n";
+		fileWrite << garage[i].km << "\n";
+		fileWrite << garage[i].annoMatricolazione << "\n";
+		fileWrite << garage[i].potenza << "\n";
+		fileWrite << garage[i].cambio << "\n";
+		fileWrite << garage[i].fumatori << "\n";
+		fileWrite << garage[i].usato << "\n";
+		fileWrite << garage[i].posti << "\n";
+		fileWrite << garage[i].porte << "\n";
+		fileWrite << garage[i].neopatentato << "\n";
 		fileWrite << garage[i].prezzo << "\n";
+		fileWrite << "ÿ";
 	}
 	fileWrite.close();
 }
 
 void readCar() {
-	
+	ifstream fileRead("cars.txt");
+
+	string line;
+
+	if (fileRead.is_open()) {
+		while (getline(fileRead, line))
+		{
+			cout << line << '\n';
+		}
+	}
+	else {
+		cout << "Errore nell'apertura del file";
+	}
 }
 //FINE FILE BINARI
