@@ -122,6 +122,12 @@ int check_click_in_rect(int x, int y, struct SDL_Rect* rect){
 	return 0;
 }
 
+void cover(SDL_Renderer *renderer, SDL_Window * window, SDL_Texture * texture, SDL_Rect* rect) {
+	SDL_RenderCopy(renderer, texture, NULL, rect);
+	SDL_RenderPresent(renderer);
+	SDL_UpdateWindowSurface(window);
+}
+
 int generazioneFinestra() {
 	int xMouse, yMouse;
 	bool quit = false;
@@ -129,6 +135,7 @@ int generazioneFinestra() {
 	SDL_Renderer* renderer;
 	SDL_Point* p;
 	bool filterControl = false;
+	int page = 0;
 
 
 
@@ -154,15 +161,11 @@ int generazioneFinestra() {
 
 	int hDIv2 = h / 2;
 
-	printf("\n\nw=%d h=%d", w, h);
-
-	cout << endl << "w / 2 = " << hDIv2;
-
 
 #define HRECTSX (6/100.0)*h
-	cout << endl << "HRECTSX = " << HRECTSX;
 #define WRECTSX (5/100.0)*w
-	cout << endl << "WRECTSX = " << WRECTSX;
+#define PERC10W ((0.5 / 100.0) * w)
+#define PERC10H ((0.9 / 100.0) * h)
 
 
 	SDL_Rect hideRect;
@@ -192,13 +195,13 @@ int generazioneFinestra() {
 	SDL_Rect searchRect;
 	searchRect.w = (41/100.0)*w;
 	searchRect.x = ((w / 2) - (searchRect.w / 2));
-	searchRect.y = (18/100.0)*h;
+	searchRect.y = (15/100.0)*h;
 	searchRect.h = (12/100.0)*h;
 
 	SDL_Rect searchIconRect;
 	searchIconRect.w = (6.75 / 100.0) * w;
 	searchIconRect.x = ((w / 2) - (searchRect.w / 2) - searchIconRect.w);
-	searchIconRect.y = (18 / 100.0) * h;
+	searchIconRect.y = searchRect.y;
 	searchIconRect.h = (12 / 100.0) * h;
 
 	SDL_Rect filterRect;
@@ -209,10 +212,27 @@ int generazioneFinestra() {
 
 	SDL_Rect bigRect;
 	bigRect.x = (1.5/100.0)*w;
-	bigRect.y = (36/100.0)*h;
+	bigRect.y = (29/100.0)*h;
 	bigRect.w = (w - bigRect.x)- bigRect.x;
 	bigRect.h = (h - bigRect.y)- bigRect.x;
 
+	SDL_Rect leftArrRect;
+	leftArrRect.w = (3 / 100.0)*w;
+	leftArrRect.x = bigRect.x + PERC10W;
+	leftArrRect.y = (bigRect.y + (bigRect.h / 2)) - (leftArrRect.w / 2);
+	leftArrRect.h = (6 / 100.0) * h;
+
+	SDL_Rect rightArrRect;
+	rightArrRect.w = (3 / 100.0) * w;
+	rightArrRect.x = (bigRect.x + bigRect.w) - rightArrRect.w - PERC10W;
+	rightArrRect.y = (bigRect.y + (bigRect.h / 2)) - (leftArrRect.w / 2);
+	rightArrRect.h = (6 / 100.0) * h;
+
+	SDL_Rect listRect;
+	listRect.x = ((((1.5 / 100.0) * w) + PERC10W) + leftArrRect.w) + PERC10W;
+	listRect.y = bigRect.y + PERC10H;
+	listRect.w = ((w - bigRect.x) - bigRect.x - PERC10W - PERC10W - (leftArrRect.w * 2)) - PERC10W - PERC10W;
+	listRect.h = 130;
 
 	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_POPUP_MENU);
 
@@ -279,6 +299,35 @@ int generazioneFinestra() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
+	//BIG RECTANGLE
+		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+		SDL_RenderDrawRect(renderer, &leftArrRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//BIG RECTANGLE
+		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+		SDL_RenderDrawRect(renderer, &rightArrRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+	//BIG RECTANGLE
+		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+		SDL_RenderDrawRect(renderer, &listRect);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderPresent(renderer);
+
+		
+
+		for (int f = 0; f < 4; f++) {
+			
+			listRect.y = listRect.y + (listRect.h + PERC10H);
+
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &listRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+			SDL_RenderPresent(renderer);
+		}
 
 	//end rectangle rendering
 
@@ -309,16 +358,19 @@ int generazioneFinestra() {
 	SDL_Texture* FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
 	SDL_FreeSurface(FilterIconSurface);
 
+	//LIST RENDERING
+	SDL_Surface* ListSurface = nullptr;
+	SDL_Texture* ListTexture = SDL_CreateTextureFromSurface(renderer, ListSurface);
+	SDL_FreeSurface(ListSurface);
+
 	
 
 	while (!quit){
 
 	//Get Mouse POS
 		SDL_GetGlobalMouseState(&xMouse, &yMouse);
-		printf("\ny = %d - x = %d", xMouse, yMouse);
 		SDL_WaitEvent(&event);
 	//--------------------------------------------------
-
 
 	//EXIT
 		if (check_click_in_rect(xMouse, yMouse, &exitRect) == 1) {
@@ -332,6 +384,9 @@ int generazioneFinestra() {
 	//HIDE
 	//square
 
+		SDL_Surface * CoverSurface = IMG_Load("code/images/cover.png");
+		SDL_Texture * CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
+
 	//SEARCH ICON
 		if (check_click_in_rect(xMouse, yMouse, &filterRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -339,88 +394,81 @@ int generazioneFinestra() {
 
 					switch (filterControl){
 					case false:
-						cout << "bbbbbbbbbbbbbbbbbbb";
 						//COVER
-						FilterIconSurface = IMG_Load("code/images/cover.png");
-
-						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
-
-						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &filterRect);
 						SDL_RenderPresent(renderer);
-
 						SDL_UpdateWindowSurface(screen);
 						//COVER
 
 						FilterIconSurface = IMG_Load("code/images/filterIconOFF.png");
-
 						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
 
 						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-
 						SDL_RenderPresent(renderer);
-
 						SDL_UpdateWindowSurface(screen);
 
-						
 						filterControl = true;
+
 						break;
-					case true:
-						cout << "aaaaaaaaaaaaaaaaaa";
-						
+
+					case true:						
 						//COVER
-						FilterIconSurface = IMG_Load("code/images/cover.png");
-
-						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
-
-						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &filterRect);
 						SDL_RenderPresent(renderer);
-
 						SDL_UpdateWindowSurface(screen);
 						//COVER
 
 						FilterIconSurface = IMG_Load("code/images/filterIconON.png");
-
 						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
 
 						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-
 						SDL_RenderPresent(renderer);
-
 						SDL_UpdateWindowSurface(screen);
-						filterControl = false;
-						break;
 
-					default:
+						filterControl = false;
+
 						break;
 					}
 				}
 			}
 		}
 
-	
+
+		if (check_click_in_rect(xMouse, yMouse, &rightArrRect) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					page += 1;
+					//COVER
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &listRect);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+					//COVER
+					listRect.y = bigRect.y + PERC10H;
+					for (int f = 0; f < 4; f++) {
+
+						listRect.y = listRect.y + (listRect.h + PERC10H);
+
+						SDL_SetRenderDrawColor(renderer, (page*10), (page * 10)-50, (page * 10)-234, 255);
+						SDL_RenderDrawRect(renderer, &listRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+						SDL_RenderPresent(renderer);
+					}
+					
+				}
+			}
+		}
 
 
-		switch (event.type)
-		{ 
+		switch (event.type){ 
 		case SDL_QUIT:
 			quit = true;
+
 			system("taskkill /IM gestionaleAutonoleggio.exe");
 		}
 
 		SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
-
-		SDL_RenderPresent(renderer);
-
 		SDL_RenderCopy(renderer, ExitTexture, NULL, &exitRect);
-
-		SDL_RenderPresent(renderer);
-
 		SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-
-		SDL_RenderPresent(renderer);
-
 		SDL_RenderCopy(renderer, SearchIconTexture, NULL, &searchIconRect);
 
 		SDL_RenderPresent(renderer);
@@ -428,22 +476,15 @@ int generazioneFinestra() {
 	}
 
 	SDL_DestroyTexture(FilterIconTexture);
-
 	SDL_DestroyTexture(ExitTexture);
-
 	SDL_DestroyTexture(SearchIconTexture);
-
 	SDL_DestroyTexture(TitleTexture);
-
 	SDL_DestroyRenderer(renderer);
-
 	SDL_DestroyWindow(screen);
 
 
 	IMG_Quit();
-
 	SDL_Quit();
-
 
 	return 0;
 }

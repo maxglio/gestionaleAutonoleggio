@@ -13,6 +13,8 @@ void getCurrentDate(int data[]);
 
 void getCurrentTime(int ora[]);
 
+void cover(SDL_Renderer* renderer, SDL_Window* window, SDL_Texture* texture, SDL_Rect* rect);
+
 //FINE DATE
 
 //FILE BINARI

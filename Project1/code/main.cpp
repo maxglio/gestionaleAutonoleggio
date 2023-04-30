@@ -11,9 +11,9 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-	//generazioneFinestra();
+	generazioneFinestra();
 	//addCar();
-	readCar();
-	printStruct();
+	//readCar();
+	//printStruct();
 	return 0;
 }
