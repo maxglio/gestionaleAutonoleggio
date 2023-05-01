@@ -632,6 +632,7 @@ void readCar() {
 	//per scorre le linee
 	while (getline(infile, line)) {
 		while ((pos = line.find(delimiter)) != string::npos) {
+			//cout << "j: " << j  << " " << "i: " << i << "\t";
 			token = line.substr(0, pos);
 			line.erase(0, pos + delimiter.length());
 
@@ -674,6 +675,7 @@ void readCar() {
 			j++;
 		}
 		i++;
+		j = 0;
 	}
 }
 void printStruct() {
