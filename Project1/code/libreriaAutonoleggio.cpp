@@ -13,7 +13,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 3
+#define NMACCHINE 20
 #define LUNGSTRUCT 13
 
 
@@ -687,3 +687,7 @@ void printStruct() {
 	}
 }
 //FINE FILE BINARI
+
+//CASTING OPERATION
+
+//FINE CASTING OPERATION

@@ -1,36 +1,36 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (x64\Debug\) contiene file condivisi da un altro progetto (Project1.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
+﻿C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: la directory intermedia (x64\Debug\) contiene file condivisi da un altro progetto (Project1.vcxproj). Tale condizione può comportare un comportamento di pulizia e ricompilazione non corretto.
   libreriaAutonoleggio.cpp
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(170,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(172,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(173,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(178,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(179,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(182,23): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(184,14): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(185,14): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(188,30): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(191,26): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(194,27): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(196,27): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(197,27): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(200,36): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(203,34): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(206,45): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(212,25): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(213,24): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(218,29): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(219,28): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(221,30): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(224,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(225,60): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(227,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(230,65): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(231,25): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(232,97): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(333,28): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(475,29): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(483,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(504,29): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(512,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\massi\source\repos\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(134,13): warning C4101: 'p': variabile locale senza riferimenti
-  Project1.vcxproj -> C:\Users\massi\source\repos\gestionaleAutonoleggio\x64\Debug\gestionaleAutonoleggio.exe
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(151,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(153,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(154,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(159,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(160,15): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(163,23): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(165,14): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(166,14): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(169,30): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(172,26): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(175,27): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(177,27): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(178,27): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(181,36): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(184,34): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(187,45): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(193,25): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(194,24): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(199,29): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(200,28): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(202,30): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(205,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(206,60): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(208,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(211,65): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(212,25): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(213,97): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(314,28): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(456,29): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(473,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(494,29): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(502,31): warning C4244: '=': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\Project1\code\libreriaAutonoleggio.cpp(115,13): warning C4101: 'p': variabile locale senza riferimenti
+  Project1.vcxproj -> C:\Users\enrmo\source\repos\maxglio\gestionaleAutonoleggio\x64\Debug\gestionaleAutonoleggio.exe
