@@ -460,6 +460,15 @@ int generazioneFinestra() {
 						SDL_SetRenderDrawColor(renderer, (page + 10), (page + 10), (page + 10), 255);
 						SDL_RenderDrawRect(renderer, &listRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
+						SDL_Color carColor = { 255, 255, 255 };
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, "a b b b b b b b b b b b b b b b bb b b bb b b b bb b b bb b b b", carColor);
+						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
+
+
 						SDL_RenderPresent(renderer);
 						listRect.y = listRect.y + (listRect.h + PERC10H);
 					}
