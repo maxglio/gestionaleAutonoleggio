@@ -114,12 +114,13 @@ int generazioneFinestra() {
 	SDL_Renderer* renderer;
 	SDL_Point* p;
 	bool filterControl = false;
-	int page = 0;
+	int page = 1;
+
+	char content[100] = { 'a','b', 'c', 'ws', 'sadg', 'hdfs', 'dfg', 'dvfd', 'a', 'adfv', 'advc', 'adfv', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', };
 
 
 
-
-
+	
 
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Init(IMG_INIT_PNG);
@@ -353,6 +354,12 @@ int generazioneFinestra() {
 	SDL_Surface* CoverSurface = IMG_Load("code/images/cover.png");
 	SDL_Texture* CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
 
+	TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
+	SDL_Color carColor = { 255, 255, 255 };
+	SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[0], carColor);
+	SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+	SDL_FreeSurface(carSurface);
+	SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
 
 	while (!quit){
 
@@ -444,8 +451,8 @@ int generazioneFinestra() {
 					page += 1;
 					
 
-					if (page > 100) {
-						page = 0;
+					if (page > 101) {
+						page = 1;
 					}
 					cout << page << endl;
 					//COVER
@@ -463,7 +470,7 @@ int generazioneFinestra() {
 
 						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
 						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, "a b b b b b b b b b b b b b b b bb b b bb b b b bb b b bb b b b", carColor);
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[(page-1)+f], carColor);
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
@@ -482,8 +489,8 @@ int generazioneFinestra() {
 					page -= 1;
 					
 
-					if (page < 0) {
-						page = 100;
+					if (page < 1) {
+						page = 101;
 					}
 					cout << page << endl;
 					//COVER
