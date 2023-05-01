@@ -7,6 +7,9 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+#include <vector>
+#include <iterator>
+#include <sstream>
 
 #include "libreriaAutonoleggio.h"
 
@@ -548,6 +551,8 @@ int generazioneFinestra() {
 //FILE BINARI
 
 void addCar() {
+	int data[3];
+
 	ofstream fileWrite;
 	//apro/creo il file
 	fileWrite.open("cars.txt", ios::app);
@@ -584,44 +589,58 @@ void addCar() {
 		else if (garage[i].potenza <= 95) {
 			garage[i].neopatentato = 1;
 		}
+		getCurrentDate(data);
+
+		garage[i].dataInizioNoleggio[0] = data[0];
+		garage[i].dataInizioNoleggio[1] = data[2];
+		garage[i].dataInizioNoleggio[2] = data[2];
+
+		garage[i].durataNoleggio = 0;
 		cout << "----------------------------" << endl;
 
 		//scrivo tuttto sul file
-		fileWrite << garage[i].marca << "\n";
-		fileWrite << garage[i].modello << "\n";
-		fileWrite << garage[i].carburante << "\n";
-		fileWrite << garage[i].km << "\n";
-		fileWrite << garage[i].annoMatricolazione << "\n";
-		fileWrite << garage[i].potenza << "\n";
-		fileWrite << garage[i].cambio << "\n";
-		fileWrite << garage[i].fumatori << "\n";
-		fileWrite << garage[i].usato << "\n";
-		fileWrite << garage[i].posti << "\n";
-		fileWrite << garage[i].porte << "\n";
-		fileWrite << garage[i].neopatentato << "\n";
-		fileWrite << garage[i].prezzo << "\n";
+		fileWrite << garage[i].marca << "\t";
+		fileWrite << garage[i].modello << "\t";
+		fileWrite << garage[i].carburante << "\t";
+		fileWrite << garage[i].km << "\t";
+		fileWrite << garage[i].annoMatricolazione << "\t";
+		fileWrite << garage[i].potenza << "\t";
+		fileWrite << garage[i].cambio << "\t";
+		fileWrite << garage[i].fumatori << "\t";
+		fileWrite << garage[i].usato << "\t";
+		fileWrite << garage[i].posti << "\t";
+		fileWrite << garage[i].porte << "\t";
+		fileWrite << garage[i].neopatentato << "\t";
+		fileWrite << garage[i].prezzo << "\t";
+		fileWrite << garage[i].dataInizioNoleggio[0] << "\t";
+		fileWrite << garage[i].dataInizioNoleggio[0] << "\t";
+		fileWrite << garage[i].dataInizioNoleggio[0] << "\t";
+		fileWrite << garage[i].durataNoleggio << "\n";
 	}
 	fileWrite.close();
 }
 
 void readCar() {
-	int i = 0;
-	int j = 0;
+	ifstream infile("cars.txt");
 
-	ifstream fileRead("cars.txt");
+	int i = 0, j = 0;
 
 	string line;
+	string delimiter = "\t";
+	string token;
 
-	if (fileRead.is_open()) {
-		while (getline(fileRead, line)){
-	
+	size_t pos = 0;
+
+	//per scorre le linee
+	while (getline(infile, line)) {
+		while ((pos = line.find(delimiter)) != string::npos) {
+			token = line.substr(0, pos);
+			cout << token << "\t";
+			line.erase(0, pos + delimiter.length());
 		}
-	}
-	else {
-		cout << "Errore nell'apertura del file";
+		i++;
 	}
 }
-
 void printStruct() {
 	int i;
 	for (i = 0; i < NMACCHINE; i++) {

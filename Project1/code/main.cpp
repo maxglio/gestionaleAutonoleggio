@@ -8,12 +8,10 @@
 
 using namespace std;
 
-
-
 int main(int argc, char* argv[]) {
-	generazioneFinestra();
+	//generazioneFinestra();
 	//addCar();
-	//readCar();
+	readCar();
 	//printStruct();
 	return 0;
 }
