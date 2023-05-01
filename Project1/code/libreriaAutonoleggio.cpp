@@ -13,7 +13,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 2
+#define NMACCHINE 3
 #define LUNGSTRUCT 13
 
 
@@ -551,8 +551,6 @@ int generazioneFinestra() {
 //FILE BINARI
 
 void addCar() {
-	int data[3];
-
 	ofstream fileWrite;
 	//apro/creo il file
 	fileWrite.open("cars.txt", ios::app);
@@ -589,11 +587,10 @@ void addCar() {
 		else if (garage[i].potenza <= 95) {
 			garage[i].neopatentato = 1;
 		}
-		getCurrentDate(data);
 
-		garage[i].dataInizioNoleggio[0] = data[0];
-		garage[i].dataInizioNoleggio[1] = data[2];
-		garage[i].dataInizioNoleggio[2] = data[2];
+		garage[i].dataInizioNoleggio[0] = 9;
+		garage[i].dataInizioNoleggio[1] = 9;
+		garage[i].dataInizioNoleggio[2] = 9;
 
 		garage[i].durataNoleggio = 0;
 		cout << "----------------------------" << endl;
@@ -613,9 +610,10 @@ void addCar() {
 		fileWrite << garage[i].neopatentato << "\t";
 		fileWrite << garage[i].prezzo << "\t";
 		fileWrite << garage[i].dataInizioNoleggio[0] << "\t";
-		fileWrite << garage[i].dataInizioNoleggio[0] << "\t";
-		fileWrite << garage[i].dataInizioNoleggio[0] << "\t";
-		fileWrite << garage[i].durataNoleggio << "\n";
+		fileWrite << garage[i].dataInizioNoleggio[1] << "\t";
+		fileWrite << garage[i].dataInizioNoleggio[2] << "\t";
+		fileWrite << garage[i].durataNoleggio << "\t";
+		fileWrite << "\n";
 	}
 	fileWrite.close();
 }
@@ -635,8 +633,45 @@ void readCar() {
 	while (getline(infile, line)) {
 		while ((pos = line.find(delimiter)) != string::npos) {
 			token = line.substr(0, pos);
-			cout << token << "\t";
 			line.erase(0, pos + delimiter.length());
+
+			//per scegliere dove metterle
+			if (j == 0) {
+				garageLettura[i].marca = token;
+			}else if (j == 1) {
+				garageLettura[i].modello = token;
+			}else if (j == 2) {
+				garageLettura[i].carburante = token;
+			}else if (j == 3) {
+				garageLettura[i].km = token;
+			}else if (j == 4) {
+				garageLettura[i].annoMatricolazione = token;
+			}else if (j == 5) {
+				garageLettura[i].potenza = token;
+			}else if (j == 6) {
+				garageLettura[i].cambio = token;
+			}else if (j == 7) {
+				garageLettura[i].fumatori = token;
+			}else if (j == 8) {
+				garageLettura[i].usato = token;
+			}else if (j == 9) {
+				garageLettura[i].posti = token;
+			}else if (j == 10) {
+				garageLettura[i].porte = token;
+			}else if (j == 11) {
+				garageLettura[i].neopatentato = token;
+			}else if (j == 12) {
+				garageLettura[i].prezzo = token;
+			}else if (j == 13) {
+				garageLettura[i].dataInizioNoleggio[0] = token;
+			}else if (j == 14) {
+				garageLettura[i].dataInizioNoleggio[1] = token;
+			}else if (j == 15) {
+				garageLettura[i].dataInizioNoleggio[2] = token;
+			}else if (j == 16) {
+				garageLettura[i].durataNoleggio = token;
+			}
+			j++;
 		}
 		i++;
 	}
@@ -644,18 +679,18 @@ void readCar() {
 void printStruct() {
 	int i;
 	for (i = 0; i < NMACCHINE; i++) {
-		cout << "marca: "              << garageLettura[i].marca << "\n";
-		cout << "modello: "            << garageLettura[i].modello << "\n";
-		cout << "carburante: "         << garageLettura[i].carburante << "\n";
-		cout << "km: "                 << garageLettura[i].km << "\n";
-		cout << "annoMatricolazione: " << garageLettura[i].annoMatricolazione << "\n";
-		cout << "potenza: "            << garageLettura[i].potenza << "\n";
-		cout << "cambio: "             << garageLettura[i].cambio << "\n";
-		cout << "fumatori: "           << garageLettura[i].fumatori << "\n";
-		cout << "usato: "              << garageLettura[i].usato << "\n";
-		cout << "posti: "              << garageLettura[i].posti << "\n";
-		cout << "porte: "              << garageLettura[i].porte << "\n";
-		cout << "neopatentato: "       << garageLettura[i].neopatentato << "\n";
+		cout << "marca: "              << garageLettura[i].marca << "  ";
+		cout << "modello: "            << garageLettura[i].modello << "  ";
+		cout << "carburante: "         << garageLettura[i].carburante << "  ";
+		cout << "km: "                 << garageLettura[i].km << "  ";
+		cout << "annoMatricolazione: " << garageLettura[i].annoMatricolazione << "  ";
+		cout << "potenza: "            << garageLettura[i].potenza << "  ";
+		cout << "cambio: "             << garageLettura[i].cambio << "  ";
+		cout << "fumatori: "           << garageLettura[i].fumatori << "  ";
+		cout << "usato: "              << garageLettura[i].usato << "  ";
+		cout << "posti: "              << garageLettura[i].posti << "  ";
+		cout << "porte: "              << garageLettura[i].porte << "  ";
+		cout << "neopatentato: "       << garageLettura[i].neopatentato << "  ";
 		cout << "prezzo: "             << garageLettura[i].prezzo << "\n";
 		cout << "-------------------\n";
 	}

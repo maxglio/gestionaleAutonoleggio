@@ -12,6 +12,6 @@ int main(int argc, char* argv[]) {
 	//generazioneFinestra();
 	//addCar();
 	readCar();
-	//printStruct();
+	printStruct();
 	return 0;
 }
