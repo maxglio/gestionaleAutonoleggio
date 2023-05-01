@@ -22,4 +22,8 @@ void readCar();
 
 void printStruct();
 //FINE FILE BINARI
+
+//CASTING OPERATION
+
+//FINE CASTING OPERATION
 #endif
