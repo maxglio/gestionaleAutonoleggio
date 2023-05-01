@@ -37,26 +37,7 @@ struct Automobile {
 	int prezzo;
 };
 
-struct AutomobileString {
-	string marca;
-	string modello;
-	string carburante;
-	string km;
-	string annoMatricolazione;
-	string dataInizioNoleggio[3];
-	string durataNoleggio;
-	string potenza;
-	string cambio;
-	string fumatori;
-	string usato;
-	string posti;
-	string porte;
-	string neopatentato;
-	string prezzo;
-};
-
 struct Automobile garage[NMACCHINE];
-struct AutomobileString garageLettura[NMACCHINE];
 
 //DATE
 void endDateCalculator(int inizio[], int fine[]){
@@ -632,45 +613,44 @@ void readCar() {
 	//per scorre le linee
 	while (getline(infile, line)) {
 		while ((pos = line.find(delimiter)) != string::npos) {
-			//cout << "j: " << j  << " " << "i: " << i << "\t";
 			token = line.substr(0, pos);
 			line.erase(0, pos + delimiter.length());
 
 			//per scegliere dove metterle
 			if (j == 0) {
-				garageLettura[i].marca = token;
+				garage[i].marca = token;
 			}else if (j == 1) {
-				garageLettura[i].modello = token;
+				garage[i].modello = token;
 			}else if (j == 2) {
-				garageLettura[i].carburante = token;
+				garage[i].carburante = token;
 			}else if (j == 3) {
-				garageLettura[i].km = token;
+				garage[i].km = stoi(token);
 			}else if (j == 4) {
-				garageLettura[i].annoMatricolazione = token;
+				garage[i].annoMatricolazione = stoi(token);
 			}else if (j == 5) {
-				garageLettura[i].potenza = token;
+				garage[i].potenza = stoi(token);
 			}else if (j == 6) {
-				garageLettura[i].cambio = token;
+				garage[i].cambio = stoi(token);
 			}else if (j == 7) {
-				garageLettura[i].fumatori = token;
+				garage[i].fumatori = stoi(token);
 			}else if (j == 8) {
-				garageLettura[i].usato = token;
+				garage[i].usato = stoi(token);
 			}else if (j == 9) {
-				garageLettura[i].posti = token;
+				garage[i].posti = stoi(token);
 			}else if (j == 10) {
-				garageLettura[i].porte = token;
+				garage[i].porte = stoi(token);
 			}else if (j == 11) {
-				garageLettura[i].neopatentato = token;
+				garage[i].neopatentato = stoi(token);
 			}else if (j == 12) {
-				garageLettura[i].prezzo = token;
+				garage[i].prezzo = stoi(token);
 			}else if (j == 13) {
-				garageLettura[i].dataInizioNoleggio[0] = token;
+				garage[i].dataInizioNoleggio[0] = stoi(token);
 			}else if (j == 14) {
-				garageLettura[i].dataInizioNoleggio[1] = token;
+				garage[i].dataInizioNoleggio[1] = stoi(token);
 			}else if (j == 15) {
-				garageLettura[i].dataInizioNoleggio[2] = token;
+				garage[i].dataInizioNoleggio[2] = stoi(token);
 			}else if (j == 16) {
-				garageLettura[i].durataNoleggio = token;
+				garage[i].durataNoleggio = stoi(token);
 			}
 			j++;
 		}
@@ -681,19 +661,19 @@ void readCar() {
 void printStruct() {
 	int i;
 	for (i = 0; i < NMACCHINE; i++) {
-		cout << "marca: "              << garageLettura[i].marca << "  ";
-		cout << "modello: "            << garageLettura[i].modello << "  ";
-		cout << "carburante: "         << garageLettura[i].carburante << "  ";
-		cout << "km: "                 << garageLettura[i].km << "  ";
-		cout << "annoMatricolazione: " << garageLettura[i].annoMatricolazione << "  ";
-		cout << "potenza: "            << garageLettura[i].potenza << "  ";
-		cout << "cambio: "             << garageLettura[i].cambio << "  ";
-		cout << "fumatori: "           << garageLettura[i].fumatori << "  ";
-		cout << "usato: "              << garageLettura[i].usato << "  ";
-		cout << "posti: "              << garageLettura[i].posti << "  ";
-		cout << "porte: "              << garageLettura[i].porte << "  ";
-		cout << "neopatentato: "       << garageLettura[i].neopatentato << "  ";
-		cout << "prezzo: "             << garageLettura[i].prezzo << "\n";
+		cout << "marca: "              << garage[i].marca << "  ";
+		cout << "modello: "            << garage[i].modello << "  ";
+		cout << "carburante: "         << garage[i].carburante << "  ";
+		cout << "km: "                 << garage[i].km << "  ";
+		cout << "annoMatricolazione: " << garage[i].annoMatricolazione << "  ";
+		cout << "potenza: "            << garage[i].potenza << "  ";
+		cout << "cambio: "             << garage[i].cambio << "  ";
+		cout << "fumatori: "           << garage[i].fumatori << "  ";
+		cout << "usato: "              << garage[i].usato << "  ";
+		cout << "posti: "              << garage[i].posti << "  ";
+		cout << "porte: "              << garage[i].porte << "  ";
+		cout << "neopatentato: "       << garage[i].neopatentato << "  ";
+		cout << "prezzo: "             << garage[i].prezzo << "\n";
 		cout << "-------------------\n";
 	}
 }
