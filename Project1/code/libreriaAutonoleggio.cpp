@@ -13,7 +13,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 20
+#define NMACCHINE 5
 #define LUNGSTRUCT 13
 
 
