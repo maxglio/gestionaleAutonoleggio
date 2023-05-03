@@ -23,6 +23,10 @@ void readCar();
 void printStruct();
 //FINE FILE BINARI
 
+//RICERCA
+int searchByName(string input);
+//FINE RICERCA
+
 //CASTING OPERATION
 
 //FINE CASTING OPERATION

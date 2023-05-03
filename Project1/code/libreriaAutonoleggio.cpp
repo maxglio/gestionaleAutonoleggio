@@ -13,8 +13,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 5
-#define LUNGSTRUCT 13
+#define NMACCHINE 100
 
 
 using namespace std;
@@ -38,6 +37,7 @@ struct Automobile {
 };
 
 struct Automobile garage[NMACCHINE];
+struct Automobile garageRicerca[NMACCHINE];
 
 //DATE
 void endDateCalculator(int inizio[], int fine[]){
@@ -676,7 +676,7 @@ void readCar() {
 }
 void printStruct() {
 	int i;
-	for (i = 0; i < NMACCHINE; i++) {
+	for (i = 1; i < NMACCHINE; i++) {
 		cout << "marca: "              << garage[i].marca << "  ";
 		cout << "modello: "            << garage[i].modello << "  ";
 		cout << "carburante: "         << garage[i].carburante << "  ";
@@ -694,6 +694,37 @@ void printStruct() {
 	}
 }
 //FINE FILE BINARI
+
+//RICERCA
+int searchByName(string input) {
+	int i, j = 0;
+
+	for (i = 0; i < NMACCHINE; i++) {
+
+		if (strcmp(garage[i].marca.c_str(), input.c_str())) {
+			garageRicerca[j].marca                 = garage[i].marca;
+			garageRicerca[j].modello               = garage[i].modello;
+			garageRicerca[j].carburante            = garage[i].carburante;
+			garageRicerca[j].km                    = garage[i].km;
+			garageRicerca[j].annoMatricolazione    = garage[i].annoMatricolazione;
+			garageRicerca[j].potenza               = garage[i].potenza;
+			garageRicerca[j].cambio                = garage[i].cambio;
+			garageRicerca[j].fumatori              = garage[i].fumatori;
+			garageRicerca[j].usato                 = garage[i].usato;
+			garageRicerca[j].posti                 = garage[i].posti;
+			garageRicerca[j].porte                 = garage[i].porte;
+			garageRicerca[j].neopatentato          = garage[i].neopatentato;
+			garageRicerca[j].prezzo                = garage[i].prezzo;
+			garageRicerca[j].dataInizioNoleggio[0] = garage[i].dataInizioNoleggio[0];
+			garageRicerca[j].dataInizioNoleggio[1] = garage[i].dataInizioNoleggio[1];
+			garageRicerca[j].dataInizioNoleggio[2] = garage[i].dataInizioNoleggio[2];
+			garageRicerca[j].durataNoleggio        = garage[i].durataNoleggio;
+			j++;
+		}
+	}
+	return j;	
+}
+//FINE RICERCA
 
 //CASTING OPERATION
 
