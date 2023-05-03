@@ -700,8 +700,7 @@ int searchByName(string input) {
 	int i, j = 0;
 
 	for (i = 0; i < NMACCHINE; i++) {
-
-		if (strcmp(garage[i].marca.c_str(), input.c_str())) {
+		if (garage[i].marca.compare(input) == 0) {
 			garageRicerca[j].marca                 = garage[i].marca;
 			garageRicerca[j].modello               = garage[i].modello;
 			garageRicerca[j].carburante            = garage[i].carburante;
@@ -729,3 +728,6 @@ int searchByName(string input) {
 //CASTING OPERATION
 
 //FINE CASTING OPERATION
+void stampDebug() {
+	cout << garageRicerca[2].modello;
+}

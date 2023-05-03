@@ -24,10 +24,12 @@ void printStruct();
 //FINE FILE BINARI
 
 //RICERCA
-int searchByName(string input);
+int searchByName(std::string input);
 //FINE RICERCA
 
 //CASTING OPERATION
 
 //FINE CASTING OPERATION
+
+void stampDebug();
 #endif
