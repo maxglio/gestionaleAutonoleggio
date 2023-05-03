@@ -13,8 +13,7 @@
 
 #include "libreriaAutonoleggio.h"
 
-#define NMACCHINE 5
-#define LUNGSTRUCT 13
+#define NMACCHINE 100
 
 
 using namespace std;
@@ -38,6 +37,7 @@ struct Automobile {
 };
 
 struct Automobile garage[NMACCHINE];
+struct Automobile garageRicerca[NMACCHINE];
 
 //DATE
 void endDateCalculator(int inizio[], int fine[]){
@@ -680,7 +680,7 @@ void readCar() {
 }
 void printStruct() {
 	int i;
-	for (i = 0; i < NMACCHINE; i++) {
+	for (i = 1; i < NMACCHINE; i++) {
 		cout << "marca: "              << garage[i].marca << "  ";
 		cout << "modello: "            << garage[i].modello << "  ";
 		cout << "carburante: "         << garage[i].carburante << "  ";
@@ -699,6 +699,77 @@ void printStruct() {
 }
 //FINE FILE BINARI
 
+//RICERCA
+int searchByName(string input) {
+	int i, j = 0;
+	for (i = 0; i < NMACCHINE; i++) {
+		if (garage[i].marca.compare(input) == 0) {
+			garageRicerca[j].marca                 = garage[i].marca;
+			garageRicerca[j].modello               = garage[i].modello;
+			garageRicerca[j].carburante            = garage[i].carburante;
+			garageRicerca[j].km                    = garage[i].km;
+			garageRicerca[j].annoMatricolazione    = garage[i].annoMatricolazione;
+			garageRicerca[j].potenza               = garage[i].potenza;
+			garageRicerca[j].cambio                = garage[i].cambio;
+			garageRicerca[j].fumatori              = garage[i].fumatori;
+			garageRicerca[j].usato                 = garage[i].usato;
+			garageRicerca[j].posti                 = garage[i].posti;
+			garageRicerca[j].porte                 = garage[i].porte;
+			garageRicerca[j].neopatentato          = garage[i].neopatentato;
+			garageRicerca[j].prezzo                = garage[i].prezzo;
+			garageRicerca[j].dataInizioNoleggio[0] = garage[i].dataInizioNoleggio[0];
+			garageRicerca[j].dataInizioNoleggio[1] = garage[i].dataInizioNoleggio[1];
+			garageRicerca[j].dataInizioNoleggio[2] = garage[i].dataInizioNoleggio[2];
+			garageRicerca[j].durataNoleggio        = garage[i].durataNoleggio;
+			j++;
+		}
+	}
+	return j;	
+}
+//FINE RICERCA
+
+//PREZZO
+int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
+	int prezzoXMese;
+	int anno;
+	int data[3];
+	int dAnni;
+
+	getCurrentDate(data);
+	anno = data[2];
+
+	prezzoXMese = prezzo;
+
+	if (fumatori != 0) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+	}
+
+	dAnni = anno - immatricolazione;
+
+	prezzoXMese -= (dAnni * 4);
+
+	if (km > 200000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 50);
+	}
+	else if (km > 150000 && km < 200000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 35);
+	}
+	else if (km > 100000 && km < 150000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 30);
+	}
+	else if (km > 50000 && km < 100000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 20);
+	}
+	else if (km <= 50000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+	}
+	return prezzoXMese;
+}
+//FINE PREZZO
+// 
 //CASTING OPERATION
 
 //FINE CASTING OPERATION
+void stampDebug() {
+	cout << garageRicerca[2].modello;
+}

@@ -23,7 +23,17 @@ void readCar();
 void printStruct();
 //FINE FILE BINARI
 
+//RICERCA
+int searchByName(std::string input);
+//FINE RICERCA
+
+//PREZZO
+int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo);
+//FINE PREZZO
+
 //CASTING OPERATION
 
 //FINE CASTING OPERATION
+
+void stampDebug();
 #endif
