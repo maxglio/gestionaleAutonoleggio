@@ -698,7 +698,6 @@ void printStruct() {
 //RICERCA
 int searchByName(string input) {
 	int i, j = 0;
-
 	for (i = 0; i < NMACCHINE; i++) {
 		if (garage[i].marca.compare(input) == 0) {
 			garageRicerca[j].marca                 = garage[i].marca;
@@ -725,6 +724,45 @@ int searchByName(string input) {
 }
 //FINE RICERCA
 
+//PREZZO
+int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
+	int prezzoXMese;
+	int anno;
+	int data[3];
+	int dAnni;
+
+	getCurrentDate(data);
+	anno = data[2];
+
+	prezzoXMese = prezzo;
+
+	if (fumatori != 0) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+	}
+
+	dAnni = anno - immatricolazione;
+
+	prezzoXMese -= (dAnni * 4);
+
+	if (km > 200000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 50);
+	}
+	else if (km > 150000 && km < 200000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 35);
+	}
+	else if (km > 100000 && km < 150000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 30);
+	}
+	else if (km > 50000 && km < 100000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 20);
+	}
+	else if (km <= 50000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+	}
+	return prezzoXMese;
+}
+//FINE PREZZO
+// 
 //CASTING OPERATION
 
 //FINE CASTING OPERATION

@@ -11,8 +11,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	string name = "ferrari";
 	readCar();
-	searchByName(name);
-	stampDebug();
+	//searchByName(name);
+	//stampDebug();
 	//generazioneFinestra();
 	//addCar();
 	//printStruct();
