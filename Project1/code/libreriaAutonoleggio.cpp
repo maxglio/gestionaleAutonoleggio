@@ -361,6 +361,10 @@ int generazioneFinestra() {
 	SDL_FreeSurface(carSurface);
 	SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
 
+
+
+
+
 	while (!quit){
 
 	//Get Mouse POS
@@ -470,7 +474,7 @@ int generazioneFinestra() {
 
 						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
 						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[(page-1)+f], carColor);
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[0], carColor);
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
