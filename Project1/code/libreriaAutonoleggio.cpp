@@ -114,11 +114,21 @@ int generazioneFinestra() {
 	SDL_Renderer* renderer;
 	SDL_Point* p;
 	bool filterControl = false;
-	int page = 1;
+	int page = 0;
+	
+	char content[1000] = "";
 
-	char content[100] = { 'a','b', 'c', 'ws', 'sadg', 'hdfs', 'dfg', 'dvfd', 'a', 'adfv', 'advc', 'adfv', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', };
+	char integer_string[1000];
+	
 
+	
 
+	for (int r = 1; r < 101; r++) {
+		sprintf(integer_string, "%d", r);
+		cout << integer_string << endl;
+		strcat(&content[r]+'\n', integer_string);
+	}
+	cout << content << endl;
 
 	
 
@@ -144,7 +154,7 @@ int generazioneFinestra() {
 
 #define HRECTSX (6/100.0)*h
 #define WRECTSX (5/100.0)*w
-#define PERC10W ((0.5 / 100.0) * w)
+#define PERC10W ((0.8 / 100.0) * w)
 #define PERC10H ((0.9 / 100.0) * h)
 
 
@@ -167,7 +177,7 @@ int generazioneFinestra() {
 	sqrRect.h = HRECTSX;
 
 	SDL_Rect titleRect;
-	titleRect.w = ((36 / 100.0) * w);
+	titleRect.w = ((46 / 100.0) * w);
 	titleRect.x = ((w / 2)-(titleRect.w/2));
 	titleRect.y = 0;
 	titleRect.h = (12/100.0)*h;
@@ -191,28 +201,28 @@ int generazioneFinestra() {
 	filterRect.h = searchRect.h;
 
 	SDL_Rect bigRect;
-	bigRect.x = (1.5/100.0)*w;
+	bigRect.x = (5/100.0)*w;
 	bigRect.y = (29/100.0)*h;
 	bigRect.w = (w - bigRect.x)- bigRect.x;
-	bigRect.h = (h - bigRect.y)- bigRect.x;
+	bigRect.h = (h - bigRect.y) - ((1.5 / 100.0) * w);
 
 	SDL_Rect leftArrRect;
 	leftArrRect.w = (3 / 100.0)*w;
-	leftArrRect.x = bigRect.x + PERC10W;
+	leftArrRect.x = PERC10W;
 	leftArrRect.y = (bigRect.y + (bigRect.h / 2)) - (leftArrRect.w / 2);
 	leftArrRect.h = (6 / 100.0) * h;
 
 	SDL_Rect rightArrRect;
 	rightArrRect.w = (3 / 100.0) * w;
-	rightArrRect.x = (bigRect.x + bigRect.w) - rightArrRect.w - PERC10W;
+	rightArrRect.x = w - rightArrRect.w - PERC10W;
 	rightArrRect.y = (bigRect.y + (bigRect.h / 2)) - (leftArrRect.w / 2);
 	rightArrRect.h = (6 / 100.0) * h;
 
 	SDL_Rect listRect;
-	listRect.x = ((((1.5 / 100.0) * w) + PERC10W) + leftArrRect.w) + PERC10W;
+	listRect.w = (w - bigRect.x) - bigRect.x - (leftArrRect.w) ;
+	listRect.x = (w / 2)-(listRect.w/2);
 	listRect.y = bigRect.y + PERC10H;
-	listRect.w = ((w - bigRect.x) - bigRect.x - PERC10W - PERC10W - (leftArrRect.w * 2)) - PERC10W - PERC10W;
-	listRect.h = 130;
+	listRect.h = (12/100.0)*h;
 
 
 	SDL_Rect filterWind;
@@ -305,16 +315,23 @@ int generazioneFinestra() {
 		SDL_RenderFillRect(renderer, &filterWind);
 		SDL_RenderPresent(renderer);
 		
-
+		
 		for (int f = 0; f < 5; f++) {
 			
 			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 			SDL_RenderDrawRect(renderer, &listRect);
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-			SDL_RenderPresent(renderer);
+			
+			TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			SDL_Color carColor = { 255, 255, 255 };
+			SDL_Surface* carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor,2);
+			SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
 			listRect.y = listRect.y + (listRect.h + PERC10H);
 		}
-
+		SDL_RenderPresent(renderer);
+		page = 1;
 	//end rectangle rendering
 
 	// WINDOW ICON
@@ -330,9 +347,9 @@ int generazioneFinestra() {
 	string stringa = to_string(proiva);
 
 	//TITLE RENDERING
-	TTF_Font* TitleFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
+	TTF_Font* TitleFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 	SDL_Color TitleColor = { 255, 255, 255 };
-	SDL_Surface* TitleSurface = TTF_RenderText_Solid(TitleFont, "mhgc", TitleColor);
+	SDL_Surface* TitleSurface = TTF_RenderText_Solid(TitleFont, "AUTONOLEGGIO", TitleColor);
 	SDL_Texture* TitleTexture = SDL_CreateTextureFromSurface(renderer, TitleSurface);
 	SDL_FreeSurface(TitleSurface);
 
@@ -354,12 +371,7 @@ int generazioneFinestra() {
 	SDL_Surface* CoverSurface = IMG_Load("code/images/cover.png");
 	SDL_Texture* CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
 
-	TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
-	SDL_Color carColor = { 255, 255, 255 };
-	SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[0], carColor);
-	SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-	SDL_FreeSurface(carSurface);
-	SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
+	
 
 
 
@@ -447,7 +459,7 @@ int generazioneFinestra() {
 				}
 			}
 		}
-
+		
 
 		if (check_click_in_rect(xMouse, yMouse, &rightArrRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -455,12 +467,12 @@ int generazioneFinestra() {
 					page += 1;
 					
 
-					if (page > 101) {
+					if (page > 100) {
 						page = 1;
 					}
 					cout << page << endl;
 					//COVER
-					SDL_RenderCopy(renderer, CoverTexture, NULL, &listRect);
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &bigRect);
 					SDL_RenderPresent(renderer);
 					SDL_UpdateWindowSurface(screen);
 					//COVER
@@ -472,9 +484,9 @@ int generazioneFinestra() {
 						SDL_RenderDrawRect(renderer, &listRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 24);
+						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[0], carColor);
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page+4], carColor);
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
@@ -494,11 +506,11 @@ int generazioneFinestra() {
 					
 
 					if (page < 1) {
-						page = 101;
+						page = 100;
 					}
 					cout << page << endl;
 					//COVER
-					SDL_RenderCopy(renderer, CoverTexture, NULL, &listRect);
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &bigRect);
 					SDL_RenderPresent(renderer);
 					SDL_UpdateWindowSurface(screen);
 					//COVER
@@ -510,6 +522,12 @@ int generazioneFinestra() {
 						SDL_RenderDrawRect(renderer, &listRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 						SDL_RenderPresent(renderer);
+						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						SDL_Color carColor = { 255, 255, 255 };
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page - 4], carColor);
+						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
 						listRect.y = listRect.y + (listRect.h + PERC10H);
 					}
 

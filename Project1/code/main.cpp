@@ -9,11 +9,11 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	string name = "ferrari";
+	//string name = "ferrari";
 	readCar();
 	//searchByName(name);
 	//stampDebug();
-	//generazioneFinestra();
+	generazioneFinestra();
 	//addCar();
 	//readCar();
 	//printStruct();
