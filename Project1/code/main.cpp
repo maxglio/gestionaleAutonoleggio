@@ -9,11 +9,15 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	//string name = "ferrari";
-	readCar();
+	char* prova;
+	string name = "ferrari";
+
+	prova = stringToChar(name);
+	cout<< prova;
+	//readCar();
 	//searchByName(name);
 	//stampDebug();
-	generazioneFinestra();
+	//generazioneFinestra();
 	//addCar();
 	//readCar();
 	//printStruct();

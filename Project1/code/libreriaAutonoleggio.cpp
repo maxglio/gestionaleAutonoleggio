@@ -695,9 +695,13 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
 	return prezzoXMese;
 }
 //FINE PREZZO
-// 
-//CASTING OPERATION
 
+
+//CASTING OPERATION
+char* stringToChar(string input) {
+	char* result = strcpy((char*)malloc(input.length() + 1), input.c_str());
+	return result;
+}
 //FINE CASTING OPERATION
 void stampDebug() {
 	cout << garageRicerca[2].modello;
