@@ -15,10 +15,10 @@ int main(int argc, char* argv[]) {
 	prova = intToChar(i);
 	cout<< prova;
 
-	//readCar();
+	readCar();
 	//searchByName(name);
 	//stampDebug();
-	//generazioneFinestra();
+	generazioneFinestra();
 	//addCar();
 	//readCar();
 	//printStruct();
