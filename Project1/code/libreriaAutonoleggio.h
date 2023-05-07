@@ -1,6 +1,8 @@
 #ifndef libreriaAutonoleggio
 #define libreriaAutonoleggio
 
+using namespace std;
+
 //INTERFACCIA GRAFICA
 int generazioneFinestra();
 
@@ -24,7 +26,7 @@ void printStruct();
 //FINE FILE BINARI
 
 //RICERCA
-int searchByName(std::string input);
+int searchByName(string input);
 //FINE RICERCA
 
 //PREZZO
@@ -32,7 +34,11 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo);
 //FINE PREZZO
 
 //CASTING OPERATION
+char* stringToChar(string input);
 
+string intTostring(int input);
+
+char* intToChar(int input);
 //FINE CASTING OPERATION
 
 void stampDebug();
