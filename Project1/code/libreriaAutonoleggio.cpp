@@ -116,19 +116,13 @@ int generazioneFinestra() {
 	bool filterControl = false;
 	int page = 0;
 	
-	char content[1000] = "";
-
-	char integer_string[1000];
-	
+	char content[100] = { 's', 'a', 'b', 's', 'f', 'd', 'ss', 'ds', 'ss', 'sfd', 'ssfd', 'sfsd', 'sdsf', 'sger', 'se', 'sgrt', 'sr' };
 
 	
 
-	for (int r = 1; r < 101; r++) {
-		sprintf(integer_string, "%d", r);
-		cout << integer_string << endl;
-		strcat(&content[r]+'\n', integer_string);
-	}
-	cout << content << endl;
+	
+
+
 
 	
 
@@ -194,12 +188,6 @@ int generazioneFinestra() {
 	searchIconRect.y = searchRect.y;
 	searchIconRect.h = (12 / 100.0) * h;
 
-	SDL_Rect filterRect;
-	filterRect.x = searchRect.x + searchRect.w + ((3 / 100.0)*w);
-	filterRect.y = searchRect.y;
-	filterRect.w = searchRect.h;
-	filterRect.h = searchRect.h;
-
 	SDL_Rect bigRect;
 	bigRect.x = (5/100.0)*w;
 	bigRect.y = (29/100.0)*h;
@@ -225,11 +213,6 @@ int generazioneFinestra() {
 	listRect.h = (12/100.0)*h;
 
 
-	SDL_Rect filterWind;
-	filterWind.x = filterRect.x;
-	filterWind.y = filterRect.y + filterRect.h;
-	filterWind.w = 0;
-	filterWind.h = 0;
 
 
 	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_POPUP_MENU);
@@ -285,11 +268,7 @@ int generazioneFinestra() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-	//FILTER
-		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-		SDL_RenderDrawRect(renderer, &filterRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
+
 
 	//BIG RECTANGLE
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -309,11 +288,7 @@ int generazioneFinestra() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-	//BIG RECTANGLE
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &filterWind);
-		SDL_RenderFillRect(renderer, &filterWind);
-		SDL_RenderPresent(renderer);
+
 		
 		
 		for (int f = 0; f < 5; f++) {
@@ -324,7 +299,7 @@ int generazioneFinestra() {
 			
 			TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 			SDL_Color carColor = { 255, 255, 255 };
-			SDL_Surface* carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor,2);
+			SDL_Surface* carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + f], carColor,2);
 			SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 			SDL_FreeSurface(carSurface);
 			SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
@@ -359,10 +334,6 @@ int generazioneFinestra() {
 	SDL_Texture* SearchIconTexture = SDL_CreateTextureFromSurface(renderer, SearchIconSurface);
 	SDL_FreeSurface(SearchIconSurface);
 	
-	//FILTER ICON RENDERING
-	SDL_Surface* FilterIconSurface = IMG_Load("code/images/filterIconON.png");
-	SDL_Texture* FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
-	SDL_FreeSurface(FilterIconSurface);
 
 	//LIST RENDERING
 	SDL_Surface* ListSurface = nullptr;
@@ -398,68 +369,6 @@ int generazioneFinestra() {
 
 
 
-	//SEARCH ICON
-		if (check_click_in_rect(xMouse, yMouse, &filterRect) == 1) {
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
-				if (event.button.button == SDL_BUTTON_LEFT) {
-
-					switch (filterControl){
-					case false:
-						//COVER
-						SDL_RenderCopy(renderer, CoverTexture, NULL, &filterRect);
-						SDL_RenderPresent(renderer);
-						SDL_UpdateWindowSurface(screen);
-						//COVER
-
-						FilterIconSurface = IMG_Load("code/images/filterIconOFF.png");
-						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
-
-						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-						SDL_RenderPresent(renderer);
-						SDL_UpdateWindowSurface(screen);
-
-						filterWind.w = 300;
-						filterWind.h = 300;
-
-						SDL_UpdateWindowSurfaceRects(screen, &filterWind, 2);
-						SDL_UpdateWindowSurface(screen);
-
-						SDL_RenderPresent(renderer);
-						
-
-						filterControl = true;
-
-						break;
-
-					case true:
-
-						//COVER
-						SDL_RenderCopy(renderer, CoverTexture, NULL, &filterRect);
-						SDL_RenderPresent(renderer);
-						SDL_UpdateWindowSurface(screen);
-						//COVER
-
-						FilterIconSurface = IMG_Load("code/images/filterIconON.png");
-						FilterIconTexture = SDL_CreateTextureFromSurface(renderer, FilterIconSurface);
-
-						SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
-						SDL_RenderPresent(renderer);
-						SDL_UpdateWindowSurface(screen);
-
-						filterWind.w = 0;
-						filterWind.h = 0;
-
-						SDL_RenderPresent(renderer);
-
-
-						filterControl = false;
-
-						break;
-					}
-				}
-			}
-		}
-		
 
 		if (check_click_in_rect(xMouse, yMouse, &rightArrRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -467,7 +376,7 @@ int generazioneFinestra() {
 					page += 1;
 					
 
-					if (page > 100) {
+					if (page > 20) {
 						page = 1;
 					}
 					cout << page << endl;
@@ -486,7 +395,11 @@ int generazioneFinestra() {
 
 						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page+4], carColor);
+
+
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page+f], carColor);
+
+
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
@@ -506,7 +419,7 @@ int generazioneFinestra() {
 					
 
 					if (page < 1) {
-						page = 100;
+						page = 20;
 					}
 					cout << page << endl;
 					//COVER
@@ -524,7 +437,7 @@ int generazioneFinestra() {
 						SDL_RenderPresent(renderer);
 						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page - 4], carColor);
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page - f], carColor);
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
@@ -545,14 +458,12 @@ int generazioneFinestra() {
 
 		SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
 		SDL_RenderCopy(renderer, ExitTexture, NULL, &exitRect);
-		SDL_RenderCopy(renderer, FilterIconTexture, NULL, &filterRect);
 		SDL_RenderCopy(renderer, SearchIconTexture, NULL, &searchIconRect);
 
 		SDL_RenderPresent(renderer);
 
 	}
 
-	SDL_DestroyTexture(FilterIconTexture);
 	SDL_DestroyTexture(ExitTexture);
 	SDL_DestroyTexture(SearchIconTexture);
 	SDL_DestroyTexture(TitleTexture);
