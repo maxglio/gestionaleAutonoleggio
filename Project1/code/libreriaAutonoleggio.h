@@ -35,6 +35,10 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo);
 
 //CASTING OPERATION
 char* stringToChar(string input);
+
+string intTostring(int input);
+
+char* intToChar(int input);
 //FINE CASTING OPERATION
 
 void stampDebug();

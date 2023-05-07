@@ -10,10 +10,11 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	char* prova;
-	string name = "ferrari";
+	int i = 4;
 
-	prova = stringToChar(name);
+	prova = intToChar(i);
 	cout<< prova;
+
 	//readCar();
 	//searchByName(name);
 	//stampDebug();
