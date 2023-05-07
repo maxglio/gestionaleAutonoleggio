@@ -116,12 +116,7 @@ int generazioneFinestra() {
 	bool filterControl = false;
 	int page = 0;
 	
-	char content[100] = { 's', 'a', 'b', 's', 'f', 'd', 'ss', 'ds', 'ss', 'sfd', 'ssfd', 'sfsd', 'sdsf', 'sger', 'se', 'sgrt', 'sr' };
-
-	
-
-	
-
+	char content[100] = {'s','b','c','d'};
 
 
 	
@@ -212,6 +207,12 @@ int generazioneFinestra() {
 	listRect.y = bigRect.y + PERC10H;
 	listRect.h = (12/100.0)*h;
 
+	SDL_Rect contentRect;
+	contentRect.x = listRect.x + PERC10W;
+	contentRect.y = listRect.y + PERC10H;
+	contentRect.w = 120;
+	contentRect.h = listRect.h - PERC10W;
+
 
 
 
@@ -269,41 +270,99 @@ int generazioneFinestra() {
 		SDL_RenderPresent(renderer);
 
 
-
 	//BIG RECTANGLE
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &bigRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-	//BIG RECTANGLE
+	//LEFT ARROW
 		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
 		SDL_RenderDrawRect(renderer, &leftArrRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-	//BIG RECTANGLE
+	//RIGHT ARROW
 		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 		SDL_RenderDrawRect(renderer, &rightArrRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
 
-		
-		
+		TTF_Font* carFont;
+		SDL_Color carColor;
+		SDL_Surface* carSurface;
+		SDL_Texture* carTexture;
+
 		for (int f = 0; f < 5; f++) {
 			
 			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 			SDL_RenderDrawRect(renderer, &listRect);
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &contentRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			
-			TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			SDL_Color carColor = { 255, 255, 255 };
-			SDL_Surface* carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + f], carColor,2);
-			SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor,2);
+			 carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+
+			contentRect.x += contentRect.w;
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor, 2);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+			contentRect.x += contentRect.w;
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor, 2);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+			contentRect.x += contentRect.w;
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor, 2);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+			contentRect.x += contentRect.w;
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor, 2);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+			contentRect.x += contentRect.w;
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor, 2);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+			contentRect.x += contentRect.w;
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid_Wrapped(carFont, &content[page + 4], carColor, 2);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &contentRect);
+			contentRect.x += contentRect.w;
+
 			listRect.y = listRect.y + (listRect.h + PERC10H);
+			contentRect.y = contentRect.y + (contentRect.h + PERC10H);
+
 		}
 		SDL_RenderPresent(renderer);
 		page = 1;
@@ -335,6 +394,7 @@ int generazioneFinestra() {
 	SDL_FreeSurface(SearchIconSurface);
 	
 
+
 	//LIST RENDERING
 	SDL_Surface* ListSurface = nullptr;
 	SDL_Texture* ListTexture = SDL_CreateTextureFromSurface(renderer, ListSurface);
@@ -364,11 +424,6 @@ int generazioneFinestra() {
 			}
 		}
 
-	//HIDE
-	//square
-
-
-
 
 		if (check_click_in_rect(xMouse, yMouse, &rightArrRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -376,7 +431,7 @@ int generazioneFinestra() {
 					page += 1;
 					
 
-					if (page > 20) {
+					if (page > 100) {
 						page = 1;
 					}
 					cout << page << endl;
@@ -395,11 +450,7 @@ int generazioneFinestra() {
 
 						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						SDL_Color carColor = { 255, 255, 255 };
-
-
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page+f], carColor);
-
-
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page+4], carColor);
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
@@ -419,7 +470,7 @@ int generazioneFinestra() {
 					
 
 					if (page < 1) {
-						page = 20;
+						page = 100;
 					}
 					cout << page << endl;
 					//COVER
@@ -437,7 +488,7 @@ int generazioneFinestra() {
 						SDL_RenderPresent(renderer);
 						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page - f], carColor);
+						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page - 4], carColor);
 						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
