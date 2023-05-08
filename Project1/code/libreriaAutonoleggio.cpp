@@ -205,26 +205,67 @@ int generazioneFinestra() {
 	listRect.w = (w - bigRect.x) - bigRect.x - (leftArrRect.w) ;
 	listRect.x = (w / 2)-(listRect.w/2);
 	listRect.y = bigRect.y + PERC10H;
-	listRect.h = (12/100.0)*h;
+	listRect.h = (12.7/100.0)*h;
 
 	SDL_Rect nomeRect;
 	nomeRect.x = listRect.x + PERC10W;
 	nomeRect.y = listRect.y + PERC10H;
 	nomeRect.w = 220;
-	nomeRect.h = (listRect.h - PERC10W)/3;
+	nomeRect.h = (listRect.h - (PERC10W * 3)) / 3;
 
 	SDL_Rect marcaRect;
 	marcaRect.x = (listRect.x + PERC10W) + nomeRect.w;
 	marcaRect.y = listRect.y + PERC10H;
 	marcaRect.w = 220;
-	marcaRect.h = (listRect.h - PERC10W) / 3;
+	marcaRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect chilometriRect;
 	chilometriRect.x = (listRect.x + PERC10W);
 	chilometriRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H);
 	chilometriRect.w = 220;
-	chilometriRect.h = (listRect.h - PERC10W) / 3;
+	chilometriRect.h = (listRect.h - (PERC10W*3.0)) / 3.0;
 
+	SDL_Rect immaRect;
+	immaRect.x = (listRect.x + PERC10W);
+	immaRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H) + (chilometriRect.h + PERC10H);
+	immaRect.w = 220;
+	immaRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+	SDL_Rect potenzaRect;
+	potenzaRect.x = nomeRect.x+(nomeRect.w*3);
+	potenzaRect.y = nomeRect.y;
+	potenzaRect.w = 220;
+	potenzaRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+	SDL_Rect postiRect;
+	postiRect.x = nomeRect.x + (nomeRect.w * 3);
+	postiRect.y = chilometriRect.y;
+	postiRect.w = 220;
+	postiRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+	SDL_Rect prezzoRect;
+	prezzoRect.x = nomeRect.x + (nomeRect.w * 3);
+	prezzoRect.y = immaRect.y;
+	prezzoRect.w = 220;
+	prezzoRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+	SDL_Rect redRect;
+	redRect.x = nomeRect.x + (nomeRect.w * 5);
+	redRect.y = nomeRect.y;
+	redRect.w = 400;
+	redRect.h = (listRect.h - PERC10W);
+
+	SDL_Rect redRectM;
+	redRectM.x = (nomeRect.x + (nomeRect.w * 5))+PERC10W;
+	redRectM.y = nomeRect.y+ PERC10H;
+	redRectM.w = 400 - (PERC10W*2);
+	redRectM.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+	SDL_Rect redRectI;
+	redRectI.x = nomeRect.x + (nomeRect.w * 5);
+	redRectI.y = nomeRect.y;
+	redRectI.w = 400;
+	redRectI.h = (listRect.h - PERC10W);
 
 
 
@@ -307,6 +348,7 @@ int generazioneFinestra() {
 		SDL_Texture* carTexture;
 
 		for (int f = 0; f < 5; f++) {
+
 			
 			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 			SDL_RenderDrawRect(renderer, &listRect);
@@ -323,23 +365,60 @@ int generazioneFinestra() {
 			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 			SDL_RenderDrawRect(renderer, &chilometriRect);
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &immaRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &potenzaRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &postiRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &prezzoRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+			SDL_RenderDrawRect(renderer, &redRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &redRectM);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			
 			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid_Wrapped(carFont, intToChar(page+f), carColor,2);
+			carSurface = TTF_RenderText_Solid(carFont, intToChar(page + f), carColor);
 			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 			SDL_FreeSurface(carSurface);
 			SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, "Inserire il numero di mesi", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectM);
 
 
 			listRect.y = listRect.y + (listRect.h + PERC10H);
 			nomeRect.y += listRect.h+ PERC10H;
 			marcaRect.y += listRect.h + PERC10H;
 			chilometriRect.y += listRect.h + PERC10H;
+			immaRect.y += listRect.h + PERC10H;
+			potenzaRect.y += listRect.h + PERC10H;
+			postiRect.y += listRect.h + PERC10H;
+			prezzoRect.y += listRect.h + PERC10H;
+			redRect.y += listRect.h + PERC10H;
+			redRectM.y += listRect.h + PERC10H;
 
 		}
 		SDL_RenderPresent(renderer);
-		page = 1;
+		
 	//end rectangle rendering
 
 	// WINDOW ICON
@@ -405,7 +484,7 @@ int generazioneFinestra() {
 					page += 1;
 					
 
-					if (page > 100) {
+					if (page > 20) {
 						page = 1;
 					}
 					cout << page << endl;
@@ -422,10 +501,10 @@ int generazioneFinestra() {
 						SDL_RenderDrawRect(renderer, &listRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, intToChar(page+f), carColor);
-						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, intToChar(page+f), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
 
@@ -444,7 +523,7 @@ int generazioneFinestra() {
 					
 
 					if (page < 1) {
-						page = 100;
+						page = 20;
 					}
 					cout << page << endl;
 					//COVER
@@ -460,10 +539,10 @@ int generazioneFinestra() {
 						SDL_RenderDrawRect(renderer, &listRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 						SDL_RenderPresent(renderer);
-						TTF_Font* carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						SDL_Color carColor = { 255, 255, 255 };
-						SDL_Surface* carSurface = TTF_RenderText_Solid(carFont, &content[page - 4], carColor);
-						SDL_Texture* carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, &content[page - 4], carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
 						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
 						listRect.y = listRect.y + (listRect.h + PERC10H);
