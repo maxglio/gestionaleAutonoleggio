@@ -255,17 +255,31 @@ int generazioneFinestra() {
 	redRect.w = 400;
 	redRect.h = (listRect.h - PERC10W);
 
-	SDL_Rect redRectM;
-	redRectM.x = (nomeRect.x + (nomeRect.w * 5))+PERC10W;
-	redRectM.y = nomeRect.y+ PERC10H;
-	redRectM.w = 400 - (PERC10W*2);
-	redRectM.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
-
 	SDL_Rect redRectI;
-	redRectI.x = nomeRect.x + (nomeRect.w * 5);
-	redRectI.y = nomeRect.y;
-	redRectI.w = 400;
-	redRectI.h = (listRect.h - PERC10W);
+	redRectI.x = (nomeRect.x + (nomeRect.w * 5))+PERC10W;
+	redRectI.y = nomeRect.y+ PERC10H;
+	redRectI.w = 200;
+	redRectI.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+	SDL_Rect calcRect;
+	calcRect.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W + (PERC10W/2);
+	calcRect.y = chilometriRect.y + PERC10H;
+	calcRect.w = 200-PERC10W;
+	calcRect.h = ((listRect.h - (PERC10W * 3.0)) / 3.0)-PERC10H;
+
+	SDL_Rect prenotaRect;
+	prenotaRect.x = calcRect.x + calcRect.w + PERC10W + PERC10W;
+	prenotaRect.y = redRectI.y;
+	prenotaRect.w = (redRect.w - calcRect.w - (PERC10W * 3))-PERC10W;
+	prenotaRect.h = redRect.h - (PERC10H *2);
+
+	SDL_Rect redRectO;
+	redRectO.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
+	redRectO.y = prezzoRect.y;
+	redRectO.w = 200;
+	redRectO.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
+
+
 
 
 
@@ -387,7 +401,19 @@ int generazioneFinestra() {
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &redRectM);
+			SDL_RenderDrawRect(renderer, &redRectI);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &calcRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &redRectO);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+			SDL_RenderDrawRect(renderer, &prenotaRect);
 			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			
 			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
@@ -399,10 +425,17 @@ int generazioneFinestra() {
 
 			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, "Inserire il numero di mesi", carColor);
+			carSurface = TTF_RenderText_Solid(carFont, "numero mesi: ", carColor);
 			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &redRectM);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, "calcola prezzo", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &calcRect);
 
 
 			listRect.y = listRect.y + (listRect.h + PERC10H);
@@ -414,7 +447,10 @@ int generazioneFinestra() {
 			postiRect.y += listRect.h + PERC10H;
 			prezzoRect.y += listRect.h + PERC10H;
 			redRect.y += listRect.h + PERC10H;
-			redRectM.y += listRect.h + PERC10H;
+			redRectI.y += listRect.h + PERC10H;
+			redRectO.y += listRect.h + PERC10H;
+			calcRect.y += listRect.h + PERC10H;
+			prenotaRect.y += listRect.h + PERC10H;
 
 		}
 		SDL_RenderPresent(renderer);
@@ -494,23 +530,108 @@ int generazioneFinestra() {
 					SDL_UpdateWindowSurface(screen);
 					//COVER
 					listRect.y = bigRect.y + PERC10H;
+					nomeRect.y = listRect.y + PERC10H;
+					marcaRect.y = listRect.y + PERC10H;
+					chilometriRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H);
+					immaRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H) + (chilometriRect.h + PERC10H);
+					potenzaRect.y = nomeRect.y;
+					postiRect.y = chilometriRect.y;
+					prezzoRect.y = immaRect.y;
+					redRect.y = nomeRect.y;
+					redRectI.y = nomeRect.y + PERC10H;
+					calcRect.y = chilometriRect.y + PERC10H;
+					prenotaRect.y = redRectI.y;
+					redRectO.y = prezzoRect.y;
 
 					for (int f = 0; f < 5; f++) {
 						
-						SDL_SetRenderDrawColor(renderer, (page + 10), (page + 10), (page + 10), 255);
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 						SDL_RenderDrawRect(renderer, &listRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &nomeRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &marcaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &chilometriRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &immaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &potenzaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &postiRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &prezzoRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+						SDL_RenderDrawRect(renderer, &redRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &redRectI);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &calcRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &redRectO);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &prenotaRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(page+f), carColor);
+						carSurface = TTF_RenderText_Solid(carFont, intToChar(page + f), carColor);
 						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
+						SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, "numero mesi: ", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &redRectI);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, "calcola prezzo", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &calcRect);
 
 
-						SDL_RenderPresent(renderer);
 						listRect.y = listRect.y + (listRect.h + PERC10H);
+						nomeRect.y += listRect.h + PERC10H;
+						marcaRect.y += listRect.h + PERC10H;
+						chilometriRect.y += listRect.h + PERC10H;
+						immaRect.y += listRect.h + PERC10H;
+						potenzaRect.y += listRect.h + PERC10H;
+						postiRect.y += listRect.h + PERC10H;
+						prezzoRect.y += listRect.h + PERC10H;
+						redRect.y += listRect.h + PERC10H;
+						redRectI.y += listRect.h + PERC10H;
+						redRectO.y += listRect.h + PERC10H;
+						calcRect.y += listRect.h + PERC10H;
+						prenotaRect.y += listRect.h + PERC10H;
 					}
 					
 				}
@@ -532,20 +653,109 @@ int generazioneFinestra() {
 					SDL_UpdateWindowSurface(screen);
 					//COVER
 					listRect.y = bigRect.y + PERC10H;
+					listRect.y = bigRect.y + PERC10H;
+					nomeRect.y = listRect.y + PERC10H;
+					marcaRect.y = listRect.y + PERC10H;
+					chilometriRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H);
+					immaRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H) + (chilometriRect.h + PERC10H);
+					potenzaRect.y = nomeRect.y;
+					postiRect.y = chilometriRect.y;
+					prezzoRect.y = immaRect.y;
+					redRect.y = nomeRect.y;
+					redRectI.y = nomeRect.y + PERC10H;
+					calcRect.y = chilometriRect.y + PERC10H;
+					prenotaRect.y = redRectI.y;
+					redRectO.y = prezzoRect.y;
 
 					for (int f = 0; f < 5; f++) {
 
-						SDL_SetRenderDrawColor(renderer, (page + 10), (page + 10), (page + 10), 255);
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
 						SDL_RenderDrawRect(renderer, &listRect);
 						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-						SDL_RenderPresent(renderer);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &nomeRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &marcaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &chilometriRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &immaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &potenzaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &postiRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &prezzoRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+						SDL_RenderDrawRect(renderer, &redRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &redRectI);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &calcRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &redRectO);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+						SDL_RenderDrawRect(renderer, &prenotaRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
 						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, &content[page - 4], carColor);
+						carSurface = TTF_RenderText_Solid(carFont, intToChar(page + f), carColor);
 						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &listRect);
+						SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, "numero mesi: ", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &redRectI);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, "calcola prezzo", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &calcRect);
+
+
 						listRect.y = listRect.y + (listRect.h + PERC10H);
+						nomeRect.y += listRect.h + PERC10H;
+						marcaRect.y += listRect.h + PERC10H;
+						chilometriRect.y += listRect.h + PERC10H;
+						immaRect.y += listRect.h + PERC10H;
+						potenzaRect.y += listRect.h + PERC10H;
+						postiRect.y += listRect.h + PERC10H;
+						prezzoRect.y += listRect.h + PERC10H;
+						redRect.y += listRect.h + PERC10H;
+						redRectI.y += listRect.h + PERC10H;
+						redRectO.y += listRect.h + PERC10H;
+						calcRect.y += listRect.h + PERC10H;
+						prenotaRect.y += listRect.h + PERC10H;
 					}
 
 				}
