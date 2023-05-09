@@ -1225,6 +1225,8 @@ char* addPrezzo(int input) {
 }
 //FINE AGGIUNTA PEZZI STRINGA
 
+//ciao
+
 void stampDebug() {
 	cout << garageRicerca[2].modello;
 }
