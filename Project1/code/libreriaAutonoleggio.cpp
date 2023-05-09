@@ -1146,6 +1146,13 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
 	else if (km <= 50000) {
 		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
 	}
+
+	if (prezzoXMese < 700) {
+		prezzoXMese = 700;
+	}
+	else if (prezzoXMese > 7000) {
+		prezzoXMese = 7000;
+	}
 	return prezzoXMese;
 }
 //FINE PREZZO
@@ -1170,6 +1177,53 @@ char* intToChar(int input) {
 
 }
 //FINE CASTING OPERATION
+
+//AGGIUNTA PEZZI STRINGA
+char* addKm(int input) {
+	string unita = intTostring(input);
+	string add = " km";
+
+	unita.append(add);
+
+	return stringToChar(unita);
+}
+
+char* addImmatricolazione(int input) {
+	string unita = "Anno: ";
+	string add = intTostring(input);
+
+	unita.append(add);
+
+	return stringToChar(unita);
+}
+
+char* addPotenza(int input) {
+	string unita = intTostring(input);
+	string add = " CV";
+
+	unita.append(add);
+
+	return stringToChar(unita);
+}
+
+char* addPosti(int input) {
+	string unita = "Posti: ";
+	string add = intTostring(input);
+
+	unita.append(add);
+
+	return stringToChar(unita);
+}
+
+char* addPrezzo(int input) {
+	string unita = intTostring(input);
+	string add = "€";
+
+	unita.append(add);
+
+	return stringToChar(unita);
+}
+//FINE AGGIUNTA PEZZI STRINGA
 
 void stampDebug() {
 	cout << garageRicerca[2].modello;

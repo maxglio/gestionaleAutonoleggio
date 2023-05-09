@@ -41,5 +41,17 @@ string intTostring(int input);
 char* intToChar(int input);
 //FINE CASTING OPERATION
 
+//AGGIUNTA PEZZI STRINGA
+char* addKm(int input);
+
+char* addImmatricolazione(int input);
+
+char* addPotenza(int input);
+
+char* addPosti(int input);
+
+char* addPrezzo(int input);
+//FINE AGGIUNTA PEZZI STRINGA
+
 void stampDebug();
 #endif
