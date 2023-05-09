@@ -10,15 +10,17 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	char* prova;
-	int i = 4;
+	int a;
+	int i = 5;
 
-	prova = intToChar(i);
-	cout<< prova;
+	prova = addPrezzo(i);
+	cout << prova;
+	
 
-	readCar();
+	//readCar();
 	//searchByName(name);
 	//stampDebug();
-	generazioneFinestra();
+	//generazioneFinestra();
 	//addCar();
 	//readCar();
 	//printStruct();
