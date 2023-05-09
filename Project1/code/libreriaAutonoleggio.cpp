@@ -892,10 +892,30 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					
-					if (yMouse < 500) {
+					if (yMouse < 451) {
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 1].km, garage[(page * 5) + 1].annoMatricolazione, garage[(page * 5) + 1].fumatori, garage[(page * 5) + 1].prezzo)), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &redRectO);
+
+						
 
 					}
+					else if (yMouse < 601 && yMouse > 451) {
 
+					}
+					else if (yMouse < 745 && yMouse > 601) {
+
+					}
+					else if (yMouse < 896 && yMouse > 745) {
+
+					}
+					else if (yMouse > 745) {
+
+					}
 				}
 			}
 		}
@@ -1146,13 +1166,6 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
 	else if (km <= 50000) {
 		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
 	}
-
-	if (prezzoXMese < 700) {
-		prezzoXMese = 700;
-	}
-	else if (prezzoXMese > 7000) {
-		prezzoXMese = 7000;
-	}
 	return prezzoXMese;
 }
 //FINE PREZZO
@@ -1177,53 +1190,6 @@ char* intToChar(int input) {
 
 }
 //FINE CASTING OPERATION
-
-//AGGIUNTA PEZZI STRINGA
-char* addKm(int input) {
-	string unita = intTostring(input);
-	string add = " km";
-
-	unita.append(add);
-
-	return stringToChar(unita);
-}
-
-char* addImmatricolazione(int input) {
-	string unita = "Anno: ";
-	string add = intTostring(input);
-
-	unita.append(add);
-
-	return stringToChar(unita);
-}
-
-char* addPotenza(int input) {
-	string unita = intTostring(input);
-	string add = " CV";
-
-	unita.append(add);
-
-	return stringToChar(unita);
-}
-
-char* addPosti(int input) {
-	string unita = "Posti: ";
-	string add = intTostring(input);
-
-	unita.append(add);
-
-	return stringToChar(unita);
-}
-
-char* addPrezzo(int input) {
-	string unita = intTostring(input);
-	string add = "€";
-
-	unita.append(add);
-
-	return stringToChar(unita);
-}
-//FINE AGGIUNTA PEZZI STRINGA
 
 void stampDebug() {
 	cout << garageRicerca[2].modello;
