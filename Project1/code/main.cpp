@@ -17,10 +17,10 @@ int main(int argc, char* argv[]) {
 	cout << prova;
 	
 
-	//readCar();
+	readCar();
 	//searchByName(name);
 	//stampDebug();
-	//generazioneFinestra();
+	generazioneFinestra();
 	//addCar();
 	//readCar();
 	//printStruct();
