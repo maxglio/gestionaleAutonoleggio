@@ -892,11 +892,15 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					
+					if (yMouse < 500) {
 
+					}
 
 				}
 			}
 		}
+
+		cout << yMouse  << endl;
 
 
 		switch (event.type){ 
