@@ -116,7 +116,8 @@ int generazioneFinestra() {
 	bool filterControl = false;
 	int page = 0;
 	string text;
-
+	int rect = 0;
+	
 	
 
 	SDL_Init(SDL_INIT_VIDEO);
@@ -411,7 +412,7 @@ int generazioneFinestra() {
 
 
 
-
+	SDL_Rect *rects[5] = { &redRectI,& redRectI2, &redRectI3, &redRectI4, &redRectI5 };
 
 	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_POPUP_MENU);
 
@@ -841,6 +842,7 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					page += 1;
+					text = "";
 					
 
 					if (page > (NMACCHINE / 5) - 1) {
@@ -1146,6 +1148,7 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					page -= 1;
+					text = "";
 					
 
 					if (page < 0) {
@@ -1452,8 +1455,62 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &redRectI) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
+					rect = 1;
+					text = "";
 					SDL_StartTextInput();
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+				}
+			}
+		}
+
+		if (check_click_in_rect(xMouse, yMouse, &redRectI2) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					rect = 2;
+					text = "";
+					SDL_StartTextInput();
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI2);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+				}
+			}
+		}
+
+		if (check_click_in_rect(xMouse, yMouse, &redRectI3) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					rect = 3;
+					text = "";
+					SDL_StartTextInput();
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI3);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+				}
+			}
+		}
+
+		if (check_click_in_rect(xMouse, yMouse, &redRectI4) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				rect = 4;
+				text = "";
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					SDL_StartTextInput();
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI4);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+				}
+			}
+		}
+
+		if (check_click_in_rect(xMouse, yMouse, &redRectI5) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					rect = 5;
+					text = "";
+					SDL_StartTextInput();
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI5);
 					SDL_RenderPresent(renderer);
 					SDL_UpdateWindowSurface(screen);
 				}
@@ -1462,14 +1519,55 @@ int generazioneFinestra() {
 		
 		if (event.type == SDL_TEXTINPUT) {
 			text += event.text.text;
+			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
+			SDL_RenderPresent(renderer);
+			SDL_UpdateWindowSurface(screen);
+			
 			cout << " > " << text << endl;
 		}
 		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
 			text.pop_back();
+			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
+			SDL_RenderPresent(renderer);
+			SDL_UpdateWindowSurface(screen);
 			cout << " > " << text << endl;
 		}
 		
+		if (rect == 1) {
+			
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI);
+		}
+		if (rect == 2) {
 
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI2);
+		}
+		if (rect == 3) {
+
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI3);
+		}
+		if (rect == 4) {
+
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI4);
+		}
+		if (rect == 5) {
+
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI5);
+		}
 
 		if (check_click_in_rect(xMouse, yMouse, &calcRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -1485,6 +1583,7 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &redRectO);
 
+
 				}
 			}
 		}
@@ -1493,6 +1592,10 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &calcRect2) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
+
+					SDL_StopTextInput();
+
+					text = "";
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
@@ -1510,6 +1613,10 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 
+					SDL_StopTextInput();
+
+					text = "";
+
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
 					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 3].km, garage[(page * 5) + 3].annoMatricolazione, garage[(page * 5) + 3].fumatori, garage[(page * 5) + 3].prezzo)), carColor);
@@ -1526,6 +1633,10 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 
+					SDL_StopTextInput();
+
+					text = "";
+
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
 					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 4].km, garage[(page * 5) + 4].annoMatricolazione, garage[(page * 5) + 4].fumatori, garage[(page * 5) + 4].prezzo)), carColor);
@@ -1541,6 +1652,10 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &calcRect5) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
+
+					SDL_StopTextInput();
+
+					text = "";
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
