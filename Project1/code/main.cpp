@@ -9,12 +9,6 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	char* prova;
-	int a;
-	int i = 5;
-
-	prova = addPrezzo(i);
-	cout << prova;
 	
 
 	readCar();

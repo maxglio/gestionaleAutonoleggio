@@ -115,9 +115,7 @@ int generazioneFinestra() {
 	SDL_Point* p;
 	bool filterControl = false;
 	int page = 0;
-	
-	char content[100] = {'s','b','c','d'};
-
+	string text;
 
 	
 
@@ -821,9 +819,10 @@ int generazioneFinestra() {
 
 	while (!quit){
 
+		SDL_PollEvent(&event);
+
 	//Get Mouse POS
 		SDL_GetGlobalMouseState(&xMouse, &yMouse);
-		SDL_WaitEvent(&event);
 	//--------------------------------------------------
 
 	//EXIT
@@ -1448,6 +1447,33 @@ int generazioneFinestra() {
 			}
 		}
 
+		if (check_click_in_rect(xMouse, yMouse, &redRectI) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+
+					
+					if (event.type == SDL_TEXTINPUT) {
+						text += event.text.text;
+						cout << " > " << text << endl;
+					}
+					else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
+						text.pop_back();
+						cout << " > " << text << endl;
+					}
+							
+						
+						
+
+					
+
+				}
+			}
+		}
+
+
 		if (check_click_in_rect(xMouse, yMouse, &calcRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
@@ -1771,6 +1797,12 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
 	}
 	else if (km <= 50000) {
 		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+	}
+	if (prezzoXMese < 700) {
+		prezzoXMese = 700;
+	}
+	else if (prezzoXMese > 7000) {
+		prezzoXMese = 7000;
 	}
 	return prezzoXMese;
 }
