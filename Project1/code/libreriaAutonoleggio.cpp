@@ -1523,14 +1523,12 @@ int generazioneFinestra() {
 			SDL_RenderPresent(renderer);
 			SDL_UpdateWindowSurface(screen);
 			
-			cout << " > " << text << endl;
 		}
 		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
 			text.pop_back();
 			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
 			SDL_RenderPresent(renderer);
 			SDL_UpdateWindowSurface(screen);
-			cout << " > " << text << endl;
 		}
 		
 		if (rect == 1) {
@@ -1568,7 +1566,6 @@ int generazioneFinestra() {
 			SDL_FreeSurface(carSurface);
 			SDL_RenderCopy(renderer, carTexture, NULL, &redRectI5);
 		}
-
 		if (check_click_in_rect(xMouse, yMouse, &calcRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
