@@ -1770,13 +1770,16 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
 	int data[3];
 	int dAnni;
 
+	prezzoXMese = prezzo;
+
 	getCurrentDate(data);
 	anno = data[2];
 
-	prezzoXMese = prezzo;
-
 	if (fumatori != 0) {
-		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 30);
+		cout << "fumatori";
+
+		
 	}
 
 	dAnni = anno - immatricolazione;
@@ -1784,25 +1787,25 @@ int prezzoPerMese(int km, int immatricolazione, int fumatori, int prezzo) {
 	prezzoXMese -= (dAnni * 4);
 
 	if (km > 200000) {
-		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 50);
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 98);
 	}
-	else if (km > 150000 && km < 200000) {
-		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 35);
+	else if (km >= 150000 && km <= 200000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 97);
 	}
 	else if (km > 100000 && km < 150000) {
-		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 30);
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 95);
 	}
-	else if (km > 50000 && km < 100000) {
-		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 20);
+	else if (km > 50000 && km <= 100000) {
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 93);
 	}
 	else if (km <= 50000) {
-		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 10);
+		prezzoXMese = prezzoXMese - ((prezzoXMese / 100) * 90);
 	}
 	if (prezzoXMese < 700) {
 		prezzoXMese = 700;
 	}
-	else if (prezzoXMese > 7000) {
-		prezzoXMese = 7000;
+	else if (prezzoXMese > 9000) {
+		prezzoXMese = 9000;
 	}
 	return prezzoXMese;
 }
@@ -1826,6 +1829,11 @@ char* intToChar(int input) {
 	result = stringToChar(stringa);
 	return result;
 
+}
+
+string charToString(char* input) {
+	string output = input;
+	return output;
 }
 //FINE CASTING OPERATION
 
@@ -1869,7 +1877,7 @@ char* addPosti(int input) {
 
 char* addPrezzo(int input) {
 	string unita = intTostring(input);
-	string add = "�";
+	string add = " euro";
 
 	unita.append(add);
 

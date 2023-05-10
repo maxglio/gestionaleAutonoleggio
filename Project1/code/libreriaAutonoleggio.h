@@ -39,6 +39,8 @@ char* stringToChar(string input);
 string intTostring(int input);
 
 char* intToChar(int input);
+
+string charToString(char* input);
 //FINE CASTING OPERATION
 
 //AGGIUNTA PEZZI STRINGA
