@@ -123,6 +123,8 @@ int generazioneFinestra() {
 	SDL_Init(IMG_INIT_PNG);
 	TTF_Init();
 
+	SDL_StopTextInput();
+
 	SDL_DisplayMode dm;
 
 
@@ -1450,33 +1452,31 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &redRectI) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
+					SDL_StartTextInput();
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectI);
 					SDL_RenderPresent(renderer);
 					SDL_UpdateWindowSurface(screen);
-
-					
-					if (event.type == SDL_TEXTINPUT) {
-						text += event.text.text;
-						cout << " > " << text << endl;
-					}
-					else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
-						text.pop_back();
-						cout << " > " << text << endl;
-					}
-							
-						
-						
-
-					
-
 				}
 			}
 		}
+		
+		if (event.type == SDL_TEXTINPUT) {
+			text += event.text.text;
+			cout << " > " << text << endl;
+		}
+		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
+			text.pop_back();
+			cout << " > " << text << endl;
+		}
+		
 
 
 		if (check_click_in_rect(xMouse, yMouse, &calcRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
+					SDL_StopTextInput();
+
+					text = "";
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
