@@ -164,7 +164,7 @@ int generazioneFinestra() {
 	SDL_Rect searchIconRect;
 	searchIconRect.w = (6.75 / 100.0) * w;
 	searchIconRect.x = titleRect.x;
-	searchIconRect.y = titleRect.y;
+	searchIconRect.y = (15 / 100.0) * h;
 	searchIconRect.h = (12 / 100.0) * h;
 
 	SDL_Rect searchRect;
@@ -181,13 +181,13 @@ int generazioneFinestra() {
 
 	SDL_Rect leftArrRect;
 	leftArrRect.w = (3 / 100.0)*w;
-	leftArrRect.x = PERC10W;
+	leftArrRect.x = bigRect.x-leftArrRect.w;
 	leftArrRect.y = (bigRect.y + (bigRect.h / 2)) - (leftArrRect.w / 2);
 	leftArrRect.h = (6 / 100.0) * h;
 
 	SDL_Rect rightArrRect;
 	rightArrRect.w = (3 / 100.0) * w;
-	rightArrRect.x = w - rightArrRect.w - PERC10W;
+	rightArrRect.x = bigRect.x+bigRect.w;
 	rightArrRect.y = (bigRect.y + (bigRect.h / 2)) - (leftArrRect.w / 2);
 	rightArrRect.h = (6 / 100.0) * h;
 
@@ -427,49 +427,90 @@ int generazioneFinestra() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-	//TITLE
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &titleRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
-	//SEARCH BOX ICON
-		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-		SDL_RenderDrawRect(renderer, &searchIconRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
 	//SEARCH BOX
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &searchRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-
-	//BIG RECTANGLE
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &bigRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
-	//LEFT ARROW
-		SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-		SDL_RenderDrawRect(renderer, &leftArrRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
-	//RIGHT ARROW
-		SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-		SDL_RenderDrawRect(renderer, &rightArrRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
 
 
 		TTF_Font* carFont;
 		SDL_Color carColor;
 		SDL_Surface* carSurface;
 		SDL_Texture* carTexture;
+		
+		for (int f = 0; f < 5; f++) {
 
+			
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			SDL_RenderDrawRect(renderer, &listRect);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].marca), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].modello), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &marcaRect);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, addKm( garage[(page * 5) + f].km), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &chilometriRect);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, addImmatricolazione(garage[(page * 5) + f].annoMatricolazione), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &immaRect);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, addPotenza(garage[(page * 5) + f].potenza), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &potenzaRect);
+
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, addPosti(garage[(page * 5) + f].posti), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &postiRect);
+			
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 255, 255 };
+			carSurface = TTF_RenderText_Solid(carFont, addPrezzo(garage[(page * 5) + f].prezzo), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prezzoRect);
+
+
+
+
+			listRect.y = listRect.y + (listRect.h + PERC10H);
+			nomeRect.y += listRect.h+ PERC10H;
+			marcaRect.y += listRect.h + PERC10H;
+			chilometriRect.y += listRect.h + PERC10H;
+			immaRect.y += listRect.h + PERC10H;
+			potenzaRect.y += listRect.h + PERC10H;
+			postiRect.y += listRect.h + PERC10H;
+			prezzoRect.y += listRect.h + PERC10H;
+
+
+		}
+		SDL_RenderPresent(renderer);
 
 
 		//1
@@ -646,115 +687,10 @@ int generazioneFinestra() {
 		carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
-		
 
 
 
 
-
-
-		for (int f = 0; f < 5; f++) {
-
-			
-			SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &listRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &nomeRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &marcaRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &chilometriRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &immaRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &potenzaRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &postiRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_RenderDrawRect(renderer, &prezzoRect);
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-
-
-
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].marca), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
-
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].modello), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &marcaRect);
-
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].km), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &chilometriRect);
-
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].annoMatricolazione), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &immaRect);
-
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].potenza), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &potenzaRect);
-
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].posti), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &postiRect);
-			
-			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-			carColor = { 255, 255, 255 };
-			carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].prezzo), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &prezzoRect);
-
-
-
-
-			listRect.y = listRect.y + (listRect.h + PERC10H);
-			nomeRect.y += listRect.h+ PERC10H;
-			marcaRect.y += listRect.h + PERC10H;
-			chilometriRect.y += listRect.h + PERC10H;
-			immaRect.y += listRect.h + PERC10H;
-			potenzaRect.y += listRect.h + PERC10H;
-			postiRect.y += listRect.h + PERC10H;
-			prezzoRect.y += listRect.h + PERC10H;
-
-
-		}
-		SDL_RenderPresent(renderer);
 		
 	//end rectangle rendering
 
@@ -856,8 +792,76 @@ int generazioneFinestra() {
 					prenotaRect.y = redRectI.y;
 					redRectO.y = prezzoRect.y;
 
+					for (int f = 0; f < 5; f++) {
+						
+						SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+						SDL_RenderDrawRect(renderer, &listRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].marca), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].modello), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &marcaRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addKm(garage[(page * 5) + f].km), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &chilometriRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addImmatricolazione(garage[(page * 5) + f].annoMatricolazione), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &immaRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addPotenza(garage[(page * 5) + f].potenza), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &potenzaRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addPosti(garage[(page * 5) + f].posti), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &postiRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addPrezzo(garage[(page * 5) + f].prezzo), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prezzoRect);
+
+
+
+
+						listRect.y = listRect.y + (listRect.h + PERC10H);
+						nomeRect.y += listRect.h + PERC10H;
+						marcaRect.y += listRect.h + PERC10H;
+						chilometriRect.y += listRect.h + PERC10H;
+						immaRect.y += listRect.h + PERC10H;
+						potenzaRect.y += listRect.h + PERC10H;
+						postiRect.y += listRect.h + PERC10H;
+						prezzoRect.y += listRect.h + PERC10H;
+					}
+
 					//1
-					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRect);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
@@ -1030,105 +1034,6 @@ int generazioneFinestra() {
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
-
-					for (int f = 0; f < 5; f++) {
-						
-						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &listRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &nomeRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &marcaRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &chilometriRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &immaRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &potenzaRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &postiRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &prezzoRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-
-
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].marca), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].modello), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &marcaRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].km), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &chilometriRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].annoMatricolazione), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &immaRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].potenza), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &potenzaRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].posti), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &postiRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].prezzo), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &prezzoRect);
-
-
-
-
-						listRect.y = listRect.y + (listRect.h + PERC10H);
-						nomeRect.y += listRect.h + PERC10H;
-						marcaRect.y += listRect.h + PERC10H;
-						chilometriRect.y += listRect.h + PERC10H;
-						immaRect.y += listRect.h + PERC10H;
-						potenzaRect.y += listRect.h + PERC10H;
-						postiRect.y += listRect.h + PERC10H;
-						prezzoRect.y += listRect.h + PERC10H;
-					}
 					
 				}
 			}
@@ -1163,6 +1068,76 @@ int generazioneFinestra() {
 					prenotaRect.y = redRectI.y;
 					redRectO.y = prezzoRect.y;
 
+					
+
+					for (int f = 0; f < 5; f++) {
+
+						SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+						SDL_RenderDrawRect(renderer, &listRect);
+						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].marca), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].modello), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &marcaRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addKm(garage[(page * 5) + f].km), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &chilometriRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addImmatricolazione(garage[(page * 5) + f].annoMatricolazione), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &immaRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addPotenza(garage[(page * 5) + f].potenza), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &potenzaRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addPosti(garage[(page * 5) + f].posti), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &postiRect);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 255, 255 };
+						carSurface = TTF_RenderText_Solid(carFont, addPrezzo(garage[(page * 5) + f].prezzo), carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prezzoRect);
+
+
+
+
+						listRect.y = listRect.y + (listRect.h + PERC10H);
+						nomeRect.y += listRect.h + PERC10H;
+						marcaRect.y += listRect.h + PERC10H;
+						chilometriRect.y += listRect.h + PERC10H;
+						immaRect.y += listRect.h + PERC10H;
+						potenzaRect.y += listRect.h + PERC10H;
+						postiRect.y += listRect.h + PERC10H;
+						prezzoRect.y += listRect.h + PERC10H;
+					}
+
 					//1
 					SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 					SDL_RenderDrawRect(renderer, &redRect);
@@ -1337,105 +1312,6 @@ int generazioneFinestra() {
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
-
-					for (int f = 0; f < 5; f++) {
-
-						SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &listRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &nomeRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &marcaRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &chilometriRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &immaRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &potenzaRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &postiRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-						SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-						SDL_RenderDrawRect(renderer, &prezzoRect);
-						SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-
-
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].marca), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &nomeRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, stringToChar(garage[(page * 5) + f].modello), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &marcaRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].km), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &chilometriRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].annoMatricolazione), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &immaRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].potenza), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &potenzaRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].posti), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &postiRect);
-
-						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-						carColor = { 255, 255, 255 };
-						carSurface = TTF_RenderText_Solid(carFont, intToChar(garage[(page * 5) + f].prezzo), carColor);
-						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-						SDL_FreeSurface(carSurface);
-						SDL_RenderCopy(renderer, carTexture, NULL, &prezzoRect);
-
-
-
-
-						listRect.y = listRect.y + (listRect.h + PERC10H);
-						nomeRect.y += listRect.h + PERC10H;
-						marcaRect.y += listRect.h + PERC10H;
-						chilometriRect.y += listRect.h + PERC10H;
-						immaRect.y += listRect.h + PERC10H;
-						potenzaRect.y += listRect.h + PERC10H;
-						postiRect.y += listRect.h + PERC10H;
-						prezzoRect.y += listRect.h + PERC10H;
-					}
 
 				}
 			}
