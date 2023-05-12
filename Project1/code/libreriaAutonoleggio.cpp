@@ -117,6 +117,8 @@ int generazioneFinestra() {
 	int page = 0;
 	string text;
 	int rect = 0;
+	char output;
+	int prezzoMensile;
 	
 	
 
@@ -1571,11 +1573,17 @@ int generazioneFinestra() {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					SDL_StopTextInput();
 
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 1].km, garage[(page * 5) + 1].annoMatricolazione, garage[(page * 5) + 1].fumatori, garage[(page * 5) + 1].prezzo);
+					cout << prezzoMensile << endl;
+
 					text = "";
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
-					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 1].km, garage[(page * 5) + 1].annoMatricolazione, garage[(page * 5) + 1].fumatori, garage[(page * 5) + 1].prezzo)), carColor);
+					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoMensile), carColor);
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &redRectO);
