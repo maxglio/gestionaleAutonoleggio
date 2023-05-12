@@ -41,6 +41,8 @@ string intTostring(int input);
 char* intToChar(int input);
 
 string charToString(char* input);
+
+int stringToInt(string input);
 //FINE CASTING OPERATION
 
 //AGGIUNTA PEZZI STRINGA

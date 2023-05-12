@@ -1947,6 +1947,10 @@ string charToString(char* input) {
 	string output = input;
 	return output;
 }
+
+int stringToInt(string input) {
+	return stoi(input);
+}
 //FINE CASTING OPERATION
 
 
