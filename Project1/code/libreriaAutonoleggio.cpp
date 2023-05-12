@@ -149,23 +149,11 @@ int generazioneFinestra() {
 #define PERC10H ((0.9 / 100.0) * h)
 
 
-	SDL_Rect hideRect;
-	hideRect.x = WRECTSX;
-	hideRect.y = 0;
-	hideRect.w = WRECTSX;
-	hideRect.h = HRECTSX;
-
 	SDL_Rect exitRect;
 	exitRect.x = 0;
 	exitRect.y = 0;
 	exitRect.w = WRECTSX;
 	exitRect.h = HRECTSX;
-
-	SDL_Rect sqrRect;
-	sqrRect.x = (WRECTSX + WRECTSX);
-	sqrRect.y = 0;
-	sqrRect.w = WRECTSX;
-	sqrRect.h = HRECTSX;
 
 	SDL_Rect titleRect;
 	titleRect.w = ((46 / 100.0) * w);
@@ -173,17 +161,17 @@ int generazioneFinestra() {
 	titleRect.y = 0;
 	titleRect.h = (12/100.0)*h;
 
-	SDL_Rect searchRect;
-	searchRect.w = (41/100.0)*w;
-	searchRect.x = ((w / 2) - (searchRect.w / 2));
-	searchRect.y = (15/100.0)*h;
-	searchRect.h = (12/100.0)*h;
-
 	SDL_Rect searchIconRect;
 	searchIconRect.w = (6.75 / 100.0) * w;
-	searchIconRect.x = ((w / 2) - (searchRect.w / 2) - searchIconRect.w);
-	searchIconRect.y = searchRect.y;
+	searchIconRect.x = titleRect.x;
+	searchIconRect.y = titleRect.y;
 	searchIconRect.h = (12 / 100.0) * h;
+
+	SDL_Rect searchRect;
+	searchRect.w = (41/100.0)*w;
+	searchRect.x = titleRect.x+ searchIconRect.w;
+	searchRect.y = (15/100.0)*h;
+	searchRect.h = (12/100.0)*h;
 
 	SDL_Rect bigRect;
 	bigRect.x = (5/100.0)*w;
@@ -432,20 +420,9 @@ int generazioneFinestra() {
 
 	//start rectangle rendering
 		
-	//SQUARE BUTTON
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &sqrRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
-	//LOW BUTTON
-		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		SDL_RenderDrawRect(renderer, &hideRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
 	//EXIT BUTTON
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+		SDL_RenderFillRect(renderer, &exitRect);
 		SDL_RenderDrawRect(renderer, &exitRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
@@ -1584,7 +1561,6 @@ int generazioneFinestra() {
 					SDL_StopTextInput();
 
 					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 1].km, garage[(page * 5) + 1].annoMatricolazione, garage[(page * 5) + 1].fumatori, garage[(page * 5) + 1].prezzo);
-					cout << prezzoMensile << endl;
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO);
@@ -1610,7 +1586,6 @@ int generazioneFinestra() {
 					SDL_StopTextInput();
 
 					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 2].km, garage[(page * 5) + 2].annoMatricolazione, garage[(page * 5) + 2].fumatori, garage[(page * 5) + 2].prezzo);
-					cout << prezzoMensile << endl;
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO2);
@@ -1635,7 +1610,6 @@ int generazioneFinestra() {
 					SDL_StopTextInput();
 
 					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 3].km, garage[(page * 5) + 3].annoMatricolazione, garage[(page * 5) + 3].fumatori, garage[(page * 5) + 3].prezzo);
-					cout << prezzoMensile << endl;
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO3);
@@ -1660,7 +1634,6 @@ int generazioneFinestra() {
 					SDL_StopTextInput();
 
 					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 4].km, garage[(page * 5) + 4].annoMatricolazione, garage[(page * 5) + 4].fumatori, garage[(page * 5) + 4].prezzo);
-					cout << prezzoMensile << endl;
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO4);
@@ -1685,7 +1658,6 @@ int generazioneFinestra() {
 					SDL_StopTextInput();
 
 					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 5].km, garage[(page * 5) + 5].annoMatricolazione, garage[(page * 5) + 5].fumatori, garage[(page * 5) + 5].prezzo);
-					cout << prezzoMensile << endl;
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO5);
