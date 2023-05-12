@@ -117,8 +117,7 @@ int generazioneFinestra() {
 	int page = 0;
 	string text;
 	int rect = 0;
-	char output;
-	int prezzoMensile;
+	int prezzoMensile;	
 	
 	
 
@@ -213,43 +212,43 @@ int generazioneFinestra() {
 	SDL_Rect nomeRect;
 	nomeRect.x = listRect.x + PERC10W;
 	nomeRect.y = listRect.y + PERC10H;
-	nomeRect.w = 220;
+	nomeRect.w = (11.45/100.0)*w;
 	nomeRect.h = (listRect.h - (PERC10W * 3)) / 3;
 
 	SDL_Rect marcaRect;
 	marcaRect.x = (listRect.x + PERC10W) + nomeRect.w + 6;
 	marcaRect.y = listRect.y + PERC10H;
-	marcaRect.w = 220;
+	marcaRect.w = (11.45 / 100.0) * w;
 	marcaRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect chilometriRect;
 	chilometriRect.x = (listRect.x + PERC10W);
 	chilometriRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H);
-	chilometriRect.w = 220;
+	chilometriRect.w = (11.45 / 100.0) * w;
 	chilometriRect.h = (listRect.h - (PERC10W*3.0)) / 3.0;
 
 	SDL_Rect immaRect;
 	immaRect.x = (listRect.x + PERC10W);
 	immaRect.y = (listRect.y + PERC10H) + (nomeRect.h + PERC10H) + (chilometriRect.h + PERC10H);
-	immaRect.w = 220;
+	immaRect.w = (11.45 / 100.0) * w;
 	immaRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect potenzaRect;
 	potenzaRect.x = nomeRect.x+(nomeRect.w*3);
 	potenzaRect.y = nomeRect.y;
-	potenzaRect.w = 220;
+	potenzaRect.w = (11.45 / 100.0) * w;
 	potenzaRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect postiRect;
 	postiRect.x = nomeRect.x + (nomeRect.w * 3);
 	postiRect.y = chilometriRect.y;
-	postiRect.w = 220;
+	postiRect.w = (11.45 / 100.0) * w;
 	postiRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect prezzoRect;
 	prezzoRect.x = nomeRect.x + (nomeRect.w * 3);
 	prezzoRect.y = immaRect.y;
-	prezzoRect.w = 220;
+	prezzoRect.w = (11.45 / 100.0) * w;
 	prezzoRect.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	//1
@@ -257,19 +256,19 @@ int generazioneFinestra() {
 	SDL_Rect redRect;
 	redRect.x = nomeRect.x + (nomeRect.w * 5);
 	redRect.y = nomeRect.y;
-	redRect.w = 400;
+	redRect.w = (20.83/100.0)*w;
 	redRect.h = (listRect.h - PERC10W);
 
 	SDL_Rect redRectI;
 	redRectI.x = (nomeRect.x + (nomeRect.w * 5))+PERC10W;
 	redRectI.y = nomeRect.y+ PERC10H;
-	redRectI.w = 200;
+	redRectI.w = (10.42/100.0)*w;
 	redRectI.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect calcRect;
 	calcRect.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W + (PERC10W/2);
 	calcRect.y = chilometriRect.y + PERC10H;
-	calcRect.w = 200-PERC10W;
+	calcRect.w = ((10.42 / 100.0) * w) - PERC10W;
 	calcRect.h = ((listRect.h - (PERC10W * 3.0)) / 3.0)-PERC10H;
 
 	SDL_Rect prenotaRect;
@@ -281,7 +280,7 @@ int generazioneFinestra() {
 	SDL_Rect redRectO;
 	redRectO.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectO.y = prezzoRect.y;
-	redRectO.w = 200;
+	redRectO.w = (10.42 / 100.0) * w;
 	redRectO.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	//2
@@ -289,19 +288,19 @@ int generazioneFinestra() {
 	SDL_Rect redRec2;
 	redRec2.x = nomeRect.x + (nomeRect.w * 5);
 	redRec2.y = nomeRect.y + listRect.h + PERC10H;
-	redRec2.w = 400;
+	redRec2.w = (20.83 / 100.0) * w;
 	redRec2.h = (listRect.h - PERC10W);
 
 	SDL_Rect redRectI2;
 	redRectI2.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectI2.y = nomeRect.y + PERC10H + listRect.h + PERC10H;
-	redRectI2.w = 200;
+	redRectI2.w = (10.42 / 100.0) * w;
 	redRectI2.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect calcRect2;
 	calcRect2.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W + (PERC10W / 2);
 	calcRect2.y = chilometriRect.y + PERC10H + listRect.h + PERC10H;
-	calcRect2.w = 200 - PERC10W;
+	calcRect2.w = ((10.42 / 100.0) * w) - PERC10W;
 	calcRect2.h = ((listRect.h - (PERC10W * 3.0)) / 3.0) - PERC10H;
 
 	SDL_Rect prenotaRect2;
@@ -313,7 +312,7 @@ int generazioneFinestra() {
 	SDL_Rect redRectO2;
 	redRectO2.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectO2.y = prezzoRect.y + listRect.h + PERC10H;
-	redRectO2.w = 200;
+	redRectO2.w = (10.42 / 100.0) * w;
 	redRectO2.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	//3
@@ -321,19 +320,19 @@ int generazioneFinestra() {
 	SDL_Rect redRect3;
 	redRect3.x = nomeRect.x + (nomeRect.w * 5);
 	redRect3.y = nomeRect.y + ((listRect.h + PERC10H)*2);
-	redRect3.w = 400;
+	redRect3.w = (20.83 / 100.0) * w;
 	redRect3.h = (listRect.h - PERC10W);
 
 	SDL_Rect redRectI3;
 	redRectI3.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectI3.y = nomeRect.y + PERC10H + ((listRect.h + PERC10H) * 2);
-	redRectI3.w = 200;
+	redRectI3.w = (10.42 / 100.0) * w;
 	redRectI3.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect calcRect3;
 	calcRect3.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W + (PERC10W / 2);
 	calcRect3.y = chilometriRect.y + PERC10H + ((listRect.h + PERC10H) * 2);
-	calcRect3.w = 200 - PERC10W;
+	calcRect3.w = ((10.42 / 100.0) * w) - PERC10W;
 	calcRect3.h = ((listRect.h - (PERC10W * 3.0)) / 3.0) - PERC10H;
 
 	SDL_Rect prenotaRect3;
@@ -345,7 +344,7 @@ int generazioneFinestra() {
 	SDL_Rect redRectO3;
 	redRectO3.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectO3.y = prezzoRect.y + ((listRect.h + PERC10H) * 2);
-	redRectO3.w = 200;
+	redRectO3.w = (10.42 / 100.0) * w;
 	redRectO3.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	//4
@@ -353,19 +352,19 @@ int generazioneFinestra() {
 	SDL_Rect redRec4;
 	redRec4.x = nomeRect.x + (nomeRect.w * 5);
 	redRec4.y = nomeRect.y + ((listRect.h + PERC10H) * 3);
-	redRec4.w = 400;
+	redRec4.w = (20.83 / 100.0) * w;
 	redRec4.h = (listRect.h - PERC10W);
 
 	SDL_Rect redRectI4;
 	redRectI4.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectI4.y = nomeRect.y + PERC10H + ((listRect.h + PERC10H) * 3);
-	redRectI4.w = 200;
+	redRectI4.w = (10.42 / 100.0) * w;
 	redRectI4.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect calcRect4;
 	calcRect4.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W + (PERC10W / 2);
 	calcRect4.y = chilometriRect.y + PERC10H + ((listRect.h + PERC10H) * 3);
-	calcRect4.w = 200 - PERC10W;
+	calcRect4.w = ((10.42 / 100.0) * w) - PERC10W;
 	calcRect4.h = ((listRect.h - (PERC10W * 3.0)) / 3.0) - PERC10H;
 
 	SDL_Rect prenotaRect4;
@@ -377,7 +376,7 @@ int generazioneFinestra() {
 	SDL_Rect redRectO4;
 	redRectO4.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectO4.y = prezzoRect.y + ((listRect.h + PERC10H) * 3);
-	redRectO4.w = 200;
+	redRectO4.w = (10.42 / 100.0) * w;
 	redRectO4.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	//5
@@ -385,19 +384,19 @@ int generazioneFinestra() {
 	SDL_Rect redRec5;
 	redRec5.x = nomeRect.x + (nomeRect.w * 5);
 	redRec5.y = nomeRect.y + ((listRect.h + PERC10H) * 4);
-	redRec5.w = 400;
+	redRec5.w = (20.83 / 100.0) * w;
 	redRec5.h = (listRect.h - PERC10W);
 
 	SDL_Rect redRectI5;
 	redRectI5.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectI5.y = nomeRect.y + PERC10H + ((listRect.h + PERC10H) * 4);
-	redRectI5.w = 200;
+	redRectI5.w = (10.42 / 100.0) * w;
 	redRectI5.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 	SDL_Rect calcRect5;
 	calcRect5.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W + (PERC10W / 2);
 	calcRect5.y = chilometriRect.y + PERC10H + ((listRect.h + PERC10H) * 4);
-	calcRect5.w = 200 - PERC10W;
+	calcRect5.w = ((10.42 / 100.0) * w) - PERC10W;
 	calcRect5.h = ((listRect.h - (PERC10W * 3.0)) / 3.0) - PERC10H;
 
 	SDL_Rect prenotaRect5;
@@ -409,7 +408,7 @@ int generazioneFinestra() {
 	SDL_Rect redRectO5;
 	redRectO5.x = (nomeRect.x + (nomeRect.w * 5)) + PERC10W;
 	redRectO5.y = prezzoRect.y + ((listRect.h + PERC10H) * 4);
-	redRectO5.w = 200;
+	redRectO5.w = (10.42 / 100.0) * w;
 	redRectO5.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
 
@@ -787,35 +786,46 @@ int generazioneFinestra() {
 	SDL_SetWindowIcon(screen, IconSurface);
 
 	// EXIT BUTTON RENDERING
-	SDL_Surface* ExitSurface = IMG_Load("code/images/exit.png");
-	SDL_Texture* ExitTexture = SDL_CreateTextureFromSurface(renderer, ExitSurface);
-	SDL_FreeSurface(ExitSurface);
+	SDL_Surface* ImgSurface = IMG_Load("code/images/exit.png");
+	SDL_Texture* ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
+	SDL_RenderCopy(renderer, ImgTexture, NULL, &exitRect);
+	SDL_FreeSurface(ImgSurface);
 
-	int proiva = 1;
-	string stringa = to_string(proiva);
+	
 
 	//TITLE RENDERING
 	TTF_Font* TitleFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 	SDL_Color TitleColor = { 255, 255, 255 };
 	SDL_Surface* TitleSurface = TTF_RenderText_Solid(TitleFont, "AUTONOLEGGIO", TitleColor);
 	SDL_Texture* TitleTexture = SDL_CreateTextureFromSurface(renderer, TitleSurface);
+	SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
 	SDL_FreeSurface(TitleSurface);
 
 
 	//SEARCH ICON RENDERING
-	SDL_Surface* SearchIconSurface = IMG_Load("code/images/searchIcon.png");
-	SDL_Texture* SearchIconTexture = SDL_CreateTextureFromSurface(renderer, SearchIconSurface);
-	SDL_FreeSurface(SearchIconSurface);
+	ImgSurface = IMG_Load("code/images/searchIcon.png");
+	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
+	SDL_RenderCopy(renderer, ImgTexture, NULL, &searchIconRect);
+	SDL_FreeSurface(ImgSurface);
 	
+	ImgSurface = IMG_Load("code/images/back.png");
+	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
+	SDL_RenderCopy(renderer, ImgTexture, NULL, &leftArrRect);
+	SDL_FreeSurface(ImgSurface);
+
+	ImgSurface = IMG_Load("code/images/forward.png");
+	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
+	SDL_RenderCopy(renderer, ImgTexture, NULL, &rightArrRect);
+	SDL_FreeSurface(ImgSurface);
 
 
-	//LIST RENDERING
-	SDL_Surface* ListSurface = nullptr;
-	SDL_Texture* ListTexture = SDL_CreateTextureFromSurface(renderer, ListSurface);
-	SDL_FreeSurface(ListSurface);
 	SDL_Surface* CoverSurface = IMG_Load("code/images/cover.png");
 	SDL_Texture* CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
 
+	
+	
+
+	SDL_RenderPresent(renderer);
 	
 
 
@@ -1597,14 +1607,19 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &calcRect2) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
-
 					SDL_StopTextInput();
 
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 2].km, garage[(page * 5) + 2].annoMatricolazione, garage[(page * 5) + 2].fumatori, garage[(page * 5) + 2].prezzo);
+					cout << prezzoMensile << endl;
+
 					text = "";
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO2);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
-					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 2].km, garage[(page * 5) + 2].annoMatricolazione, garage[(page * 5) + 2].fumatori, garage[(page * 5) + 2].prezzo)), carColor);
+					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoMensile), carColor);
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &redRectO2);
@@ -1617,14 +1632,19 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &calcRect3) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
-
 					SDL_StopTextInput();
 
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 3].km, garage[(page * 5) + 3].annoMatricolazione, garage[(page * 5) + 3].fumatori, garage[(page * 5) + 3].prezzo);
+					cout << prezzoMensile << endl;
+
 					text = "";
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO3);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
-					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 3].km, garage[(page * 5) + 3].annoMatricolazione, garage[(page * 5) + 3].fumatori, garage[(page * 5) + 3].prezzo)), carColor);
+					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoMensile), carColor);
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &redRectO3);
@@ -1637,14 +1657,19 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &calcRect4) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
-
 					SDL_StopTextInput();
 
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 4].km, garage[(page * 5) + 4].annoMatricolazione, garage[(page * 5) + 4].fumatori, garage[(page * 5) + 4].prezzo);
+					cout << prezzoMensile << endl;
+
 					text = "";
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO4);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
-					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 4].km, garage[(page * 5) + 4].annoMatricolazione, garage[(page * 5) + 4].fumatori, garage[(page * 5) + 4].prezzo)), carColor);
+					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoMensile), carColor);
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &redRectO4);
@@ -1657,14 +1682,19 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &calcRect5) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
-
 					SDL_StopTextInput();
 
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 5].km, garage[(page * 5) + 5].annoMatricolazione, garage[(page * 5) + 5].fumatori, garage[(page * 5) + 5].prezzo);
+					cout << prezzoMensile << endl;
+
 					text = "";
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO5);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
 
 					carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 					carColor = { 255, 255, 255 };
-					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoPerMese(garage[(page * 5) + 5].km, garage[(page * 5) + 5].annoMatricolazione, garage[(page * 5) + 5].fumatori, garage[(page * 5) + 5].prezzo)), carColor);
+					carSurface = TTF_RenderText_Solid(carFont, intToChar(prezzoMensile), carColor);
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &redRectO5);
@@ -1682,16 +1712,11 @@ int generazioneFinestra() {
 			system("taskkill /IM gestionaleAutonoleggio.exe");
 		}
 
-		SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
-		SDL_RenderCopy(renderer, ExitTexture, NULL, &exitRect);
-		SDL_RenderCopy(renderer, SearchIconTexture, NULL, &searchIconRect);
-
+		
 		SDL_RenderPresent(renderer);
-
 	}
 
-	SDL_DestroyTexture(ExitTexture);
-	SDL_DestroyTexture(SearchIconTexture);
+	SDL_DestroyTexture(ImgTexture);
 	SDL_DestroyTexture(TitleTexture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(screen);
