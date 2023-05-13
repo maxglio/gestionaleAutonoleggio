@@ -55,6 +55,8 @@ char* addPotenza(int input);
 char* addPosti(int input);
 
 char* addPrezzo(int input);
+
+void addReserved();
 //FINE AGGIUNTA PEZZI STRINGA
 
 void stampDebug();
