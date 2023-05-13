@@ -118,10 +118,7 @@ int generazioneFinestra() {
 	int page = 0;
 	string text;
 	int rect = 0;
-	int prezzoMensile;
-	bool search = false;
-	int prenotaButton = 0;
-	
+	int prezzoMensile;	
 	
 
 	SDL_Init(SDL_INIT_VIDEO);
@@ -163,18 +160,6 @@ int generazioneFinestra() {
 	titleRect.x = ((w / 2)-(titleRect.w/2));
 	titleRect.y = 0;
 	titleRect.h = (12/100.0)*h;
-
-	SDL_Rect searchIconRect;
-	searchIconRect.w = (6.75 / 100.0) * w;
-	searchIconRect.x = titleRect.x;
-	searchIconRect.y = (15 / 100.0) * h;
-	searchIconRect.h = (12 / 100.0) * h;
-
-	SDL_Rect searchRect;
-	searchRect.w = (41/100.0)*w;
-	searchRect.x = titleRect.x+ searchIconRect.w;
-	searchRect.y = (15/100.0)*h;
-	searchRect.h = (12/100.0)*h;
 
 	SDL_Rect bigRect;
 	bigRect.x = (5/100.0)*w;
@@ -430,14 +415,6 @@ int generazioneFinestra() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
 
-	//SEARCH BOX
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &searchRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderPresent(renderer);
-
-
-
 		TTF_Font* carFont;
 		SDL_Color carColor;
 		SDL_Surface* carSurface;
@@ -519,10 +496,6 @@ int generazioneFinestra() {
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &prenotaRect);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &calcRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
@@ -544,13 +517,26 @@ int generazioneFinestra() {
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect);
 
+		if (garage[(page * 5) + 0].riservato == 1) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 0, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+		}
+		else if (garage[(page * 5) + 0].riservato == 0) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 0, 255, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+		}
+
 		//2
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &redRec2);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &prenotaRect2);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -575,13 +561,26 @@ int generazioneFinestra() {
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect2);
 
+		if (garage[(page * 5) + 1].riservato == 1) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 0, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+		}
+		else if (garage[(page * 5) + 1].riservato == 0) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 0, 255, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+		}
+
 		//3
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &redRect3);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &prenotaRect3);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -606,13 +605,26 @@ int generazioneFinestra() {
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect3);
 
+		if (garage[(page * 5) + 2].riservato == 1) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 0, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+		}
+		else if (garage[(page * 5) + 2].riservato == 0) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 0, 255, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+		}
+
 		//4
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &redRec4);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &prenotaRect4);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -637,13 +649,26 @@ int generazioneFinestra() {
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect4);
 
+		if (garage[(page * 5) + 3].riservato == 1) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 0, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+		}
+		else if (garage[(page * 5) + 3].riservato == 0) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 0, 255, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+		}
+
 		//5
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(renderer, &redRec5);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &prenotaRect5);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -667,6 +692,23 @@ int generazioneFinestra() {
 		carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
+
+		if (garage[(page * 5) + 4].riservato == 1) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 255, 0, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+		}
+		else if (garage[(page * 5) + 4].riservato == 0) {
+			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+			carColor = { 0, 255, 0 };
+			carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+		}
 
 
 
@@ -694,12 +736,6 @@ int generazioneFinestra() {
 	SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
 	SDL_FreeSurface(TitleSurface);
 
-
-	//SEARCH ICON RENDERING
-	ImgSurface = IMG_Load("code/images/searchIcon.png");
-	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
-	SDL_RenderCopy(renderer, ImgTexture, NULL, &searchIconRect);
-	SDL_FreeSurface(ImgSurface);
 	
 	ImgSurface = IMG_Load("code/images/back.png");
 	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
@@ -711,28 +747,10 @@ int generazioneFinestra() {
 	SDL_RenderCopy(renderer, ImgTexture, NULL, &rightArrRect);
 	SDL_FreeSurface(ImgSurface);
 
-
-	carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
-	carColor = { 255, 255, 255 };
-	carSurface = TTF_RenderText_Solid(carFont, "Inserisci la marca:", carColor);
-	carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-	SDL_FreeSurface(carSurface);
-	SDL_RenderCopy(renderer, carTexture, NULL, &searchRect);
-
-
-
 	SDL_Surface* CoverSurface = IMG_Load("code/images/cover.png");
 	SDL_Texture* CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
 
-	
-	
-
 	SDL_RenderPresent(renderer);
-	
-
-
-
-
 
 	while (!quit){
 
@@ -750,58 +768,6 @@ int generazioneFinestra() {
 				}
 			}
 		}
-
-
-		if (check_click_in_rect(xMouse, yMouse, &searchRect) == 1) {
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
-				if (event.button.button == SDL_BUTTON_LEFT) {
-					search = true;
-					text = "";
-					SDL_StartTextInput();
-					SDL_RenderCopy(renderer, CoverTexture, NULL, &searchRect);
-					SDL_RenderPresent(renderer);
-					SDL_UpdateWindowSurface(screen);
-
-				}
-			}
-		}
-
-		if (event.type == SDL_TEXTINPUT && search == true) {
-			text += event.text.text;
-			SDL_RenderCopy(renderer, CoverTexture, NULL, &searchRect);
-			SDL_UpdateWindowSurface(screen);
-			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &searchRect);
-			SDL_RenderPresent(renderer);
-
-
-		}
-		else if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size())&& search == true) {
-			text.pop_back();
-			SDL_RenderCopy(renderer, CoverTexture, NULL, &searchRect);
-			SDL_UpdateWindowSurface(screen);
-			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
-			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
-			SDL_FreeSurface(carSurface);
-			SDL_RenderCopy(renderer, carTexture, NULL, &searchRect);
-			SDL_RenderPresent(renderer);
-
-		}
-
-		if (check_click_in_rect(xMouse, yMouse, &searchIconRect) == 1) {
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
-				if (event.button.button == SDL_BUTTON_LEFT) {
-					text = "";
-					SDL_StopTextInput;
-					search = false;
-					
-
-				}
-			}
-		}
-
 
 		if (check_click_in_rect(xMouse, yMouse, &rightArrRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -906,10 +872,6 @@ int generazioneFinestra() {
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &calcRect);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
@@ -931,13 +893,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect);
 
+					if (garage[(page * 5) + 0].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+					}
+					else if (garage[(page * 5) + 0].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+					}
+
 					//2
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRec2);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect2);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -962,13 +937,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect2);
 
+					if (garage[(page * 5) + 1].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+					}
+					else if (garage[(page * 5) + 1].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+					}
+
 					//3
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRect3);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect3);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -993,13 +981,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect3);
 
+					if (garage[(page * 5) + 2].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+					}
+					else if (garage[(page * 5) + 2].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+					}
+
 					//4
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRec4);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect4);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -1024,13 +1025,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect4);
 
+					if (garage[(page * 5) + 3].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+					}
+					else if (garage[(page * 5) + 3].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+					}
+
 					//5
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRec5);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect5);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -1054,6 +1068,23 @@ int generazioneFinestra() {
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
+
+					if (garage[(page * 5) + 4].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+					}
+					else if (garage[(page * 5) + 4].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+					}
 					
 				}
 			}
@@ -1164,10 +1195,6 @@ int generazioneFinestra() {
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &calcRect);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
@@ -1189,13 +1216,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect);
 
+					if (garage[(page * 5) + 0].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+					}
+					else if (garage[(page * 5) + 0].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+					}
+
 					//2
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRec2);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect2);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -1220,13 +1260,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect2);
 
+					if (garage[(page * 5) + 1].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+					}
+					else if (garage[(page * 5) + 1].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+					}
+
 					//3
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRect3);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect3);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -1251,13 +1304,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect3);
 
+					if (garage[(page * 5) + 2].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+					}
+					else if (garage[(page * 5) + 2].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+					}
+
 					//4
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRec4);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect4);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -1282,13 +1348,26 @@ int generazioneFinestra() {
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect4);
 
+					if (garage[(page * 5) + 3].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+					}
+					else if (garage[(page * 5) + 3].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+					}
+
 					//5
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 					SDL_RenderDrawRect(renderer, &redRec5);
-					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-
-					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-					SDL_RenderDrawRect(renderer, &prenotaRect5);
 					SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
 					SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -1312,6 +1391,23 @@ int generazioneFinestra() {
 					carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 					SDL_FreeSurface(carSurface);
 					SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
+
+					if (garage[(page * 5) + 4].riservato == 1) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+					}
+					else if (garage[(page * 5) + 4].riservato == 0) {
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 0, 255, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenota", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+					}
 
 				}
 			}
@@ -1382,14 +1478,14 @@ int generazioneFinestra() {
 			}
 		}
 		
-		if (event.type == SDL_TEXTINPUT && search == false) {
+		if (event.type == SDL_TEXTINPUT) {
 			text += event.text.text;
 			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
 			SDL_RenderPresent(renderer);
 			SDL_UpdateWindowSurface(screen);
 			
 		}
-		else if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) && search == false) {
+		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
 			text.pop_back();
 			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
 			SDL_RenderPresent(renderer);
@@ -1436,7 +1532,7 @@ int generazioneFinestra() {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					SDL_StopTextInput();
 
-					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 1].km, garage[(page * 5) + 1].annoMatricolazione, garage[(page * 5) + 1].fumatori, garage[(page * 5) + 1].prezzo);
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 0].km, garage[(page * 5) + 0].annoMatricolazione, garage[(page * 5) + 0].fumatori, garage[(page * 5) + 0].prezzo);
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO);
@@ -1461,7 +1557,7 @@ int generazioneFinestra() {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					SDL_StopTextInput();
 
-					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 2].km, garage[(page * 5) + 2].annoMatricolazione, garage[(page * 5) + 2].fumatori, garage[(page * 5) + 2].prezzo);
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 1].km, garage[(page * 5) + 1].annoMatricolazione, garage[(page * 5) + 1].fumatori, garage[(page * 5) + 1].prezzo);
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO2);
@@ -1485,7 +1581,7 @@ int generazioneFinestra() {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					SDL_StopTextInput();
 
-					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 3].km, garage[(page * 5) + 3].annoMatricolazione, garage[(page * 5) + 3].fumatori, garage[(page * 5) + 3].prezzo);
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 2].km, garage[(page * 5) + 2].annoMatricolazione, garage[(page * 5) + 2].fumatori, garage[(page * 5) + 2].prezzo);
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO3);
@@ -1509,7 +1605,7 @@ int generazioneFinestra() {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					SDL_StopTextInput();
 
-					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 4].km, garage[(page * 5) + 4].annoMatricolazione, garage[(page * 5) + 4].fumatori, garage[(page * 5) + 4].prezzo);
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 3].km, garage[(page * 5) + 3].annoMatricolazione, garage[(page * 5) + 3].fumatori, garage[(page * 5) + 3].prezzo);
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO4);
@@ -1533,7 +1629,7 @@ int generazioneFinestra() {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					SDL_StopTextInput();
 
-					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 5].km, garage[(page * 5) + 5].annoMatricolazione, garage[(page * 5) + 5].fumatori, garage[(page * 5) + 5].prezzo);
+					prezzoMensile = stringToInt(text) * prezzoPerMese(garage[(page * 5) + 4].km, garage[(page * 5) + 4].annoMatricolazione, garage[(page * 5) + 4].fumatori, garage[(page * 5) + 4].prezzo);
 
 					text = "";
 					SDL_RenderCopy(renderer, CoverTexture, NULL, &redRectO5);
@@ -1555,12 +1651,130 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &prenotaRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
-					prenotaButton = 1;
 
-					if (garage[(page * 5)+1].usato == 1) {
-						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "prenotato", screen);
+					if (garage[(page * 5)+0].riservato == 1) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina gia prenotata", screen);
+					}
+					else if (garage[(page * 5) + 0].riservato == 0) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina prenotata correttamente", screen);
+						garage[(page * 5) + 0].riservato = 1;
+
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &prenotaRect);
+						SDL_RenderPresent(renderer);
+						SDL_UpdateWindowSurface(screen);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect);
+
+					}
+				}
+			}
+		}
+		if (check_click_in_rect(xMouse, yMouse, &prenotaRect2) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+
+					if (garage[(page * 5) + 1].riservato == 1) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina gia prenotata", screen);
+					}
+					else if (garage[(page * 5) + 1].riservato == 0) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina prenotata correttamente", screen);
+						garage[(page * 5) + 1].riservato = 1;
+
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &prenotaRect2);
+						SDL_RenderPresent(renderer);
+						SDL_UpdateWindowSurface(screen);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect2);
+
+					}
+				}
+			}
+		}
+		if (check_click_in_rect(xMouse, yMouse, &prenotaRect3) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					if (garage[(page * 5) + 2].riservato == 1) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina gia prenotata", screen);
+					}
+					else if (garage[(page * 5) + 2].riservato == 0) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina prenotata correttamente", screen);
+						garage[(page * 5) + 2].riservato = 1;
+
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &prenotaRect3);
+						SDL_RenderPresent(renderer);
+						SDL_UpdateWindowSurface(screen);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect3);
+
 					}
 
+				}
+			}
+		}
+		if (check_click_in_rect(xMouse, yMouse, &prenotaRect4) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					
+					if (garage[(page * 5) + 3].riservato == 1) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina gia prenotata", screen);
+					}
+					else if (garage[(page * 5) + 3].riservato == 0) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina prenotata correttamente", screen);
+						garage[(page * 5) + 3].riservato = 1;
+
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &prenotaRect4);
+						SDL_RenderPresent(renderer);
+						SDL_UpdateWindowSurface(screen);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect4);
+
+					}
+				}
+			}
+		}
+		if (check_click_in_rect(xMouse, yMouse, &prenotaRect5) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					
+					if (garage[(page * 5) + 4].riservato == 1) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina gia prenotata", screen);
+					}
+					else if (garage[(page * 5) + 4].riservato == 0) {
+						SDL_ShowSimpleMessageBox(0, "stato prenotazione", "macchina prenotata correttamente", screen);
+						garage[(page * 5) + 4].riservato = 1;
+
+						SDL_RenderCopy(renderer, CoverTexture, NULL, &prenotaRect5);
+						SDL_RenderPresent(renderer);
+						SDL_UpdateWindowSurface(screen);
+
+						carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+						carColor = { 255, 0, 0 };
+						carSurface = TTF_RenderText_Solid(carFont, "prenotato", carColor);
+						carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+						SDL_FreeSurface(carSurface);
+						SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
+
+					}
 				}
 			}
 		}
