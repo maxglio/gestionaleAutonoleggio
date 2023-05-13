@@ -764,6 +764,9 @@ int generazioneFinestra() {
 		if (check_click_in_rect(xMouse, yMouse, &exitRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
+
+					//funzione 
+
 					system("taskkill /IM gestionaleAutonoleggio.exe");
 				}
 			}
