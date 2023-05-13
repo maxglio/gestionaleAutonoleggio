@@ -10,6 +10,7 @@
 #include <vector>
 #include <iterator>
 #include <sstream>
+#include <time.h>
 
 #include "libreriaAutonoleggio.h"
 
@@ -34,6 +35,7 @@ struct Automobile {
 	int porte;
 	int neopatentato;
 	int prezzo;
+	int riservato;
 };
 
 struct Automobile garage[NMACCHINE];
@@ -1710,6 +1712,8 @@ void readCar() {
 				garage[i].dataInizioNoleggio[2] = stoi(token);
 			}else if (j == 16) {
 				garage[i].durataNoleggio = stoi(token);
+			}else if (j == 17) {
+				garage[i].riservato = stoi(token);
 			}
 			j++;
 		}
@@ -1891,10 +1895,10 @@ char* addPrezzo(int input) {
 
 	return stringToChar(unita);
 }
+
+void stampDebug() {
+	cout << "a: " << garage[99].riservato;
+}
 //FINE AGGIUNTA PEZZI STRINGA
 
 //ciao
-
-void stampDebug() {
-	cout << garageRicerca[2].modello;
-}
