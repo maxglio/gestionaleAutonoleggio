@@ -1937,6 +1937,7 @@ void readCar() {
 		i++;
 		j = 0;
 	}
+	infile.close();
 }
 void printStruct() {
 	int i;
@@ -2117,5 +2118,37 @@ void stampDebug() {
 	cout << "a: " << garage[99].riservato;
 }
 //FINE AGGIUNTA PEZZI STRINGA
+
+//RISCRITTURA TOTALE
+void totalReWrite() {
+	ofstream reWriteFile;
+	reWriteFile.open("cars.txt", ios::trunc);
+
+	for (int i = 0; i < NMACCHINE; i++) {
+		//scrivo tuttto sul file
+		reWriteFile << garage[i].marca << "\t";
+		reWriteFile << garage[i].modello << "\t";
+		reWriteFile << garage[i].carburante << "\t";
+		reWriteFile << garage[i].km << "\t";
+		reWriteFile << garage[i].annoMatricolazione << "\t";
+		reWriteFile << garage[i].potenza << "\t";
+		reWriteFile << garage[i].cambio << "\t";
+		reWriteFile << garage[i].fumatori << "\t";
+		reWriteFile << garage[i].usato << "\t";
+		reWriteFile << garage[i].posti << "\t";
+		reWriteFile << garage[i].porte << "\t";
+		reWriteFile << garage[i].neopatentato << "\t";
+		reWriteFile << garage[i].prezzo << "\t";
+		reWriteFile << garage[i].dataInizioNoleggio[0] << "\t";
+		reWriteFile << garage[i].dataInizioNoleggio[1] << "\t";
+		reWriteFile << garage[i].dataInizioNoleggio[2] << "\t";
+		reWriteFile << garage[i].durataNoleggio << "\t";
+		reWriteFile << garage[i].riservato << "\t";
+		reWriteFile << "\n";
+	}
+
+	reWriteFile.close();
+}
+//FINE RISCRITTURA TOTALE
 
 //ciao

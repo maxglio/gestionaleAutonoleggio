@@ -59,5 +59,9 @@ char* addPrezzo(int input);
 void addReserved();
 //FINE AGGIUNTA PEZZI STRINGA
 
+//RISCRITTURA TOTALE
+void totalReWrite();
+//FINE RISCRITTURA TOTALE
+
 void stampDebug();
 #endif

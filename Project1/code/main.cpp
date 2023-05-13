@@ -13,7 +13,8 @@ int main(int argc, char* argv[]) {
 	readCar();
 	//searchByName(name);
 	//stampDebug();
-	generazioneFinestra();
+	//generazioneFinestra();
+	totalReWrite();
 	//addCar();
 	//printStruct();
 	return 0;
