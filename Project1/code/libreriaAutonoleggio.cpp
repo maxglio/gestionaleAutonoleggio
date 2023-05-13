@@ -113,11 +113,11 @@ int generazioneFinestra() {
 	SDL_Event event;
 	SDL_Renderer* renderer;
 	SDL_Point* p;
-	bool filterControl = false;
 	int page = 0;
 	string text;
 	int rect = 0;
-	int prezzoMensile;	
+	int prezzoMensile;
+	bool search = false;
 	
 	
 
@@ -732,6 +732,15 @@ int generazioneFinestra() {
 	SDL_FreeSurface(ImgSurface);
 
 
+	carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
+	carColor = { 255, 255, 255 };
+	carSurface = TTF_RenderText_Solid(carFont, "Inserisci la marca:", carColor);
+	carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+	SDL_FreeSurface(carSurface);
+	SDL_RenderCopy(renderer, carTexture, NULL, &searchRect);
+
+
+
 	SDL_Surface* CoverSurface = IMG_Load("code/images/cover.png");
 	SDL_Texture* CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
 
@@ -758,6 +767,57 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 					system("taskkill /IM gestionaleAutonoleggio.exe");
+				}
+			}
+		}
+
+
+		if (check_click_in_rect(xMouse, yMouse, &searchRect) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					search = true;
+					text = "";
+					SDL_StartTextInput();
+					SDL_RenderCopy(renderer, CoverTexture, NULL, &searchRect);
+					SDL_RenderPresent(renderer);
+					SDL_UpdateWindowSurface(screen);
+
+				}
+			}
+		}
+
+		if (event.type == SDL_TEXTINPUT && search == true) {
+			text += event.text.text;
+			SDL_RenderCopy(renderer, CoverTexture, NULL, &searchRect);
+			SDL_UpdateWindowSurface(screen);
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &searchRect);
+			SDL_RenderPresent(renderer);
+
+
+		}
+		else if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size())&& search == true) {
+			text.pop_back();
+			SDL_RenderCopy(renderer, CoverTexture, NULL, &searchRect);
+			SDL_UpdateWindowSurface(screen);
+			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
+			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
+			SDL_FreeSurface(carSurface);
+			SDL_RenderCopy(renderer, carTexture, NULL, &searchRect);
+			SDL_RenderPresent(renderer);
+
+		}
+
+		if (check_click_in_rect(xMouse, yMouse, &searchIconRect) == 1) {
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					text = "";
+					SDL_StopTextInput;
+					search = false;
+					
+
 				}
 			}
 		}
@@ -1382,14 +1442,14 @@ int generazioneFinestra() {
 			}
 		}
 		
-		if (event.type == SDL_TEXTINPUT) {
+		if (event.type == SDL_TEXTINPUT && search == false) {
 			text += event.text.text;
 			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
 			SDL_RenderPresent(renderer);
 			SDL_UpdateWindowSurface(screen);
 			
 		}
-		else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) {
+		else if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_BACKSPACE && text.size()) && search == false) {
 			text.pop_back();
 			SDL_RenderCopy(renderer, CoverTexture, NULL, rects[rect-1]);
 			SDL_RenderPresent(renderer);
