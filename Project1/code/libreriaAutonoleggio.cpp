@@ -2145,6 +2145,7 @@ void totalReWrite() {
 		reWriteFile << garage[i].durataNoleggio << "\t";
 		reWriteFile << garage[i].riservato << "\t";
 		reWriteFile << "\n";
+		//A
 	}
 
 	reWriteFile.close();
