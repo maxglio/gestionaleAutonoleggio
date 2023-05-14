@@ -9,13 +9,6 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	//addReserved();
-	//readCar();
-	//searchByName(name);
-	//stampDebug();
 	generazioneFinestra();
-	//totalReWrite();
-	//addCar();
-	//printStruct();
 	return 0;
 }

@@ -11,11 +11,8 @@
 #include <iterator>
 #include <sstream>
 #include <time.h>
-
 #include "libreriaAutonoleggio.h"
-
 #define NMACCHINE 100
-
 
 using namespace std;
 
@@ -65,9 +62,7 @@ void endDateCalculator(int inizio[], int fine[]){
 	else if(fine[1] >= 25){
 		fine[2] += 2;
 	}
-
 	fine[1] %= 12;
-
 }
 
 void getCurrentDate(int data[]) {
@@ -87,9 +82,6 @@ void getCurrentTime(int ora[]) {
 }
 //FINE DATE
 
-
-
-
 //INTERFACCIA GRAFICA
 
 int check_click_in_rect(int x, int y, struct SDL_Rect* rect){
@@ -108,7 +100,6 @@ int check_click_in_rect(int x, int y, struct SDL_Rect* rect){
 	return 0;
 }
 
-
 int generazioneFinestra() {
 	int xMouse, yMouse;
 	bool quit = false;
@@ -120,7 +111,6 @@ int generazioneFinestra() {
 	int rect = 0;
 	int prezzoMensile;	
 	
-
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Init(IMG_INIT_PNG);
 	TTF_Init();
@@ -129,8 +119,6 @@ int generazioneFinestra() {
 	SDL_StopTextInput();
 
 	SDL_DisplayMode dm;
-
-	garage[0].riservato = 0;
 
 	if (SDL_GetDesktopDisplayMode(0, &dm) != 0) {
 		SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
@@ -388,26 +376,18 @@ int generazioneFinestra() {
 	redRectO5.w = (10.42 / 100.0) * w;
 	redRectO5.h = (listRect.h - (PERC10W * 3.0)) / 3.0;
 
-
-
 	SDL_Rect *rects[5] = { &redRectI,& redRectI2, &redRectI3, &redRectI4, &redRectI5 };
 
 	SDL_Window* screen = SDL_CreateWindow("Autonoleggio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_POPUP_MENU);
 
-	
-
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
-	// Select the color for drawing. It is set to red here.
+
 	SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255);
 
-	// Clear the entire screen to our selected color.
 	SDL_RenderClear(renderer);
 
-	// Up until now everything was drawn behind the scenes.
-	// This will show the new contents of the window.
 	SDL_RenderPresent(renderer);
 
-	//start rectangle rendering
 		
 	//EXIT BUTTON
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
@@ -415,12 +395,15 @@ int generazioneFinestra() {
 		SDL_RenderDrawRect(renderer, &exitRect);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderPresent(renderer);
+	// END EXIT
 
 		TTF_Font* carFont;
 		SDL_Color carColor;
 		SDL_Surface* carSurface;
 		SDL_Texture* carTexture;
 		
+		// RENDER LIST
+
 		for (int f = 0; f < 5; f++) {
 
 			
@@ -489,7 +472,6 @@ int generazioneFinestra() {
 
 		}
 		SDL_RenderPresent(renderer);
-
 
 		//1
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -694,6 +676,8 @@ int generazioneFinestra() {
 		SDL_FreeSurface(carSurface);
 		SDL_RenderCopy(renderer, carTexture, NULL, &calcRect5);
 
+		
+
 		if (garage[(page * 5) + 4].riservato == 1) {
 			carFont = TTF_OpenFont("code/font/Roboto-Regular.ttf", 128);
 			carColor = { 255, 0, 0 };
@@ -710,7 +694,7 @@ int generazioneFinestra() {
 			SDL_FreeSurface(carSurface);
 			SDL_RenderCopy(renderer, carTexture, NULL, &prenotaRect5);
 		}
-
+		// END LIST RENDERING
 
 
 
@@ -721,7 +705,7 @@ int generazioneFinestra() {
 	SDL_Surface* IconSurface = IMG_Load("code/images/icon.png");
 	SDL_SetWindowIcon(screen, IconSurface);
 
-	// EXIT BUTTON RENDERING
+	// EXIT IMAGE RENDERING
 	SDL_Surface* ImgSurface = IMG_Load("code/images/exit.png");
 	SDL_Texture* ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
 	SDL_RenderCopy(renderer, ImgTexture, NULL, &exitRect);
@@ -737,7 +721,7 @@ int generazioneFinestra() {
 	SDL_RenderCopy(renderer, TitleTexture, NULL, &titleRect);
 	SDL_FreeSurface(TitleSurface);
 
-	
+	//ARROW
 	ImgSurface = IMG_Load("code/images/back.png");
 	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
 	SDL_RenderCopy(renderer, ImgTexture, NULL, &leftArrRect);
@@ -747,6 +731,7 @@ int generazioneFinestra() {
 	ImgTexture = SDL_CreateTextureFromSurface(renderer, ImgSurface);
 	SDL_RenderCopy(renderer, ImgTexture, NULL, &rightArrRect);
 	SDL_FreeSurface(ImgSurface);
+	//ARROW
 
 	SDL_Surface* CoverSurface = IMG_Load("code/images/cover.png");
 	SDL_Texture* CoverTexture = SDL_CreateTextureFromSurface(renderer, CoverSurface);
@@ -772,6 +757,8 @@ int generazioneFinestra() {
 				}
 			}
 		}
+
+		//ARROW CLICK
 
 		if (check_click_in_rect(xMouse, yMouse, &rightArrRect) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -1416,6 +1403,7 @@ int generazioneFinestra() {
 				}
 			}
 		}
+		//__________
 
 		if (check_click_in_rect(xMouse, yMouse, &redRectI) == 1) {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
