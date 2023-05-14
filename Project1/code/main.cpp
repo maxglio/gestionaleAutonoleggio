@@ -10,11 +10,11 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	//addReserved();
-	readCar();
+	//readCar();
 	//searchByName(name);
 	//stampDebug();
-	//generazioneFinestra();
-	totalReWrite();
+	generazioneFinestra();
+	//totalReWrite();
 	//addCar();
 	//printStruct();
 	return 0;

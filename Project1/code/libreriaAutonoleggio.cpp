@@ -124,12 +124,13 @@ int generazioneFinestra() {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Init(IMG_INIT_PNG);
 	TTF_Init();
+	readCar();
 
 	SDL_StopTextInput();
 
 	SDL_DisplayMode dm;
 
-
+	garage[0].riservato = 0;
 
 	if (SDL_GetDesktopDisplayMode(0, &dm) != 0) {
 		SDL_Log("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError());
@@ -765,7 +766,7 @@ int generazioneFinestra() {
 			if (event.type == SDL_MOUSEBUTTONDOWN) {
 				if (event.button.button == SDL_BUTTON_LEFT) {
 
-					//funzione 
+					totalReWrite();
 
 					system("taskkill /IM gestionaleAutonoleggio.exe");
 				}
@@ -1496,7 +1497,7 @@ int generazioneFinestra() {
 		}
 		
 		if (rect == 1) {
-			
+			carColor = { 255,255,255 };
 			carSurface = TTF_RenderText_Solid(carFont, stringToChar(text), carColor);
 			carTexture = SDL_CreateTextureFromSurface(renderer, carSurface);
 			SDL_FreeSurface(carSurface);
